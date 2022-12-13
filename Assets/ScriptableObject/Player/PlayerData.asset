@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Player
   speed: 5
-  life: 25
+  life: 0
   maxlife: 100
-  State: 0
+  State: 1
   animator: {fileID: 0}
   Weapon: {fileID: 4162564090942213869, guid: e46e626879b952f4ba0c54bbd259107b, type: 3}
   IsDamaged: 0

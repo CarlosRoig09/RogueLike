@@ -25,10 +25,10 @@ public class Enemy : Character, IDestroyable
     {
         FindTarget();
     }
-    protected void DealContactDamage(GameObject gameObject)
+   /* protected void DealContactDamage(GameObject gameObject)
     {
         gameObject.GetComponent<Player>().TakeDamage(enemyData.ContactDamage);
-    }
+    }*/
     protected void FindTarget()
     {
         lookDirection = _player.transform.position - transform.position;

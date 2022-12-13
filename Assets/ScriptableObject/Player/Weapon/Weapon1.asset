@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: Weapon1
   m_EditorClassIdentifier: 
   Proyectile: {fileID: 7360910221543691183, guid: 8a7c48963ef16d64a9e67ab8eefd3010, type: 3}
-  ProyectileDamage: 100
+  ProyectileDamage: 5
   ProyectileSpeed: 1000
   BulletsXShoot: 1
-  currentBullets: 6
+  currentBullets: 2
   maxDistance: 7000
   currentDistance: 0
   TotalBullets: 6
   CadenceTime: 0.4
-  CountCadenceTime: 0.4010223
+  CountCadenceTime: 0.40192884
   Reload: 0.7
   proyectileUser: 0

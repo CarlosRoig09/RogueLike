@@ -34,10 +34,17 @@ public class GameManager : MonoBehaviour
     }
     [SerializeField]
     private PlayerData _playerData;
-    private EnemyWaveControler _enemyWaveControler;
+    public float numberOfBulletsWeapon1;
+    public float numberOfBulletsWeapon2;
     private void Awake()
     {
-        _instance = this;
+        if (_instance != null)
+            Destroy(gameObject);
+        else
+        {
+            DontDestroyOnLoad(gameObject);
+            _instance = this;
+        }
     }
     // Start is called before the first frame update
     void Start()

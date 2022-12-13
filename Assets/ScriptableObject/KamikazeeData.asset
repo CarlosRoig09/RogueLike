@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Kamikazee
   speed: 100
-  life: 30
-  maxlife: 30
+  life: 20
+  maxlife: 20
   State: 0
   animator: {fileID: 0}
   ContactDamage: 2
   TimeBeforeNoticePlayer: 0
   durationOfExplosion: 0.5
-  explosionDamage: 20
+  explosionDamage: 25

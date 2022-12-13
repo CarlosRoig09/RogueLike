@@ -31,6 +31,18 @@ public class GestionInventory : MonoBehaviour
         if (inventory.LimitWeapons >= inventory.Weapons.Count)
             if (!IsInTheList(weaponData))
             {
+                float bullets = 0;
+                switch (weaponData.Name)
+                {
+                    case "Pistol":
+                        bullets = GameManager.Instance.numberOfBulletsWeapon1;
+                        break;
+                    case "Rifle":
+                        bullets = GameManager.Instance.numberOfBulletsWeapon2;
+                        break;
+                }
+                weaponData.shootData.currentBullets = bullets;
+                weaponData.shootData.TotalBullets = bullets;
                 Debug.Log("Weapon Add");
                 inventory.Weapons.Add(weaponData);
             }
