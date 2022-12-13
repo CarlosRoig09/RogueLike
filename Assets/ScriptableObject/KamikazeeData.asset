@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ddcbe825c17bcb41a6d799bb49a4856, type: 3}
+  m_Name: KamikazeeData
+  m_EditorClassIdentifier: 
+  Name: Kamikazee
+  speed: 100
+  life: 20
+  maxlife: 20
+  State: 0
+  animator: {fileID: 0}
+  ContactDamage: 2
+  TimeBeforeNoticePlayer: 0
+  durationOfExplosion: 0.5
+  explosionDamage: 25
