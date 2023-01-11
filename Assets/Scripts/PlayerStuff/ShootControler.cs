@@ -4,27 +4,24 @@ using UnityEngine;
 public class ShootControler: MonoBehaviour
 {
     private ShootSO _shootSO;
+    private float _count;
     public void NewWeapon(ShootSO newShoot)
     {
         _shootSO = newShoot;
+        _count = _shootSO.CadenceTime;
     }
 
-    private void Update()
-    {
-        if (_shootSO.CountCadenceTime < _shootSO.CadenceTime)
-            _shootSO.CountCadenceTime += Time.deltaTime;
-    }
     public void ProyectileSpawn()
     {
-        if (_shootSO.CountCadenceTime >= _shootSO.CadenceTime)
+        if (_shootSO.CadenceTime <= _count)
         {
+            _count = 0;
             if (_shootSO.currentBullets > 0)
                 for (float i = 0; i < _shootSO.BulletsXShoot; i++)
                 {
-                   var proyectile = Instantiate(_shootSO.Proyectile, transform.position, Quaternion.identity);
+                    var proyectile = Instantiate(_shootSO.Proyectile, transform.position, Quaternion.identity);
                     proyectile.GetComponent<ProyectileBehaivour>().WeaponType(_shootSO);
                     _shootSO.currentBullets -= 1;
-                    _shootSO.CountCadenceTime = 0;
                     switch (_shootSO.proyectileUser)
                     {
                         case ProyectileUser.Player:
@@ -37,7 +34,8 @@ public class ShootControler: MonoBehaviour
                 }
             else
                 StartCoroutine(ReloadWeapon(_shootSO.Reload));
-        } 
+        }
+        else _count += Time.deltaTime;
     }
     private IEnumerator ReloadWeapon(float time)
     {

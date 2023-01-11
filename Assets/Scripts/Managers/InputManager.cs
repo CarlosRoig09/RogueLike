@@ -17,6 +17,7 @@ public class InputManager : MonoBehaviour
     void Update()
     {
         MovementInput();
+        MeleeInput();
         ShootInput();
         DashInput();
         ChangeWeapon();
@@ -24,13 +25,19 @@ public class InputManager : MonoBehaviour
 
     private void MovementInput()
     {
-        _player.Movement(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        _player.Movement(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
     }
 
     private void ShootInput()
     {
-     if (Input.GetMouseButtonDown(0))
+     if (Input.GetMouseButtonDown(1))
          _player.Shoot();           
+    }
+
+    private void MeleeInput()
+    {
+        if (Input.GetMouseButtonDown(0))
+            _player.MeleeAttack();
     }
 
     private void DashInput()

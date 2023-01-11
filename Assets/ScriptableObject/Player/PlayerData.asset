@@ -13,14 +13,13 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   Name: Player
-  speed: 5
-  life: 0
+  speed: 500
+  life: 100
   maxlife: 100
-  State: 1
-  animator: {fileID: 0}
-  Weapon: {fileID: 4162564090942213869, guid: e46e626879b952f4ba0c54bbd259107b, type: 3}
-  IsDamaged: 0
-  dashSpeed: 25
-  dashCountdown: 1
-  dashDuration: 0.2
+  State: 0
   invulerability: 0
+  Damagable: 0
+  IsDamaged: 0
+  dashSpeed: 30
+  dashCountdown: 1
+  dashDuration: 0.5

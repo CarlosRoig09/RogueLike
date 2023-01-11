@@ -9,15 +9,12 @@ public class GestionInventory : MonoBehaviour
     [SerializeField]
     private WeaponData firstWeapon;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        WeaponData copyOfFirstWeapon =Instantiate(firstWeapon);
+        inventory.Weapons = new List<WeaponData>();
         _counter = 0;
         _weaponController = GameObject.Find("Weapon").GetComponent<ChangeWeaponController>();
-        inventory.Weapons = new List<WeaponData>
-        {
-            copyOfFirstWeapon
-        };
+        AddWeapon(firstWeapon);
         SetWeaponValues(inventory.Weapons[0]);
     }
 
@@ -25,44 +22,49 @@ public class GestionInventory : MonoBehaviour
     void Update()
     {
     }
+
     public void AddWeapon(WeaponData weaponData)
     {
         Debug.Log("AddWeapon Arrived");
         if (inventory.LimitWeapons >= inventory.Weapons.Count)
+        {
             if (!IsInTheList(weaponData))
             {
-                float bullets = 0;
-                switch (weaponData.Name)
-                {
-                    case "Pistol":
-                        bullets = GameManager.Instance.numberOfBulletsWeapon1;
-                        break;
-                    case "Rifle":
-                        bullets = GameManager.Instance.numberOfBulletsWeapon2;
-                        break;
-                }
-                weaponData.shootData.currentBullets = bullets;
-                weaponData.shootData.TotalBullets = bullets;
                 Debug.Log("Weapon Add");
-                inventory.Weapons.Add(weaponData);
+                inventory.Weapons.Add(Instantiate(weaponData));
             }
             else Debug.Log("Weapon Repeated");
+        }
+        else Debug.Log("No more space");
+    }
+
+    public void DetachTheCurrentWeapon()
+    {
+        if(inventory.Weapons.Count>1)
+        {
+            Instantiate(inventory.Weapons[_counter]);
+            inventory.Weapons.RemoveAt(_counter);
+            SetWeaponValues(inventory.Weapons[_counter]);
+        }
     }
     public void ChangeWeapon()
     {
-        _counter += 1;
-        if (inventory.Weapons.Count <= _counter)
-            _counter = 0;
-        Debug.Log(_counter);
-       SetWeaponValues(inventory.Weapons[_counter]);
+        if (inventory.Weapons[_counter].WA==WeaponState.Normal) {
+            _counter += 1;
+            if (inventory.Weapons.Count <= _counter)
+                _counter = 0;
+            Debug.Log(_counter);
+            if (inventory.Weapons.Count > 1)
+                SetWeaponValues(inventory.Weapons[_counter]);
+            }
     }
     private bool IsInTheList(WeaponData weaponData)
     {
         foreach (var weapon in inventory.Weapons)
             if (weapon.Name == weaponData.Name)
             {
-                weapon.shootData.TotalBullets += weaponData.shootData.TotalBullets;
-                weapon.shootData.currentBullets = weapon.shootData.TotalBullets;
+              /*  weapon.shootData.TotalBullets += weaponData.shootData.TotalBullets;
+                weapon.shootData.currentBullets = weapon.shootData.TotalBullets;*/
                 return true;
             }
         return false;
@@ -71,6 +73,6 @@ public class GestionInventory : MonoBehaviour
 
     public void SetWeaponValues(WeaponData newweapon)
     {
-        _weaponController.SetNewWeaponData(newweapon);
+       _weaponController.SetNewWeaponData(newweapon);
     }
 }

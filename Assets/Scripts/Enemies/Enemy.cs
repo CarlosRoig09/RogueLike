@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Enemy : Character, IDestroyable
@@ -8,9 +9,11 @@ public class Enemy : Character, IDestroyable
     private float currentLife;
     protected Vector3 lookDirection;
     private float lookAngle;
-    private GameObject _player;
+    protected GameObject _player;
     [SerializeField]
     private DropegableItems _items;
+    [SerializeField]
+    private float _chanceOfDropNothing;
     public GameObject Player
     {
         get => _player;
@@ -19,6 +22,7 @@ public class Enemy : Character, IDestroyable
     {
         currentLife = enemyData.maxlife;
         State = Life.Alive;
+        enemyData.Damagable = Invulnerability.Damagable;
         _player = GameObject.Find("Player");
     }
     protected virtual void Update()
@@ -51,7 +55,10 @@ public class Enemy : Character, IDestroyable
     }
     public void GetHitByPlayer(float damage)
     {
-        TakeDamage(damage);
+            Debug.Log("I got Damaged");
+            TakeDamage(damage);
+            enemyData.Damagable = Invulnerability.NoDamagable;
+            StartCoroutine(InvulnerabilityTime(0.5f));
     }
 
     public void Destroyed()
@@ -62,13 +69,18 @@ public class Enemy : Character, IDestroyable
 
     public bool DropAnObject()
     {
-        foreach (var item in _items.Items)
+        float minRange = 0;
+        var random = Random.Range(minRange, _items.Items.Length * 10 + _chanceOfDropNothing);
+        for (var i = 0; i < _items.Items.Length; i++)
         {
-            if (Random.Range(1, 101) <= item.RateAperance)
+            Debug.Log(random);
+            if (random >= minRange && random <= _items.Items[i].RateAperance / _items.Items.Length * (i + 1))
             {
-                Instantiate(item.prefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+                Instantiate(_items.Items[i].prefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
                 return true;
             }
+            else
+                minRange = _items.Items[i].RateAperance / _items.Items.Length;
         }
         return false;
     }
@@ -76,6 +88,12 @@ public class Enemy : Character, IDestroyable
     public override void Movement(float directionX, float directionY)
     {
         //Is for the childs if they move
-        throw new System.NotImplementedException();
+    }
+
+    private IEnumerator InvulnerabilityTime(float time)
+    {
+        yield return new WaitForSeconds(time);
+        enemyData.Damagable = Invulnerability.Damagable;
+        StopMomentum();
     }
 }

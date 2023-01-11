@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18150486a69d8f14f8a3846120cb38ce, type: 3}
+  m_Name: ScytheSO
+  m_EditorClassIdentifier: 
+  Name: Scythe
+  Description: 
+  prefab: {fileID: 6602177924332670726, guid: c0398762792e0554398a216de932c62f, type: 3}
+  CountDown: 10
+  RateAperance: 50
+  shootData: {fileID: 11400000, guid: db3d979436d407f40b37664148cf1c07, type: 2}
+  meleeData: {fileID: 11400000, guid: 6a9c9676db9c47942a18cca792facd67, type: 2}
+  Weapon: {fileID: 6602177924332670726, guid: c0398762792e0554398a216de932c62f, type: 3}
+  WeaponHolder:
+    serializedVersion: 2
+    m_Bits: 8
+  WA: 0

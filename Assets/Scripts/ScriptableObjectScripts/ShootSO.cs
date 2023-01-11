@@ -14,12 +14,16 @@ public class ShootSO : ScriptableObject
     public float ProyectileDamage;
     public float ProyectileSpeed;
     public float BulletsXShoot;
+    public float TotalBullets;
     public float currentBullets;
     public float maxDistance;
-    public float currentDistance;
-    public float TotalBullets;
     public float CadenceTime;
-    public float CountCadenceTime;
     public float Reload;
+    public float ImpulseForce;
     public ProyectileUser proyectileUser;
+    public bool rangeAttack;
 }
+
+
+
+

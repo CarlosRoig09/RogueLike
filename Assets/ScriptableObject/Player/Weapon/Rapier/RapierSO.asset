@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18150486a69d8f14f8a3846120cb38ce, type: 3}
+  m_Name: RapierSO
+  m_EditorClassIdentifier: 
+  Name: Rapier
+  Description: 
+  prefab: {fileID: 8227410270467569918, guid: 64c26931f78c1464b8a589f4d34acbe8, type: 3}
+  CountDown: 10
+  RateAperance: 50
+  shootData: {fileID: 11400000, guid: d60faf952d0712444ae3fdf568ba9245, type: 2}
+  meleeData: {fileID: 11400000, guid: d3b272ff6aa0c394ab9186776f6d6eaf, type: 2}
+  Weapon: {fileID: 8227410270467569918, guid: 64c26931f78c1464b8a589f4d34acbe8, type: 3}
+  WeaponHolder:
+    serializedVersion: 2
+    m_Bits: 8
+  WA: 0
