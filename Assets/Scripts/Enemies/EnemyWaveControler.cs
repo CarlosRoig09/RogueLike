@@ -33,6 +33,8 @@ public class EnemyWaveControler : MonoBehaviour
     private float _currentEnemy;
     private WaveState _waveState;
     private List<GameObject> _enemySpawned;
+    [SerializeField]
+    private Transform _player;
     public WaveState WaveState
     {
         get => _waveState;
@@ -123,11 +125,11 @@ public class EnemyWaveControler : MonoBehaviour
         } while (GameObjectInThatPosition(position));
         return Instantiate(enemy, position, Quaternion.identity);
     }
+
     private bool GameObjectInThatPosition(Vector3 position)
     {
-        var hitColliders = Physics.OverlapSphere(position, 2);
-        if (hitColliders.Length > 0)
+        if (Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Camera.main.transform.position), position) || Physics2D.Raycast(position, _player.position, 100, 6))
             return true;
-        return false;
+            return false;
     }
 }

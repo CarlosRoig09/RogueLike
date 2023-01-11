@@ -11,5 +11,6 @@ public class CharData : ScriptableObject
     public float life;
     public float maxlife;
     public Life State;
-    public Animator animator;
+    public float invulerability;
+    public Invulnerability Damagable;
 }

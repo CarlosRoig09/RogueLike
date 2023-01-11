@@ -7,6 +7,8 @@ public class DestroyableObstacle : MonoBehaviour, IDestroyable
     private float _life;
     [SerializeField]
     private DropegableItems _items;
+    [SerializeField]
+    private float _chanceOfDropNothing;
 
     // Start is called before the first frame update
     void Start()
@@ -28,15 +30,18 @@ public class DestroyableObstacle : MonoBehaviour, IDestroyable
 
     public bool DropAnObject()
     {
-        foreach (var item in _items.Items)
+        float minRange=0;
+        var random = Random.Range(minRange, _items.Items.Length*10+_chanceOfDropNothing);
+        for (var i = 0; i < _items.Items.Length; i++)
         {
-            var random = Random.Range(1, 101);
             Debug.Log(random);
-            if(random<= item.RateAperance)
+            if (random >= minRange && random <= _items.Items[i].RateAperance / _items.Items.Length * (i+1))
             {
-                Instantiate(item.prefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+                Instantiate(_items.Items[i].prefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
                 return true;
             }
+            else
+                minRange = _items.Items[i].RateAperance / _items.Items.Length;
         }
         return false;
     }

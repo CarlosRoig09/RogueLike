@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18150486a69d8f14f8a3846120cb38ce, type: 3}
+  m_Name: LanceSO
+  m_EditorClassIdentifier: 
+  Name: Lance
+  Description: 
+  prefab: {fileID: 8683389704625851569, guid: dc98acac940cac34e8ed2675d9032498, type: 3}
+  CountDown: 10
+  RateAperance: 50
+  shootData: {fileID: 11400000, guid: b94e7c5b850523449a953485a232efb1, type: 2}
+  meleeData: {fileID: 11400000, guid: 407a199b57587b64e999ae52e11d24d7, type: 2}
+  Weapon: {fileID: 8683389704625851569, guid: dc98acac940cac34e8ed2675d9032498, type: 3}
+  WeaponHolder:
+    serializedVersion: 2
+    m_Bits: 8
+  WA: 0

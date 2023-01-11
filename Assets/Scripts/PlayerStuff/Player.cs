@@ -11,47 +11,68 @@ public class Player : Character
 {
     
     public PlayerData _playerDataSO;
-    private ShootControler _weapon;
+    public IWeaponControler Weapon { set => _weapon = value; }
+    private IWeaponControler _weapon;
     private Rigidbody2D _rb;
-    private Invulnerability _invulnerability;
-    private Vector3 _vectorPM;
+    private Animator _anim;
     // Start is called before the first frame update
     void Start()
     {
-        _invulnerability = Invulnerability.Damagable;
+        _playerDataSO.Damagable = Invulnerability.Damagable;
         _rb = gameObject.GetComponent<Rigidbody2D>();
-        _weapon = GameObject.Find("Weapon").GetComponent<ShootControler>();
         _playerDataSO.life = _playerDataSO.maxlife;
         _playerDataSO.State = Life.Alive;
-    }
+        _anim = gameObject.GetComponent<Animator>();
+     }
     // Update is called once per frame
     void Update()
     {
-        RotationZByMouse();
+        ChangeSpriteByRotation();
+    }
+
+    private void ChangeSpriteByRotation()
+    {
+        Vector3 vector = gameObject.GetComponentInParent<Player>().VectorMousePlayerAngle();
+        float angle = Mathf.Atan2(vector.y, vector.x) * Mathf.Rad2Deg;
+        float xPosition = Mathf.Cos(Mathf.Deg2Rad * angle);
+        float yPosition = Mathf.Sin(Mathf.Deg2Rad * angle);
+        _anim.SetFloat("Movement", Mathf.Abs(_rb.velocity.x) + Mathf.Abs(_rb.velocity.y));
+        _anim.SetFloat("MPositionX", xPosition);
+        _anim.SetFloat("MPositionY", yPosition);
     }
     public override void Movement(float directionX, float directionY)
     {
-        if(_invulnerability==Invulnerability.Damagable)
-        transform.position += new Vector3(directionX * _playerDataSO.speed * Time.deltaTime, directionY * _playerDataSO.speed * Time.deltaTime, transform.position.z);
+        if(_playerDataSO.Damagable==Invulnerability.Damagable)
+        _rb.velocity = new Vector3(directionX * _playerDataSO.speed * Time.fixedDeltaTime, directionY * _playerDataSO.speed * Time.fixedDeltaTime, transform.position.z);
     }
-    void RotationZByMouse()
+    public Vector3 VectorMousePlayerAngle()
     {
-        _vectorPM = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, Mathf.Atan2(_vectorPM.y, _vectorPM.x) * Mathf.Rad2Deg);
+       return Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
     }
-
     public override void TakeDamage(float damage)
     {
-        if(_invulnerability == Invulnerability.Damagable)
-        gameObject.GetComponent<LifeControler>().ModifyLife(damage * -1,ref _playerDataSO.life, _playerDataSO.maxlife);
+        if (_playerDataSO.Damagable == Invulnerability.Damagable)
+        {
+            gameObject.GetComponent<LifeControler>().ModifyLife(damage * -1, ref _playerDataSO.life, _playerDataSO.maxlife);
+            _anim.SetBool("Damage", true);
+            _playerDataSO.Damagable = Invulnerability.NoDamagable;
+            _rb.velocity = new Vector3(0, 0);
+            StartCoroutine(InvulnerabilityTime(0.5f, "Damage"));
+        }
     }
     public void SumLife(float extraLife)
     {
         gameObject.GetComponent<LifeControler>().ModifyLife(extraLife, ref _playerDataSO.life, _playerDataSO.maxlife);
     }
+
+    public void MeleeAttack()
+    {
+        Debug.Log("AttackByAnimator");
+        _weapon.FirstButtonAttack();
+    }
     public void Shoot()
     {
-        _weapon.ProyectileSpawn();
+        _weapon.SecondButtonAttack();
     }
     public override void OnDeath()
     {
@@ -59,14 +80,17 @@ public class Player : Character
     }
     public void Dash()
     {
-     _rb.AddForce(transform.right * _playerDataSO.dashSpeed,ForceMode2D.Impulse);
-        _invulnerability = Invulnerability.NoDamagable;
-        StartCoroutine(StopMomentum(_playerDataSO.dashDuration));
+        _anim.SetBool("Dash", true);
+        var vectorPM = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+     _rb.AddForce(vectorPM.normalized * _playerDataSO.dashSpeed,ForceMode2D.Impulse);
+        _playerDataSO.Damagable = Invulnerability.NoDamagable;
+        StartCoroutine(InvulnerabilityTime(_playerDataSO.dashDuration, "Dash"));
     }
-    private IEnumerator StopMomentum(float time)
+    private IEnumerator InvulnerabilityTime(float time, string animation)
     {
         yield return new WaitForSeconds(time);
-        _invulnerability = Invulnerability.Damagable;
-        _rb.velocity = new Vector3(0, 0);
+        _anim.SetBool(animation, false);
+        _playerDataSO.Damagable = Invulnerability.Damagable;
+        StopMomentum();
     }
 }

@@ -8,6 +8,7 @@ public class WeaponItemController : ItemBehaivour
     // Start is called before the first frame update
     void Start()
     {
+        weaponData.WA = WeaponState.Item;
     }
 
     // Update is called once per frame
@@ -34,6 +35,8 @@ public class WeaponItemController : ItemBehaivour
 
     public override void DestroyItem()
     {
+        foreach (var collider in gameObject.GetComponents<PolygonCollider2D>())
+            collider.enabled = false;
         Destroy(gameObject);
     }
 
