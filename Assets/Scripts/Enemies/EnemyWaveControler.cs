@@ -2,37 +2,24 @@ using System.Collections.Generic;
 using UnityEngine;
 public enum WaveState
 {
-    CallFirstWave,
-    FirstWave,
-    CallSecondWave,
-    SecondWave, 
-    CallThirtWave,
-    ThirthWave,
+    CallWave,
     WaveEnded
 }
 public class EnemyWaveControler : MonoBehaviour
 {
     //Haré probablemente para variar un ScriptableObject de cada zona y sus Wave en un futuro.
-    [SerializeField]
-    private float _firstWaveTurret;
-    [SerializeField]
-    private float _firstWaveKamikazee;
-    [SerializeField]
-    private float _secondWaveTurret;
-    [SerializeField]
-    private float _secondWaveKamikazee;
-    [SerializeField]
-    private float _thirtWaveTurret;
-    [SerializeField]
-    private float _thirtWaveKamikazee;
+    private GameManager _startGame;
+    private List<EnemyWave> _waves;
+   // [SerializeField]
+
     [SerializeField]
     private GameObject _turret;
     [SerializeField]
     private GameObject _kamikazee;
-    private List<EnemyWave> _enemyWaves;
     private float _currentEnemy;
     private WaveState _waveState;
     private List<GameObject> _enemySpawned;
+    private float _numberOfWaves;
     [SerializeField]
     private Transform _player;
     public WaveState WaveState
@@ -42,53 +29,30 @@ public class EnemyWaveControler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _enemyWaves = new List<EnemyWave> { new EnemyWave(1, _firstWaveKamikazee, _firstWaveTurret), new EnemyWave(2, _secondWaveKamikazee, _secondWaveTurret), new EnemyWave(3, _thirtWaveKamikazee, _thirtWaveTurret) };
-        _waveState = WaveState.CallFirstWave;
-        _enemySpawned = new List<GameObject>();
+        _startGame = GameManager.Instance;
+        _startGame.OnStartGame += CreateWaves;
     }
 
     void Update()
     {
-        switch (_waveState)
-        {
-            case WaveState.CallFirstWave:
-                Debug.Log("Wave1");
-                CallWave(WaveState.FirstWave,0);
-                break;
-            case WaveState.FirstWave:
-                ControlIfWaveIsFinished(WaveState.CallSecondWave);
-                break;
-            case WaveState.CallSecondWave:
-                Debug.Log("Wave2");
-               CallWave(WaveState.SecondWave,1);
-                break;
-            case WaveState.SecondWave:
-                ControlIfWaveIsFinished(WaveState.CallThirtWave);
-                break;
-            case WaveState.CallThirtWave:
-                Debug.Log("Wave3");
-               CallWave(WaveState.ThirthWave,2);
-                break;
-            case WaveState.ThirthWave:
-                ControlIfWaveIsFinished(WaveState.WaveEnded);
-                break;
-        }
     }
 
-    private void CallWave(WaveState newState, int waveNumber)
+    private void CreateWaves()
     {
-        //No hay muchas más variantes, más allá de sumar o restar enemigos. 
-        float extraKamikazee = 0;
-        float extraTurret = 0;
-        if (Random.Range(1,100)<=20)
+        int numberOfWave = 0;
+        foreach (var scenari in gameObject.GetComponent<ControlScenari>().Escenaris)
         {
-            extraKamikazee = Random.Range(1, 2);
-            extraTurret = Random.Range(1, 2);
+            if (scenari.CompareTag("combat"))
+                numberOfWave += 1;
         }
-        EnemySpawn(_kamikazee, _enemyWaves[waveNumber].KamikazeeNumber + extraKamikazee);
-        EnemySpawn(_turret, _enemyWaves[waveNumber].TurretNumber + extraTurret);
-        _currentEnemy = _enemyWaves[waveNumber].KamikazeeNumber + _enemyWaves[waveNumber].TurretNumber + extraKamikazee + extraTurret;
-        _waveState = newState;
+        _waves = new List<EnemyWave>(numberOfWave);
+        foreach (var wave in _waves)
+        {
+           // wave = new EnemyWave(Random.Range(1,3),Random.Range(),);
+        }
+    }
+    public void CallWave()
+    {
     }
 
     private void ControlIfWaveIsFinished(WaveState nextWave)

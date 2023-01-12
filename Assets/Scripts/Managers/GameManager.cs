@@ -26,8 +26,11 @@ public class GameManager : MonoBehaviour
             return _instance;
         }
     }
+    public delegate void StartGame();
+    public event StartGame OnStartGame;
     private Escenas _scene;
     private GameFinish _gameFinish;
+    private bool _calledStartGame;
     public GameFinish GameFinish
     {
         get => _gameFinish;
@@ -50,6 +53,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(gameObject);
+        _calledStartGame = false;
     }
 
     // Update is called once per frame
@@ -58,6 +62,10 @@ public class GameManager : MonoBehaviour
         ChangeScene();
         if (_scene == Escenas.GameScreen)
         {
+            if (!_calledStartGame) {
+                OnStartGame();
+                _calledStartGame = true;
+            }
             if (_playerData.State == Life.Death)
             {
                 _gameFinish = GameFinish.Lose;
