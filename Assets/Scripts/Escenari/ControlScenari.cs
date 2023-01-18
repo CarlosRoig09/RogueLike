@@ -66,7 +66,7 @@ public class ControlScenari : MonoBehaviour
                 _scenariCount += 1;
                 Debug.Log(_scenariCount);
                 var newPosition = new Vector3(previosposition.position.x + 100,previosposition.position.y);
-            _currentScenari = Instantiate(_newOrder[_scenariCount], newPosition, Quaternion.identity);
+                 _currentScenari = Instantiate(_newOrder[_scenariCount], newPosition, Quaternion.identity);
                 break;
             case 0:
                 _scenariCount = 0;
