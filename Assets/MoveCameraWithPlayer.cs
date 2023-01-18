@@ -13,8 +13,9 @@ public class MoveCameraWithPlayer : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void LateUpdate()
     {
-        transform.position = new Vector3(_player.position.x, _player.position.y, _player.position.z);
+        transform.position = new Vector2(_player.position.x + 0.5f, _player.position.y + 0.5f);
+
     }
 }
