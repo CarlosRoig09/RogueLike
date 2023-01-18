@@ -63,18 +63,17 @@ public class GameManager : MonoBehaviour
         if (_scene == Escenas.GameScreen)
         {
             if (!_calledStartGame) {
-                OnStartGame();
                 _calledStartGame = true;
+                OnStartGame();
             }
             if (_playerData.State == Life.Death)
             {
                 _gameFinish = GameFinish.Lose;
                 SceneManager.LoadScene("GameOver");
             }
-            if (GameObject.Find("Spawner").GetComponent<EnemyWaveControler>().WaveState == WaveState.WaveEnded)
+            if (GameObject.Find("Spawner").GetComponent<EnemyWaveControler>().ControlIfWaveIsFinished())
             {
-                _gameFinish = GameFinish.Win;
-                SceneManager.LoadScene("GameOver");
+                GameObject.Find("Spawner").GetComponent<ControlScenari>().DoorOpens();
             }
         }
         void ChangeScene()

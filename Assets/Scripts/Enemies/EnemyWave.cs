@@ -1,7 +1,7 @@
 using UnityEngine;
 public class EnemyWave 
 {
-    private readonly float _waveNumber;
+    private readonly int _waveNumber;
     public int WaveNumber
     {
         get => _waveNumber;
@@ -32,7 +32,7 @@ public class EnemyWave
         _waveDefeated = false;
     }
 
-    public float[] CallWave()
+    public EnemyWave CallWave()
     {
         float[] waves = new float[0];
         float extraKamikazee;
@@ -47,9 +47,9 @@ public class EnemyWave
                 extraKamikazee = Random.Range(-1, 3);
                 extraTurret = Random.Range(-1, 3);
             }
-            waves[waves.Length - 2] = _kamikazeeNumber[WaveNumber] + extraKamikazee;
-            waves[waves.Length - 1] = _turretNumber[WaveNumber] + extraTurret;
+            _kamikazeeNumber[i] += extraKamikazee;
+            _turretNumber[i] += extraTurret;
         }
-        return waves;
+        return this;
     }
 }

@@ -19,9 +19,9 @@ public class EnemyWaveControler : MonoBehaviour
     private float _currentEnemy;
     private WaveState _waveState;
     private List<GameObject> _enemySpawned;
-    private float _numberOfWaves;
     [SerializeField]
     private Transform _player;
+    private bool _activeWave;
     public WaveState WaveState
     {
         get => _waveState;
@@ -30,42 +30,65 @@ public class EnemyWaveControler : MonoBehaviour
     void Start()
     {
         _startGame = GameManager.Instance;
-        _startGame.OnStartGame += CreateWaves;
+        _activeWave = false;
+        _enemySpawned = new List<GameObject>();
     }
-
-    void Update()
+    public void CreateWaves()
     {
-    }
-
-    private void CreateWaves()
-    {
+        Debug.Log("CreatedWaves");
         int numberOfWave = 0;
+        _waves = new List<EnemyWave>();
         foreach (var scenari in gameObject.GetComponent<ControlScenari>().Escenaris)
         {
             if (scenari.CompareTag("combat"))
+            {
                 numberOfWave += 1;
+                var turrets = new float[numberOfWave];
+                var kamikazes = new float[numberOfWave];
+                for (int i = 0; i < numberOfWave; i++)
+                {
+                    turrets[i] = Random.Range(numberOfWave, numberOfWave * 2) / numberOfWave;
+                    kamikazes[i] = Random.Range(numberOfWave, numberOfWave * 2) / numberOfWave;
+                }
+                _waves.Add(new EnemyWave(numberOfWave,kamikazes,turrets));
+            }
         }
-        _waves = new List<EnemyWave>(numberOfWave);
-        foreach (var wave in _waves)
+    }
+    public void CallWave(int currentSala, Vector3 scenariPosition)
+    {
+        _currentEnemy = 0;
+       var waves = _waves[currentSala].CallWave();
+        foreach (var kamiKazeeNumber in waves.KamikazeeNumber)
         {
-           // wave = new EnemyWave(Random.Range(1,3),Random.Range(),);
+            EnemySpawn(_kamikazee, kamiKazeeNumber,scenariPosition);
+            _currentEnemy += kamiKazeeNumber;
         }
-    }
-    public void CallWave()
-    {
-    }
-
-    private void ControlIfWaveIsFinished(WaveState nextWave)
-    {
-        CurrentEnemy(ref _currentEnemy);
-        if (_currentEnemy <= 0)
-            _waveState = nextWave;
+        foreach (var turretNumber in waves.TurretNumber)
+        {
+            EnemySpawn(_turret, turretNumber,scenariPosition);
+            _currentEnemy += turretNumber;
+        }
+        _activeWave = true;
     }
 
-    public void EnemySpawn(GameObject enemy, float number)
+    public bool ControlIfWaveIsFinished()
+    {
+        if (_activeWave)
+        {
+            CurrentEnemy(ref _currentEnemy);
+            if (_currentEnemy <= 0)
+            {
+                _activeWave = false;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void EnemySpawn(GameObject enemy, float number, Vector3 scenariPosition)
     {
         for (int i = 0; i < number; i++)
-            _enemySpawned.Add(ControlInstancePosition(enemy));
+            _enemySpawned.Add(ControlInstancePosition(enemy,scenariPosition));
     }
     public void CurrentEnemy(ref float currentEnemies)
     {
@@ -80,12 +103,12 @@ public class EnemyWaveControler : MonoBehaviour
         }
     }
 
-    private GameObject ControlInstancePosition(GameObject enemy)
+    private GameObject ControlInstancePosition(GameObject enemy, Vector3 scenariPosition)
     {
         Vector3 position;
         do
         {
-            position = new Vector3(Random.Range(-32.4f, 12.62f), Random.Range(-8.75f, 10.42f));
+            position = new Vector3(Random.Range(-32.4f, 12.62f) + scenariPosition.x, Random.Range(-8.75f, 10.42f)+scenariPosition.y);
         } while (GameObjectInThatPosition(position));
         return Instantiate(enemy, position, Quaternion.identity);
     }

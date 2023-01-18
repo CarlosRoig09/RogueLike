@@ -8,6 +8,7 @@ TagManager:
   - Proyectile
   - Item
   - Weapon
+  - combat
   layers:
   - Default
   - TransparentFX
