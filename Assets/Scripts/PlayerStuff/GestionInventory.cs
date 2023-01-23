@@ -25,12 +25,10 @@ public class GestionInventory : MonoBehaviour
 
     public void AddWeapon(WeaponData weaponData)
     {
-        Debug.Log("AddWeapon Arrived");
         if (inventory.LimitWeapons >= inventory.Weapons.Count)
         {
             if (!IsInTheList(weaponData))
             {
-                Debug.Log("Weapon Add");
                 inventory.Weapons.Add(Instantiate(weaponData));
             }
             else Debug.Log("Weapon Repeated");

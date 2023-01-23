@@ -40,7 +40,7 @@ public class EnemyWaveControler : MonoBehaviour
         _waves = new List<EnemyWave>();
         foreach (var scenari in gameObject.GetComponent<ControlScenari>().Escenaris)
         {
-            if (scenari.CompareTag("combat"))
+            if (scenari.transform.GetChild(0).CompareTag("combat"))
             {
                 numberOfWave += 1;
                 var turrets = new float[numberOfWave];

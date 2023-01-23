@@ -55,7 +55,6 @@ public class Enemy : Character, IDestroyable
     }
     public void GetHitByPlayer(float damage)
     {
-            Debug.Log("I got Damaged");
             TakeDamage(damage);
             enemyData.Damagable = Invulnerability.NoDamagable;
             StartCoroutine(InvulnerabilityTime(0.5f));

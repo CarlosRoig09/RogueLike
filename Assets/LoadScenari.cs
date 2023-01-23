@@ -7,6 +7,7 @@ public class LoadScenari : MonoBehaviour
     private int _id;
     public int Id
     {
+        get { return _id; }
         set { _id = value;}
     }
     [SerializeField]
@@ -28,13 +29,25 @@ public class LoadScenari : MonoBehaviour
     }
   private void ScenariLoaded(int id)
    {
+        _player = GameObject.Find("Player").GetComponent<Transform>();
         _player.transform.position = new Vector3(_door1.transform.position.x+0.2f,_door1.transform.position.y);
         _spawner.GetComponent<EnemyWaveControler>().CallWave(id,transform.position);
    }
 
- public void ScenariAlredyLoaded()
+ public void ScenariAlredyLoaded(string door)
     {
-        _player.transform.position = new Vector3(_door2.transform.position.x + 0.2f, _door1.transform.position.y);
+        _player = GameObject.Find("Player").GetComponent<Transform>();
+         switch (door)
+        {
+            case "Door1":
+                _player.transform.position = new Vector3(_door1.transform.position.x + 5f, _door2.transform.position.y);
+                break;
+            case "Door2":
+                _player.transform.position = new Vector3(_door2.transform.position.x -5f, _door2.transform.position.y);
+                break;
+            default:
+                break;
+        }
     }
 
     public void CallOpenDoor()
