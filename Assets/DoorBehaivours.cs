@@ -23,11 +23,14 @@ public class DoorBehaivours : MonoBehaviour
         gameObject.GetComponent<SpriteRenderer>().color = new Color(0,0,0,0);
         gameObject.GetComponent<Collider2D>().isTrigger = true;
         _openDoor = true;
+        _parent.GetComponent<LoadScenari>().OnOpenDoor -= Open;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (_openDoor&&collision.gameObject.CompareTag("Player"))
-            GameObject.Find("Spawner").GetComponent<ControlScenari>().LoadScenari(_doorId);
+        if (_openDoor && collision.gameObject.CompareTag("Player")) {
+            Debug.Log(transform.parent.parent.name);
+        GameObject.Find("Spawner").GetComponent<ControlScenari>().LoadScenari(_doorId);
+    }
     }
 }

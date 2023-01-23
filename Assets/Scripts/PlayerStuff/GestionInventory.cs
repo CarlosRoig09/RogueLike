@@ -51,7 +51,6 @@ public class GestionInventory : MonoBehaviour
             _counter += 1;
             if (inventory.Weapons.Count <= _counter)
                 _counter = 0;
-            Debug.Log(_counter);
             if (inventory.Weapons.Count > 1)
                 SetWeaponValues(inventory.Weapons[_counter]);
             }

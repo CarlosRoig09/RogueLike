@@ -8,7 +8,6 @@ public enum WaveState
 public class EnemyWaveControler : MonoBehaviour
 {
     //Haré probablemente para variar un ScriptableObject de cada zona y sus Wave en un futuro.
-    private GameManager _startGame;
     private List<EnemyWave> _waves;
    // [SerializeField]
 
@@ -29,7 +28,6 @@ public class EnemyWaveControler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _startGame = GameManager.Instance;
         _activeWave = false;
         _enemySpawned = new List<GameObject>();
     }

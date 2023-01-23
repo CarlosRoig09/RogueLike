@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     public event StartGame OnStartGame;
     private Escenas _scene;
     private GameFinish _gameFinish;
+    private ControlScenari _cS;
     private bool _calledStartGame;
     public GameFinish GameFinish
     {
@@ -52,6 +53,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _cS = GameObject.Find("Spawner").GetComponent<ControlScenari>();
         DontDestroyOnLoad(gameObject);
         _calledStartGame = false;
     }
@@ -71,7 +73,7 @@ public class GameManager : MonoBehaviour
                 _gameFinish = GameFinish.Lose;
                 SceneManager.LoadScene("GameOver");
             }
-            if (GameObject.Find("Spawner").GetComponent<EnemyWaveControler>().ControlIfWaveIsFinished())
+            if (GameObject.Find("Spawner").GetComponent<EnemyWaveControler>().ControlIfWaveIsFinished()&&_cS.newScene)
             {
                 GameObject.Find("Spawner").GetComponent<ControlScenari>().DoorOpens();
             }

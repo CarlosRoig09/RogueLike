@@ -67,7 +67,6 @@ public class Player : Character
 
     public void MeleeAttack()
     {
-        Debug.Log("AttackByAnimator");
         _weapon.FirstButtonAttack();
     }
     public void Shoot()

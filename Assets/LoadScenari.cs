@@ -52,6 +52,7 @@ public class LoadScenari : MonoBehaviour
 
     public void CallOpenDoor()
     {
+        _spawner.GetComponent<ControlScenari>().newScene = false;
         OnOpenDoor();
     }
 }

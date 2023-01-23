@@ -99,7 +99,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.25160074, y: 0}
+  m_Offset: {x: -1.2326306, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -110,7 +110,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5032012, y: 1}
+  m_Size: {x: 3.4652612, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &3240687871762702595
 MonoBehaviour:
@@ -224,7 +224,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.21300077, y: 0}
+  m_Offset: {x: 1.461771, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -235,7 +235,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.4803998, y: 1}
+  m_Size: {x: 3.97794, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &8418821534613434952
 MonoBehaviour:
@@ -3335,13 +3335,13 @@ Tilemap:
       e33: 1
   m_TileColorArray:
   - m_RefCount: 16
-    m_Data: {r: 0.9121667, g: 0.6171248, b: 0.6763581, a: 1}
+    m_Data: {r: 0.9883189, g: 0.47877276, b: 0.57561547, a: 1}
   - m_RefCount: 164
-    m_Data: {r: 0.74729353, g: 0.42181793, b: 0.44925678, a: 1}
+    m_Data: {r: 0.8882494, g: 0.58449465, b: 0.60058933, a: 1}
   - m_RefCount: 0
-    m_Data: {r: 4.9413e-41, g: 4.9413e-41, b: 4.9413e-41, a: 4.9413e-41}
+    m_Data: {r: 4.8793e-41, g: 4.8793e-41, b: 4.8793e-41, a: 4.8793e-41}
   - m_RefCount: 0
-    m_Data: {r: 4.9413e-41, g: 4.9413e-41, b: 4.9413e-41, a: 4.9413e-41}
+    m_Data: {r: 4.8793e-41, g: 4.8793e-41, b: 4.8793e-41, a: 4.8793e-41}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -3601,11 +3601,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 201531891774601688, guid: 0a4d1a1c18bde294b894f842c7ae6f22, type: 3}
       propertyPath: m_Size.x
-      value: 1.5032012
+      value: 3.4652612
       objectReference: {fileID: 0}
     - target: {fileID: 201531891774601688, guid: 0a4d1a1c18bde294b894f842c7ae6f22, type: 3}
       propertyPath: m_Offset.x
-      value: -0.25160074
+      value: -1.2326306
       objectReference: {fileID: 0}
     - target: {fileID: 298072813950832994, guid: 0a4d1a1c18bde294b894f842c7ae6f22, type: 3}
       propertyPath: _doorId
@@ -5237,11 +5237,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7904830364420960563, guid: 0a4d1a1c18bde294b894f842c7ae6f22, type: 3}
       propertyPath: m_Size.x
-      value: 1.4803998
+      value: 3.97794
       objectReference: {fileID: 0}
     - target: {fileID: 7904830364420960563, guid: 0a4d1a1c18bde294b894f842c7ae6f22, type: 3}
       propertyPath: m_Offset.x
-      value: 0.21300077
+      value: 1.461771
       objectReference: {fileID: 0}
     - target: {fileID: 8418512492674627553, guid: 0a4d1a1c18bde294b894f842c7ae6f22, type: 3}
       propertyPath: m_Layer

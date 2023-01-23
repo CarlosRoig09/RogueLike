@@ -17,9 +17,11 @@ public class ControlScenari : MonoBehaviour
     private Transform _player;
     private GameObject _currentScenari;
     private EnemyWaveControler _eWC;
+    public bool newScene;
     // Start is called before the first frame update
     void Start()
     {
+        newScene = false;
         _startGame = GameManager.Instance;
         _startGame.OnStartGame += CreateEscenaris;
         _scenariCount = 0;
@@ -29,7 +31,6 @@ public class ControlScenari : MonoBehaviour
 
     void CreateEscenaris()
     {
-        Debug.Log("CreatedScenary");
         bool isRepitive;
         int count = 0;
         while(count < _escenari.Count)
@@ -53,36 +54,50 @@ public class ControlScenari : MonoBehaviour
 
    public void LoadScenari(float door)
     {
-        switch (door)
+        Transform previosposition = null;
+        float addDistance = 0;
+        string instantDoor = null;
+       switch (door)
         {
             case 1:
                 _scenariCount-=1;
-                Debug.Log(_scenariCount);
-                _currentScenari = ReturnALoadedScenari(GameObject.FindGameObjectsWithTag("scenari"),_scenariCount);
-              _currentScenari.GetComponent<LoadScenari>().ScenariAlredyLoaded("Door2");
+                instantDoor = "Door2";
                 break;
             case 2:
-                var previosposition = _newOrder[_scenariCount].transform;
+                 previosposition = ReturnALoadedScenari(GameObject.FindGameObjectsWithTag("scenari"),_scenariCount).transform;
                 _scenariCount += 1;
-                Debug.Log(_scenariCount);
-                if (!SearchIfASceneariIsLoaded(GameObject.FindGameObjectsWithTag("scenari"), _scenariCount))
-                {
-                    var newPosition = new Vector3(previosposition.position.x + 100, previosposition.position.y);
-                    _currentScenari = Instantiate(_newOrder[_scenariCount], newPosition, Quaternion.identity);
-                }
-                else
-                {
-                    _currentScenari = ReturnALoadedScenari(GameObject.FindGameObjectsWithTag("scenari"), _scenariCount);
-                    _currentScenari.GetComponent<LoadScenari>().ScenariAlredyLoaded("Door1");
-                }
+                addDistance = 100;
+                instantDoor = "Door1";
                 break;
             case 0:
                 _scenariCount = 0;
-                Debug.Log(_scenariCount);
-                _currentScenari = Instantiate(_newOrder[0],new Vector3(0,0),Quaternion.identity);
+                addDistance = 0;
+                previosposition = _newOrder[_scenariCount].transform;
                 break;
         }
-        _currentScenari.GetComponent<LoadScenari>().Id = _scenariCount;
+        if (_scenariCount >= 0 || _scenariCount < _newOrder.Count)
+        {
+            Debug.Log(_scenariCount);
+            if (!SearchIfASceneariIsLoaded(GameObject.FindGameObjectsWithTag("scenari"), _scenariCount))
+            {
+                newScene = true;
+                var newPosition = new Vector3(previosposition.position.x + addDistance, previosposition.position.y);
+                _currentScenari = Instantiate(_newOrder[_scenariCount], newPosition, Quaternion.identity);
+            }
+            else
+            {
+                _currentScenari = ReturnALoadedScenari(GameObject.FindGameObjectsWithTag("scenari"), _scenariCount);
+                _currentScenari.GetComponent<LoadScenari>().ScenariAlredyLoaded(instantDoor);
+            }
+            _currentScenari.GetComponent<LoadScenari>().Id = _scenariCount;
+        }
+        else
+        {
+            if (_scenariCount < 0)
+                _scenariCount = 0;
+            else if (_scenariCount >= _newOrder.Count)
+                _scenariCount = _newOrder.Count - 1;
+        }
     }
 
     private bool SearchIfASceneariIsLoaded(GameObject[] Loaded, int WantToLoad)
