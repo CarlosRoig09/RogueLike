@@ -372,7 +372,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0
   far clip plane: 1000
   field of view: 60
   orthographic: 1
@@ -1174,7 +1174,23 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 217075115}
     - target: {fileID: 4596021103494977613, guid: d86efcb84ee33094fac8a9219504f506, type: 3}
+      propertyPath: _escenari.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596021103494977613, guid: d86efcb84ee33094fac8a9219504f506, type: 3}
       propertyPath: _escenari.Array.data[0]
+      value: 
+      objectReference: {fileID: 8597100980679031137, guid: bef9064a9f80d8649a844018b7ac3882, type: 3}
+    - target: {fileID: 4596021103494977613, guid: d86efcb84ee33094fac8a9219504f506, type: 3}
+      propertyPath: _escenari.Array.data[1]
+      value: 
+      objectReference: {fileID: 8597100980679031137, guid: bef9064a9f80d8649a844018b7ac3882, type: 3}
+    - target: {fileID: 4596021103494977613, guid: d86efcb84ee33094fac8a9219504f506, type: 3}
+      propertyPath: _escenari.Array.data[2]
+      value: 
+      objectReference: {fileID: 8597100980679031137, guid: bef9064a9f80d8649a844018b7ac3882, type: 3}
+    - target: {fileID: 4596021103494977613, guid: d86efcb84ee33094fac8a9219504f506, type: 3}
+      propertyPath: _escenari.Array.data[3]
       value: 
       objectReference: {fileID: 8597100980679031137, guid: bef9064a9f80d8649a844018b7ac3882, type: 3}
     m_RemovedComponents: []
