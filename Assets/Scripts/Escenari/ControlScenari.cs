@@ -18,7 +18,7 @@ public class ControlScenari : MonoBehaviour
     private GameObject _currentScenari;
     private EnemyWaveControler _eWC;
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         _startGame = GameManager.Instance;
         _startGame.OnStartGame += CreateEscenaris;
@@ -58,15 +58,23 @@ public class ControlScenari : MonoBehaviour
             case 1:
                 _scenariCount-=1;
                 Debug.Log(_scenariCount);
-                _currentScenari = _newOrder[_scenariCount];
-              _currentScenari.GetComponent<LoadScenari>().ScenariAlredyLoaded();
+                _currentScenari = ReturnALoadedScenari(GameObject.FindGameObjectsWithTag("scenari"),_scenariCount);
+              _currentScenari.GetComponent<LoadScenari>().ScenariAlredyLoaded("Door2");
                 break;
             case 2:
                 var previosposition = _newOrder[_scenariCount].transform;
                 _scenariCount += 1;
                 Debug.Log(_scenariCount);
-                var newPosition = new Vector3(previosposition.position.x + 100,previosposition.position.y);
-                 _currentScenari = Instantiate(_newOrder[_scenariCount], newPosition, Quaternion.identity);
+                if (!SearchIfASceneariIsLoaded(GameObject.FindGameObjectsWithTag("scenari"), _scenariCount))
+                {
+                    var newPosition = new Vector3(previosposition.position.x + 100, previosposition.position.y);
+                    _currentScenari = Instantiate(_newOrder[_scenariCount], newPosition, Quaternion.identity);
+                }
+                else
+                {
+                    _currentScenari = ReturnALoadedScenari(GameObject.FindGameObjectsWithTag("scenari"), _scenariCount);
+                    _currentScenari.GetComponent<LoadScenari>().ScenariAlredyLoaded("Door1");
+                }
                 break;
             case 0:
                 _scenariCount = 0;
@@ -75,6 +83,30 @@ public class ControlScenari : MonoBehaviour
                 break;
         }
         _currentScenari.GetComponent<LoadScenari>().Id = _scenariCount;
+    }
+
+    private bool SearchIfASceneariIsLoaded(GameObject[] Loaded, int WantToLoad)
+    {
+        foreach (var load in Loaded)
+        {
+            if (load.GetComponent<LoadScenari>().Id == WantToLoad)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private GameObject ReturnALoadedScenari(GameObject[] Loaded, int WantToLoad)
+    {
+        foreach (var load in Loaded)
+        {
+            if (load.GetComponent<LoadScenari>().Id == WantToLoad)
+            {
+                return load;
+            }
+        }
+        return null;
     }
 
     public void DoorOpens()

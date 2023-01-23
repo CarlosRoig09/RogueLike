@@ -25,9 +25,9 @@ public class DoorBehaivours : MonoBehaviour
         _openDoor = true;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        if (_openDoor)
-        GameObject.Find("Spawner").GetComponent<ControlScenari>().LoadScenari(_doorId);
+        if (_openDoor&&collision.gameObject.CompareTag("Player"))
+            GameObject.Find("Spawner").GetComponent<ControlScenari>().LoadScenari(_doorId);
     }
 }
