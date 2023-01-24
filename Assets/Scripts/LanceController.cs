@@ -6,6 +6,7 @@ public class LanceController : MonoBehaviour, IWeaponControler
     private WeaponData _weaponSO;
     private GameObject _parent;
     private GameObject _grandParent;
+    private Enemy _enemyStunned;
     public WeaponData WeaponSO { get => _weaponSO; set => _weaponSO = value; }
 
     // Start is called before the first frame update
@@ -26,7 +27,15 @@ public class LanceController : MonoBehaviour, IWeaponControler
             _weaponSO.MaxDistance(_parent, WeaponState.Stop);
             _weaponSO.ComeBack(_grandParent, _parent, 1.5f);
             if (_weaponSO.WA == WeaponState.ComeBack)
+            {
                 CollisionEnable();
+                if(_enemyStunned!= null)
+                {
+                   _enemyStunned.DeStunned();
+                   _enemyStunned.GetHitByPlayer(_weaponSO.shootData.ProyectileDamage);
+                    _enemyStunned= null;
+                }
+            }
             else
                 if (!_weaponSO.shootData.rangeAttack)
                 StartCoroutine(_weaponSO.ResetProyectileCount());
@@ -63,17 +72,26 @@ public class LanceController : MonoBehaviour, IWeaponControler
         if (enabled)
         {
             if (collision.gameObject.GetComponent<IDestroyable>() != null)
+            {
                 collision.gameObject.GetComponent<IDestroyable>().GetHitByPlayer(_weaponSO.WA == WeaponState.MeleeAttack ? _weaponSO.meleeData.Damage : _weaponSO.shootData.ProyectileDamage);
+                if(_weaponSO.WA == WeaponState.DistanceAttack&&collision.gameObject.CompareTag("Enemy"))
+                {
+                    _parent.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0);
+                    _weaponSO.WA = WeaponState.Stop;
+                  _enemyStunned = collision.gameObject.GetComponent<Enemy>();
+                    _enemyStunned.Stunned(5);
+                }
+            }
+            
 
-            if (collision.CompareTag("Enemy") || collision.CompareTag("Proyectile"))
-                PushOtherGO(collision, _weaponSO.WA == WeaponState.MeleeAttack ? _weaponSO.meleeData.ImpulseForce : _weaponSO.shootData.ImpulseForce);
+          //  if (collision.CompareTag("Enemy") || collision.CompareTag("Proyectile"))
+                //PushOtherGO(collision, _weaponSO.WA == WeaponState.MeleeAttack ? _weaponSO.meleeData.ImpulseForce : _weaponSO.shootData.ImpulseForce);
         }
     }
-        public void PushOtherGO(Collider2D collision, float impulse)
+    public void PushOtherGO(Collider2D collision, float impulse)
     {
         Vector3 enemyDirection = collision.gameObject.transform.position - transform.position;
-        var canBeImpulse = collision.gameObject.GetComponent<ICanBeImpulsed>();
-        if (canBeImpulse != null)
+        if (collision.gameObject.TryGetComponent<ICanBeImpulsed>(out var canBeImpulse))
             canBeImpulse.GetImpulse(enemyDirection.normalized * impulse);
     }
     public void CollisionEnable()

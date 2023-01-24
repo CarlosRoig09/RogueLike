@@ -94,13 +94,13 @@ public class Kamikazee : Enemy
     }
     public override void Movement(float directionX, float directionY)
     {
-        if (enemyData.Damagable == Invulnerability.Damagable)
-            _rb.velocity = enemyData.speed * Time.fixedDeltaTime * new Vector3(directionX, directionY);
+        if (cloneEnemyData.Damagable == Invulnerability.Damagable&&!cloneEnemyData._stunned)
+            _rb.velocity = cloneEnemyData.speed * Time.fixedDeltaTime * new Vector3(directionX, directionY);
     }
 
     private void IsGoingToExplote()
     {
-        if (lookDirection.magnitude<=2)
+        if (lookDirection.magnitude<=2&&cloneEnemyData.Damagable == Invulnerability.Damagable&&!cloneEnemyData._stunned)
             _movement = KamikazeeMovement.Explode;
     }
 
@@ -117,7 +117,7 @@ public class Kamikazee : Enemy
     {
         if (_movement == KamikazeeMovement.Explode && collision.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<Player>().TakeDamage(enemyData.ContactDamage);
+            collision.gameObject.GetComponent<Player>().TakeDamage(cloneEnemyData.ContactDamage);
         }
         if (collision.gameObject.layer == 7)
         {

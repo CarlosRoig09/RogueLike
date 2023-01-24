@@ -4,7 +4,8 @@ using UnityEngine;
 public class Enemy : Character, IDestroyable
 {
     [SerializeField]
-    protected EnemyData enemyData;
+    private EnemyData enemyData;
+    protected EnemyData cloneEnemyData;
     public Life State;
     private float currentLife;
     protected Vector3 lookDirection;
@@ -20,24 +21,36 @@ public class Enemy : Character, IDestroyable
     }
     protected virtual void Start()
     {
-        currentLife = enemyData.maxlife;
-        State = Life.Alive;
-        enemyData.Damagable = Invulnerability.Damagable;
+        cloneEnemyData = Instantiate(enemyData);
+        cloneEnemyData._stunned = false;
+        cloneEnemyData.Damagable = Invulnerability.Damagable;
         _player = GameObject.Find("Player");
     }
     protected virtual void Update()
     {
         FindTarget();
     }
-   /* protected void DealContactDamage(GameObject gameObject)
+
+    public void Stunned(float time)
     {
-        gameObject.GetComponent<Player>().TakeDamage(enemyData.ContactDamage);
-    }*/
+        StopMomentum();
+        cloneEnemyData._stunned = true;
+        StartCoroutine(StunTime(time));
+    }
+
+    public void DeStunned()
+    {
+        StopCoroutine(StunTime(0));
+        cloneEnemyData._stunned = false;
+    }
     protected void FindTarget()
     {
-        lookDirection = _player.transform.position - transform.position;
-        lookAngle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, lookAngle);
+        if (!cloneEnemyData._stunned)
+        {
+            lookDirection = _player.transform.position - transform.position;
+            lookAngle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(0, 0, lookAngle);
+        }
     }
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
@@ -47,7 +60,7 @@ public class Enemy : Character, IDestroyable
     }
     public override void TakeDamage(float damage)
     {
-        gameObject.GetComponent<LifeControler>().ModifyLife(damage * -1,ref currentLife, enemyData.maxlife);
+        gameObject.GetComponent<LifeControler>().ModifyLife(damage * -1, ref cloneEnemyData.life, cloneEnemyData.maxlife);
     }
     public override void OnDeath()
     {
@@ -56,7 +69,7 @@ public class Enemy : Character, IDestroyable
     public void GetHitByPlayer(float damage)
     {
             TakeDamage(damage);
-            enemyData.Damagable = Invulnerability.NoDamagable;
+            cloneEnemyData.Damagable = Invulnerability.NoDamagable;
             StartCoroutine(InvulnerabilityTime(0.5f));
     }
 
@@ -91,7 +104,13 @@ public class Enemy : Character, IDestroyable
     private IEnumerator InvulnerabilityTime(float time)
     {
         yield return new WaitForSeconds(time);
-        enemyData.Damagable = Invulnerability.Damagable;
+        cloneEnemyData.Damagable = Invulnerability.Damagable;
         StopMomentum();
+    }
+
+    private IEnumerator StunTime(float time)
+    {
+        yield return new WaitForSeconds(time);
+        cloneEnemyData._stunned = false;
     }
 }
