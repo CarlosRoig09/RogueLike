@@ -133,7 +133,7 @@ PolygonCollider2D:
       - {x: 0.0020674756, y: 0.033184353}
 --- !u!95 &3298207268776230541
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -150,7 +150,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!50 &247168531241600665
 Rigidbody2D:
   serializedVersion: 4
@@ -184,7 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4368a9ed6e9d8c84caef6990abec00f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponData: {fileID: 11400000, guid: a14b32f2525907a4b86afff92cef1497, type: 2}
+  weaponData: {fileID: 11400000, guid: d22e45f383d65e84b81e4cc347b4345d, type: 2}
 --- !u!114 &-5220174862742759982
 MonoBehaviour:
   m_ObjectHideFlags: 0

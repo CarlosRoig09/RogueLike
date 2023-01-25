@@ -15,6 +15,7 @@ public class Player : Character
     private IWeaponControler _weapon;
     private Rigidbody2D _rb;
     private Animator _anim;
+    private ControlStats _controlStats;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +24,7 @@ public class Player : Character
         _playerDataSO.life = _playerDataSO.maxlife;
         _playerDataSO.State = Life.Alive;
         _anim = gameObject.GetComponent<Animator>();
+        _controlStats = gameObject.GetComponent<ControlStats>();
      }
     // Update is called once per frame
     void Update()
@@ -84,6 +86,7 @@ public class Player : Character
      _rb.AddForce(vectorPM.normalized * _playerDataSO.dashSpeed,ForceMode2D.Impulse);
         _playerDataSO.Damagable = Invulnerability.NoDamagable;
         StartCoroutine(InvulnerabilityTime(_playerDataSO.dashDuration, "Dash"));
+        _controlStats.ModificadorDeStat(Type.WeaponsDamage,5,_playerDataSO.dashDuration);
     }
     private IEnumerator InvulnerabilityTime(float time, string animation)
     {

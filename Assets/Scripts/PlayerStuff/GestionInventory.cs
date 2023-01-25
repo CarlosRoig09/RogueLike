@@ -23,17 +23,18 @@ public class GestionInventory : MonoBehaviour
     {
     }
 
-    public void AddWeapon(WeaponData weaponData)
+    public bool AddWeapon(WeaponData weaponData)
     {
-        if (inventory.LimitWeapons >= inventory.Weapons.Count)
+        if (inventory.LimitWeapons > inventory.Weapons.Count)
         {
             if (!IsInTheList(weaponData))
             {
                 inventory.Weapons.Add(Instantiate(weaponData));
+                return true;
             }
-            else Debug.Log("Weapon Repeated");
         }
         else Debug.Log("No more space");
+        return false;
     }
 
     public void DetachTheCurrentWeapon()
@@ -66,7 +67,6 @@ public class GestionInventory : MonoBehaviour
             }
         return false;
     }
-
 
     public void SetWeaponValues(WeaponData newweapon)
     {
