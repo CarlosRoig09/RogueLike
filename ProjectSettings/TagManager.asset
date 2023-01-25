@@ -9,6 +9,7 @@ TagManager:
   - Item
   - Weapon
   - combat
+  - scenari
   layers:
   - Default
   - TransparentFX
