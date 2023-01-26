@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: TemporDamageUp
   Description: 
-  prefab: {fileID: 0}
+  prefab: {fileID: 1874522718307050945, guid: ccf620ae75305614c82726bdc57e6592, type: 3}
   CountDown: 10
   RateAperance: 50
+  Price: 0
   modUp: 2
   temporal: 1
   Stat: 0
