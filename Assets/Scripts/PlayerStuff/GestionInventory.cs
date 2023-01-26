@@ -29,7 +29,12 @@ public class GestionInventory : MonoBehaviour
         {
             if (!IsInTheList(weaponData))
             {
-                inventory.Weapons.Add(Instantiate(weaponData));
+                var cloneWeapon = Instantiate(weaponData);
+                var meleeClone = Instantiate(weaponData.meleeData);
+                var shootClone = Instantiate(weaponData.shootData);
+                cloneWeapon.meleeData = meleeClone;
+                cloneWeapon.shootData = shootClone;
+                inventory.Weapons.Add(cloneWeapon);
                 return true;
             }
         }
@@ -66,6 +71,11 @@ public class GestionInventory : MonoBehaviour
                 return true;
             }
         return false;
+    }
+
+    public void AddCoins(float value)
+    {
+        inventory.Coins += value;
     }
 
     public void SetWeaponValues(WeaponData newweapon)

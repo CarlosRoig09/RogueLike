@@ -40,13 +40,13 @@ public class ControlStats : MonoBehaviour
             case Type.WeaponsDamage:
                 foreach (var weapon in inventory.Weapons)
                 {
-                    weapon.meleeData.Damage += modificator;
-                    weapon.shootData.ProyectileDamage += modificator;
+                    weapon.meleeData.Damage *= modificator;
+                    weapon.shootData.ProyectileDamage *= modificator;
                 }
                 break;
             case Type.PlayerSpeed:
-                playerData.speed += modificator;
-                playerData.dashSpeed += modificator;
+                playerData.speed *= modificator;
+                playerData.dashSpeed *= modificator;
                 break;
         }
     }
@@ -55,6 +55,6 @@ public class ControlStats : MonoBehaviour
     {
         SearchForStats(stat, modificator);
         yield return new WaitForSeconds(time);
-        SearchForStats(stat, modificator*-1);
+        SearchForStats(stat, 1/modificator);
     }
 }

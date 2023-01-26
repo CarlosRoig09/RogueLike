@@ -86,7 +86,7 @@ public class Player : Character
      _rb.AddForce(vectorPM.normalized * _playerDataSO.dashSpeed,ForceMode2D.Impulse);
         _playerDataSO.Damagable = Invulnerability.NoDamagable;
         StartCoroutine(InvulnerabilityTime(_playerDataSO.dashDuration, "Dash"));
-        _controlStats.ModificadorDeStat(Type.WeaponsDamage,5,_playerDataSO.dashDuration);
+        _controlStats.ModificadorDeStat(Type.WeaponsDamage,1.5f,_playerDataSO.dashDuration);
     }
     private IEnumerator InvulnerabilityTime(float time, string animation)
     {
