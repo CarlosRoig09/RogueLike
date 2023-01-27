@@ -143,6 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4368a9ed6e9d8c84caef6990abec00f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemData: {fileID: 11400000, guid: a03e8d58a6ef2bb4d9f47b21d993c763, type: 2}
   weaponData: {fileID: 11400000, guid: a03e8d58a6ef2bb4d9f47b21d993c763, type: 2}
 --- !u!60 &4102091294081172544
 PolygonCollider2D:

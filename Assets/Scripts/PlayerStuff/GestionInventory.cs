@@ -4,6 +4,9 @@ public class GestionInventory : MonoBehaviour
 {
     [SerializeField]
     private Inventory inventory;
+    public Inventory Inventory { get { return inventory; }
+        set { inventory = value; }
+    }
     private ChangeWeaponController _weaponController;
     private int _counter;
     [SerializeField]

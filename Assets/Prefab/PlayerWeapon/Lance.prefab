@@ -202,6 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4368a9ed6e9d8c84caef6990abec00f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemData: {fileID: 11400000, guid: 6791e305127043846a3d6a7749a3cb61, type: 2}
   weaponData: {fileID: 11400000, guid: 6791e305127043846a3d6a7749a3cb61, type: 2}
 --- !u!60 &8388633934616389836
 PolygonCollider2D:

@@ -17,7 +17,7 @@ MonoBehaviour:
   prefab: {fileID: 1874522718307050945, guid: 9d866ea613ffb9c44a43cf14842a22e8, type: 3}
   CountDown: 10
   RateAperance: 50
-  Price: 0
+  Price: 2
   modUp: 1.5
   temporal: 1
   Stat: 1

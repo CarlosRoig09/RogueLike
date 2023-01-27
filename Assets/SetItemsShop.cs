@@ -9,7 +9,7 @@ public class SetItemsShop : MonoBehaviour
     private GameObject[] _itemHolder;
     private GameObject[] itemsSpawned;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         itemsSpawned = new GameObject[_itemHolder.Length];
         bool isRepitive;
