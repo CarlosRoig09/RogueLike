@@ -14,5 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Weapons:
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   LimitWeapons: 5
-  Coins: 2
+  Coins: 855
