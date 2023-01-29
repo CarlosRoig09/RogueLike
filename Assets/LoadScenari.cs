@@ -31,7 +31,10 @@ public class LoadScenari : MonoBehaviour
    {
         _player = GameObject.Find("Player").GetComponent<Transform>();
         _player.transform.position = new Vector3(_door1.transform.position.x+0.2f,_door1.transform.position.y);
-        _spawner.GetComponent<EnemyWaveControler>().CallWave(id,transform.position);
+        if (transform.GetChild(0).CompareTag("combat"))
+            _spawner.GetComponent<EnemyWaveControler>().CallWave(id, transform.position);
+        else
+            CallOpenDoor();
    }
 
  public void ScenariAlredyLoaded(string door)

@@ -9,7 +9,6 @@ public class Kamikazee : Enemy
 {
     private Rigidbody2D _rb;
     private KamikazeeMovement _movement;
-    private GameObject _wall;
     [SerializeField]
     private LayerMask wallMask;
     [SerializeField]

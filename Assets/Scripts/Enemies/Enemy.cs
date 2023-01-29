@@ -1,18 +1,18 @@
 using System.Collections;
 using UnityEngine;
 
-public class Enemy : Character, IDestroyable
+public class Enemy : Character, IDestroyable, IGivePuntuation
 {
     [SerializeField]
     private EnemyData enemyData;
     protected EnemyData cloneEnemyData;
     public Life State;
-    private float currentLife;
     protected Vector3 lookDirection;
     private float lookAngle;
     protected GameObject _player;
     [SerializeField]
     private DropegableItems _items;
+    protected GameObject _wall;
     [SerializeField]
     private float _chanceOfDropNothing;
     public GameObject Player
@@ -65,10 +65,12 @@ public class Enemy : Character, IDestroyable
     public override void OnDeath()
     {
         State = Life.Death;
+        GivePuntuation(cloneEnemyData.PuntuationXDeath);
     }
     public void GetHitByPlayer(float damage)
     {
-            TakeDamage(damage);
+        GivePuntuation(cloneEnemyData.PuntuationXHit);
+        TakeDamage(damage);
             cloneEnemyData.Damagable = Invulnerability.NoDamagable;
             StartCoroutine(InvulnerabilityTime(0.5f));
     }
@@ -81,17 +83,11 @@ public class Enemy : Character, IDestroyable
 
     public bool DropAnObject()
     {
-        float minRange = 0;
-        var random = Random.Range(minRange, _items.Items.Length * 10 + _chanceOfDropNothing);
-        for (var i = 0; i < _items.Items.Length; i++)
+      var item = RandomMethods.ReturnARandomObject(_items.Items, 50, _items.Items.Length, 0);
+        if (item > -1)
         {
-            if (random >= minRange && random <= _items.Items[i].RateAperance / _items.Items.Length * (i + 1))
-            {
-                Instantiate(_items.Items[i].prefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
-                return true;
-            }
-            else
-                minRange = _items.Items[i].RateAperance / _items.Items.Length;
+            Instantiate(_items.Items[item].prefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+            return true;
         }
         return false;
     }
@@ -112,5 +108,14 @@ public class Enemy : Character, IDestroyable
     {
         yield return new WaitForSeconds(time);
         cloneEnemyData._stunned = false;
+    }
+
+   protected void SetPuntuation(float Puntuation)
+    {
+       
+    }
+    public void GivePuntuation(float Puntuation)
+    {
+        GameManager.Instance.Puntuation += Puntuation;
     }
 }

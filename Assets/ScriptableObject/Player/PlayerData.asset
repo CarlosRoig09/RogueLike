@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   Name: Player
-  speed: 500
-  life: 100
-  maxlife: 100
+  speed: 600
+  life: 10
+  maxlife: 10
   State: 0
   invulerability: 0
   Damagable: 0
   IsDamaged: 0
-  dashSpeed: 30
+  dashSpeed: 36
   dashCountdown: 1
   dashDuration: 0.5

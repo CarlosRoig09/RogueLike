@@ -21,5 +21,8 @@ MonoBehaviour:
   Damagable: 0
   ContactDamage: 2
   TimeBeforeNoticePlayer: 0
+  _stunned: 0
+  PuntuationXHit: 1
+  PuntuationXDeath: 5
   durationOfExplosion: 0.5
   explosionDamage: 25

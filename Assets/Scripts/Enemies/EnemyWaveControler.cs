@@ -5,7 +5,7 @@ public enum WaveState
     CallWave,
     WaveEnded
 }
-public class EnemyWaveControler : MonoBehaviour
+public class EnemyWaveControler : MonoBehaviour, IGivePuntuation
 {
     //Haré probablemente para variar un ScriptableObject de cada zona y sus Wave en un futuro.
     private List<EnemyWave> _waves;
@@ -50,6 +50,8 @@ public class EnemyWaveControler : MonoBehaviour
                 }
                 _waves.Add(new EnemyWave(numberOfWave,kamikazes,turrets));
             }
+            else
+                _waves.Add(null);
         }
     }
     public void CallWave(int currentSala, Vector3 scenariPosition)
@@ -69,17 +71,22 @@ public class EnemyWaveControler : MonoBehaviour
         _activeWave = true;
     }
 
-    public bool ControlIfWaveIsFinished()
+    public bool ControlIfWaveIsFinished(out float currentEnemy, out float totalEnemy)
     {
         if (_activeWave)
         {
             CurrentEnemy(ref _currentEnemy);
+            currentEnemy = _currentEnemy;
+            totalEnemy = _enemySpawned.Count;
             if (_currentEnemy <= 0)
             {
+                GivePuntuation(_enemySpawned.Count*10);
                 _activeWave = false;
                 return true;
             }
         }
+        currentEnemy = _currentEnemy;
+        totalEnemy = _enemySpawned.Count;
         return false;
     }
 
@@ -116,5 +123,10 @@ public class EnemyWaveControler : MonoBehaviour
         if (Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Camera.main.transform.position), position) || Physics2D.Raycast(position, _player.position, 100, 6))
             return true;
             return false;
+    }
+
+    public void GivePuntuation(float Puntuation)
+    {
+        GameManager.Instance.Puntuation += Puntuation;
     }
 }

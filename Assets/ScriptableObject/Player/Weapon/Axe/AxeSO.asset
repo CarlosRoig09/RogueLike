@@ -16,8 +16,9 @@ MonoBehaviour:
   Description: 
   prefab: {fileID: 7165837905553589229, guid: 7d24d641beb82b543bab476006062a8e, type: 3}
   CountDown: 10
-  RateAperance: 0
+  RateAperance: 10
   Price: 10
+  Puntuation: 5
   shootData: {fileID: 11400000, guid: a722e1306febb414698ac4ee09d7f1ed, type: 2}
   meleeData: {fileID: 11400000, guid: 0f91f15c43a4eb343819e2bc4d45840e, type: 2}
   Weapon: {fileID: 7165837905553589229, guid: 7d24d641beb82b543bab476006062a8e, type: 3}

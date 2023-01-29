@@ -16,6 +16,7 @@ public class StateItemController : ItemBehaivour
             player.GetComponent<ControlStats>().ModificadorDeStat(_sUICSO.Stat,_sUICSO.modUp,_sUICSO.timeDuration);
         else
             player.GetComponent<ControlStats>().ModificadorDeStat(_sUICSO.Stat, _sUICSO.modUp);
+        GivePuntuation(_sUICSO.Puntuation);
     }
 
     public override IEnumerator TimeTillItemDesapeare(float time)

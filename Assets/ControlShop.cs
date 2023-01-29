@@ -17,7 +17,7 @@ public class ControlShop : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+       if (collision.gameObject.CompareTag("Player"))
         {
             float price;
            if(collision.gameObject.GetComponent<GestionInventory>().Inventory.Coins>= ( price =_item.GetComponent<ItemBehaivour>().itemData.Price))
@@ -28,7 +28,7 @@ public class ControlShop : MonoBehaviour
                     item.enabled = true;
                 }
                _item.GetComponent<ItemBehaivour>().enabled = true;
-              //  Destroy(gameObject);
+                GetComponent<Collider2D>().enabled = false;
             }
 
         }

@@ -13,6 +13,7 @@ public class Coin : ItemBehaivour
 
     public override void GiveToPlayer(GameObject player)
     {
+        GivePuntuation(_cISO.Puntuation);
         player.GetComponent<GestionInventory>().AddCoins(_cISO.value);
         DestroyItem();
     }

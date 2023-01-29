@@ -41,6 +41,7 @@ public class Player : Character
         _anim.SetFloat("Movement", Mathf.Abs(_rb.velocity.x) + Mathf.Abs(_rb.velocity.y));
         _anim.SetFloat("MPositionX", xPosition);
         _anim.SetFloat("MPositionY", yPosition);
+        _anim.SetFloat("Life", _playerDataSO.life);
     }
     public override void Movement(float directionX, float directionY)
     {

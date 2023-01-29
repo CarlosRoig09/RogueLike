@@ -7,11 +7,12 @@ public class ControlScenari : MonoBehaviour
     private GameManager _startGame;
     [SerializeField]
     private List<GameObject> _escenari;
+
+    private List<GameObject> _newOrder;
     public List<GameObject> Escenaris
     {
-        get => _escenari;
+        get => _newOrder;
     }
-    private List<GameObject> _newOrder;
     private int _scenariCount;
     [SerializeField]
     private Transform _player;

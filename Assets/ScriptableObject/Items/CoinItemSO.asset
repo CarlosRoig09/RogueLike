@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Coin5
   Description: 
-  prefab: {fileID: 0}
+  prefab: {fileID: 2495149860427607870, guid: 0d30116d67d6a10439f7813bb62d57ef, type: 3}
   CountDown: 10
   RateAperance: 60
+  Price: 0
+  Puntuation: 5
   value: 5

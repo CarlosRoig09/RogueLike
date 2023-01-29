@@ -29,8 +29,11 @@ public class WeaponItemController : ItemBehaivour
 
     public override void GiveToPlayer(GameObject player)
     {
-     if(player.GetComponent<GestionInventory>().AddWeapon(weaponData))
+        if (player.GetComponent<GestionInventory>().AddWeapon(weaponData))
+        {
+            GivePuntuation(weaponData.Puntuation);
             DestroyItem();
+        }
     }
 
     public override void DestroyItem()

@@ -38,8 +38,28 @@ public class GameManager : MonoBehaviour
     }
     [SerializeField]
     private PlayerData _playerData;
-    public float numberOfBulletsWeapon1;
-    public float numberOfBulletsWeapon2;
+    private float _puntuation;
+    private GetPuntuation _controlPuntuation;
+    public float Puntuation
+    {
+        get => _puntuation;
+        set { _puntuation = value;
+            _controlPuntuation.PuntuationChanged();
+            }
+    }
+    private float _numberOfEnemyKilled;
+    public float NumberOfEnemyKilled
+    {
+        get => _numberOfEnemyKilled;
+    }
+    private float _enemyKilledInCurrentRoom;
+    private float _currentEnemy;
+    private float _totalEnemy;
+    private float _rooms;
+    public float Rooms
+    { 
+        get => _rooms;
+    }
     private void Awake()
     {
         if (_instance != null)
@@ -53,7 +73,6 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _cS = GameObject.Find("Spawner").GetComponent<ControlScenari>();
         DontDestroyOnLoad(gameObject);
         _calledStartGame = false;
     }
@@ -64,19 +83,31 @@ public class GameManager : MonoBehaviour
         ChangeScene();
         if (_scene == Escenas.GameScreen)
         {
-            if (!_calledStartGame) {
+            if (!_calledStartGame)
+            {
+                _controlPuntuation = GameObject.Find("Puntuation").GetComponent<GetPuntuation>();
+                _cS = GameObject.Find("Spawner").GetComponent<ControlScenari>();
+                _puntuation = 0;
+                _rooms = 0;
+                _numberOfEnemyKilled = 0;
                 _calledStartGame = true;
                 OnStartGame();
             }
             if (_playerData.State == Life.Death)
             {
+                _numberOfEnemyKilled += _enemyKilledInCurrentRoom;
                 _gameFinish = GameFinish.Lose;
                 SceneManager.LoadScene("GameOver");
             }
-            if (GameObject.Find("Spawner").GetComponent<EnemyWaveControler>().ControlIfWaveIsFinished()&&_cS.newScene)
+            if (GameObject.Find("Spawner").GetComponent<EnemyWaveControler>().ControlIfWaveIsFinished(out _currentEnemy, out _totalEnemy) && _cS.newScene)
             {
                 GameObject.Find("Spawner").GetComponent<ControlScenari>().DoorOpens();
+                _numberOfEnemyKilled += _enemyKilledInCurrentRoom;
+                _rooms += 1;
             }
+            else
+                if (_numberOfEnemyKilled < _totalEnemy - _currentEnemy)
+            _enemyKilledInCurrentRoom = _totalEnemy - _currentEnemy;
         }
         void ChangeScene()
         {
@@ -87,6 +118,7 @@ public class GameManager : MonoBehaviour
                     break;
                 case "GameOver":
                     _scene = Escenas.GameOverScreen;
+                    _calledStartGame = false;
                     break;
                 case "GameStart":
                     _scene = Escenas.StartScreen;

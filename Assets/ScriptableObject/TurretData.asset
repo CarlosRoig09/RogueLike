@@ -21,5 +21,8 @@ MonoBehaviour:
   Damagable: 0
   ContactDamage: 5
   TimeBeforeNoticePlayer: 0
+  _stunned: 0
+  PuntuationXHit: 1
+  PuntuationXDeath: 5
   Proyectile: {fileID: 5163282210510779587, guid: 9decf7727c1896746ad155efffb94087, type: 3}
   CadenceTime: 2

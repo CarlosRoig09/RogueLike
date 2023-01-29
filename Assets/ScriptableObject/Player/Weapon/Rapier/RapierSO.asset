@@ -18,6 +18,7 @@ MonoBehaviour:
   CountDown: 10
   RateAperance: 50
   Price: 10
+  Puntuation: 5
   shootData: {fileID: 11400000, guid: d60faf952d0712444ae3fdf568ba9245, type: 2}
   meleeData: {fileID: 11400000, guid: d3b272ff6aa0c394ab9186776f6d6eaf, type: 2}
   Weapon: {fileID: 8227410270467569918, guid: 64c26931f78c1464b8a589f4d34acbe8, type: 3}

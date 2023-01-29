@@ -7,7 +7,7 @@ public class DoorBehaivours : MonoBehaviour
     private int _doorId;
     private bool _openDoor;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         _parent = transform.parent.parent.gameObject;
         _parent.GetComponent<LoadScenari>().OnOpenDoor += Open;
@@ -23,7 +23,7 @@ public class DoorBehaivours : MonoBehaviour
         gameObject.GetComponent<SpriteRenderer>().color = new Color(0,0,0,0);
         gameObject.GetComponent<Collider2D>().isTrigger = true;
         _openDoor = true;
-        _parent.GetComponent<LoadScenari>().OnOpenDoor -= Open;
+       // _parent.GetComponent<LoadScenari>().OnOpenDoor -= Open;
     }
 
     private void OnTriggerExit2D(Collider2D collision)

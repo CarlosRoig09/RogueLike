@@ -30,17 +30,11 @@ public class DestroyableObstacle : MonoBehaviour, IDestroyable
 
     public bool DropAnObject()
     {
-        float minRange=0;
-        var random = Random.Range(minRange, _items.Items.Length*10+_chanceOfDropNothing);
-        for (var i = 0; i < _items.Items.Length; i++)
+        var item = RandomMethods.ReturnARandomObject(_items.Items, _chanceOfDropNothing, _items.Items.Length, 0);
+        if (item > -1)
         {
-            if (random >= minRange && random <= _items.Items[i].RateAperance / _items.Items.Length * (i+1))
-            {
-                Instantiate(_items.Items[i].prefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
-                return true;
-            }
-            else
-                minRange = _items.Items[i].RateAperance / _items.Items.Length;
+            Instantiate(_items.Items[item].prefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+            return true;
         }
         return false;
     }
