@@ -34,10 +34,10 @@ public class WeaponData : ItemData
             WA = WeaponState.DistanceAttack;
         }
     }
-    public void ThrowWeapon(GameObject weapon)
+    public void ThrowWeapon(GameObject weapon, float Speed)
     {
         if(shootData.rangeAttack)
-        weapon.GetComponent<Rigidbody2D>().velocity = shootData.ProyectileSpeed * Time.fixedDeltaTime * weapon.transform.right;
+        weapon.GetComponent<Rigidbody2D>().velocity = Speed * Time.fixedDeltaTime * weapon.transform.right;
     }
 
     public void MaxDistance(GameObject weapon, WeaponState newState)
@@ -58,13 +58,13 @@ public class WeaponData : ItemData
         WA = WS;
     }
 
-    public void ComeBack(GameObject parent, GameObject weapon,float speedToComeBack)
+    public void ComeBack(GameObject parent, GameObject weapon,float speedToComeBack, float Speed)
     {
         if (WA == WeaponState.ComeBack)
         {
             var vectorComeBack = parent.transform.position - weapon.transform.position;
             weapon.transform.rotation = Quaternion.Euler(weapon.transform.rotation.x, weapon.transform.rotation.y, Mathf.Atan2(vectorComeBack.y, vectorComeBack.x) * Mathf.Rad2Deg);
-            ThrowWeapon(weapon);
+            ThrowWeapon(weapon,Speed);
             if (Physics2D.Raycast(weapon.transform.position, parent.transform.position - weapon.transform.position, 0.65f, WeaponHolder.value))
             {
                 ParentAndChildrenMethods.ParentAChildren(parent, weapon);

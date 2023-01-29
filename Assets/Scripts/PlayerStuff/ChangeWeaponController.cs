@@ -21,7 +21,7 @@ public class ChangeWeaponController : MonoBehaviour
         if (weaponComponent is MonoBehaviour mono)
             mono.enabled = true;
        weaponComponent.WeaponSO = weaponData;
-        transform.parent.gameObject.GetComponentInParent<Player>().Weapon = weaponComponent;
+        transform.parent.gameObject.GetComponentInParent<PlayerController>().Weapon = weaponComponent;
     }
   
 }

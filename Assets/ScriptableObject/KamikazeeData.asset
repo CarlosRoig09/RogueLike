@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: KamikazeeData
   m_EditorClassIdentifier: 
   Name: Kamikazee
-  speed: 100
+  speed: 250
   life: 12
   maxlife: 20
   State: 0
@@ -26,3 +26,4 @@ MonoBehaviour:
   PuntuationXDeath: 5
   durationOfExplosion: 0.5
   explosionDamage: 25
+  explosionImpulse: 500

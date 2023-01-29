@@ -25,7 +25,7 @@ public class LifeItemController : ItemBehaivour
 
     public override void GiveToPlayer(GameObject player)
     {
-        player.GetComponent<Player>().SumLife(lifeItemSO.VariableLife);
+        player.GetComponent<PlayerController>().SumLife(lifeItemSO.VariableLife);
         GivePuntuation(lifeItemSO.Puntuation);
     }
 

@@ -43,19 +43,20 @@ public class Enemy : Character, IDestroyable, IGivePuntuation
         StopCoroutine(StunTime(0));
         cloneEnemyData._stunned = false;
     }
-    protected void FindTarget()
+    protected Quaternion FindTarget()
     {
         if (!cloneEnemyData._stunned)
         {
             lookDirection = _player.transform.position - transform.position;
             lookAngle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0, 0, lookAngle);
+            return Quaternion.Euler(0, 0, lookAngle);
         }
+        return transform.rotation;
     }
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
         //No muy bien equilibrado aún
-       /* if (collision.gameObject.CompareTag("Player"))
+       /* if (collision.gameObject.CompareTag("PlayerController"))
             DealContactDamage(collision.gameObject); */
     }
     public override void TakeDamage(float damage)
@@ -109,12 +110,7 @@ public class Enemy : Character, IDestroyable, IGivePuntuation
         yield return new WaitForSeconds(time);
         cloneEnemyData._stunned = false;
     }
-
-   protected void SetPuntuation(float Puntuation)
-    {
-       
-    }
-    public void GivePuntuation(float Puntuation)
+    public void GivePuntuation(int Puntuation)
     {
         GameManager.Instance.Puntuation += Puntuation;
     }

@@ -52,7 +52,7 @@ public class ProyectileBehaivour : MonoBehaviour, ICanBeImpulsed
                 break;
             case ProyectileUser.Enemy:
                 if (collision.CompareTag("Player"))
-                    collision.gameObject.GetComponent<Player>().TakeDamage(_damage);
+                    collision.gameObject.GetComponent<PlayerController>().TakeDamage(_damage);
                 if (collision.CompareTag("Weapon"))
                     _proyectileUser = ProyectileUser.Player;
                 if (!collision.CompareTag("Enemy") && !collision.CompareTag("Item") && !collision.CompareTag("Weapon"))

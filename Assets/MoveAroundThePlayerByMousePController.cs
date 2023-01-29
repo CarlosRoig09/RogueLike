@@ -21,7 +21,7 @@ public class MoveAroundThePlayerByMousePController : MonoBehaviour
     }
     void Start()
     {
-        _player = GameObject.Find("Player");
+        _player =GameObject.Find("Player");
         _hS = HandState.MoveByMouse;
     }
     // Update is called once per frame
@@ -30,7 +30,7 @@ public class MoveAroundThePlayerByMousePController : MonoBehaviour
         switch (_hS)
         {
             case HandState.MoveByMouse:
-                RotationZ(_player.GetComponent<Player>().VectorMousePlayerAngle());
+                RotationZ(_player.GetComponent<PlayerController>().VectorMousePlayerAngle());
                 break;
             case HandState.MoveByRotateAnim:
                 RotateAround(transform.parent.transform.position);

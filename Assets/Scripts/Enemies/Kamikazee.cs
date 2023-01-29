@@ -1,9 +1,11 @@
+using TMPro;
 using UnityEngine;
 public enum KamikazeeMovement
 {
     Movement,
-    AvoidObstacle,
-    Explode
+   // AvoidObstacle,
+    Explode,
+    Explosion
 }
 public class Kamikazee : Enemy
 {
@@ -14,30 +16,31 @@ public class Kamikazee : Enemy
     [SerializeField]
     private float explosionTimer;
     private float _counTillDisapear;
+    private Animator _anim;
     protected override void Start()
     {
         base.Start();
         _movement = KamikazeeMovement.Movement;
         _rb = gameObject.GetComponent<Rigidbody2D>();
+        _anim= GetComponent<Animator>();
     }
     protected override void Update()
     {
         base.Update();
+        transform.rotation = FindTarget();
         switch (_movement)
         {
             case KamikazeeMovement.Movement:
                 Movement(transform.right.x, transform.right.y);
                 IsGoingToExplote();
                 break;
-            case KamikazeeMovement.AvoidObstacle:
-                ChangeDirectionWhenImpact();
-                break;
             case KamikazeeMovement.Explode:
+            case KamikazeeMovement.Explosion:
                 Explosion();
                 break;
         }
     }
-    private void ChangeDirectionWhenImpact()
+   /* private void ChangeDirectionWhenImpact()
     {
         if (ContactWithAnObject(Vector2.down))
             PrioritzateMovement(Vector2.down, _player.transform.position);
@@ -49,9 +52,9 @@ public class Kamikazee : Enemy
             PrioritzateMovement(Vector2.left, _player.transform.position);
         else
             _movement = KamikazeeMovement.Movement;
-    }
+    }*/
 
-    private void PrioritzateMovement(Vector2 direction, Vector2 playerPosition)
+    /*private void PrioritzateMovement(Vector2 direction, Vector2 playerPosition)
     {
         if (direction.x == 0)
         {
@@ -85,12 +88,12 @@ public class Kamikazee : Enemy
                     _movement = KamikazeeMovement.Movement;
             }
         }
-    }
+    }*/
 
-    private bool ContactWithAnObject(Vector2 direction)
+ /*   private bool ContactWithAnObject(Vector2 direction)
     {
         return Physics2D.Raycast(transform.position, direction, 0.65f);
-    }
+    }*/
     public override void Movement(float directionX, float directionY)
     {
         if (cloneEnemyData.Damagable == Invulnerability.Damagable&&!cloneEnemyData._stunned)
@@ -99,29 +102,55 @@ public class Kamikazee : Enemy
 
     private void IsGoingToExplote()
     {
-        if (lookDirection.magnitude<=2&&cloneEnemyData.Damagable == Invulnerability.Damagable&&!cloneEnemyData._stunned)
+        if (lookDirection.magnitude <= 4 && cloneEnemyData.Damagable == Invulnerability.Damagable && !cloneEnemyData._stunned)
+        {
+            _anim.SetBool("GoingToExplote", true);
+            _rb.constraints = RigidbodyConstraints2D.FreezeAll;
             _movement = KamikazeeMovement.Explode;
+            
+        }
     }
 
     private void Explosion()
     {
         StopMomentum();
         if (explosionTimer > _counTillDisapear)
-            transform.localScale = new Vector3(transform.localScale.x + 2f * Time.deltaTime, transform.localScale.y + 2f * Time.deltaTime);
-        else State = Life.Death;
-        _counTillDisapear += Time.deltaTime;
+            _counTillDisapear += Time.deltaTime;
+        else
+        { 
+            cloneEnemyData.Damagable = Invulnerability.NoDamagable;
+            _movement = KamikazeeMovement.Explosion;
+            _anim.SetFloat("ExplosionTimer", _counTillDisapear);
+        }
     }
-
+    public void Death()
+    {
+        State = Life.Death;
+    }
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
-        if (_movement == KamikazeeMovement.Explode && collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<Player>().TakeDamage(cloneEnemyData.ContactDamage);
+             Vector3 playerDirection = collision.gameObject.transform.position - transform.position;
+             KamikazeeData kamikazeeData = (KamikazeeData)cloneEnemyData;
+             collision.gameObject.GetComponent<PlayerController>().TakeDamage(kamikazeeData.explosionDamage);
+            collision.gameObject.GetComponent<PlayerController>().GetImpulse(playerDirection.normalized * kamikazeeData.explosionImpulse);
         }
-        if (collision.gameObject.layer == 7)
+      
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (_movement == KamikazeeMovement.Explosion && collision.gameObject.CompareTag("Player"))
         {
-            _movement = KamikazeeMovement.AvoidObstacle;
-            _wall = collision.gameObject;
+            Vector3 playerDirection = collision.gameObject.transform.position - transform.position;
+            KamikazeeData kamikazeeData = (KamikazeeData)cloneEnemyData;
+            collision.gameObject.GetComponent<PlayerController>().TakeDamage(kamikazeeData.explosionDamage);
+            collision.gameObject.GetComponent<PlayerController>().GetImpulse(playerDirection.normalized * kamikazeeData.explosionImpulse);
         }
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+       
     }
 }

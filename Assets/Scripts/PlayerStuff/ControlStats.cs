@@ -9,12 +9,14 @@ public enum ItemEffect
 public class ControlStats : MonoBehaviour
 {
     [SerializeField]
-    private Inventory inventory;
-    [SerializeField]
-    private PlayerData playerData;
+    private PlayerStats playerStats;
     void Start()
     {
-        
+        playerStats.AttackSpeed = 1;
+        playerStats.Damage = 1;
+        playerStats.ProyectileDamage = 1;
+        playerStats.ProyectileSpeed = 1;
+        playerStats.Speed = 1;
     }
 
     // Update is called once per frame
@@ -25,7 +27,10 @@ public class ControlStats : MonoBehaviour
 
     public void ModificadorDeStat(Type stat, float modificator)
     {
-        SearchForStats(stat, modificator);
+        if (!SuprassLimit(stat))
+        {
+            SearchForStats(stat, modificator);
+        }
     }
 
     public void ModificadorDeStat(Type stat, float modificator, float time)
@@ -33,20 +38,45 @@ public class ControlStats : MonoBehaviour
         StartCoroutine(TemporaryModif(time, stat, modificator));
     }
 
+    private bool SuprassLimit(Type stat)
+    {
+        switch (stat)
+        {
+            case Type.WeaponsDamage:
+                if(playerStats.Damage>=1.6f)
+                    return true;
+                break;
+            case Type.PlayerSpeed:
+                if (playerStats.Speed >= 1.6f)
+                    return true;
+                break;
+            case Type.AttackSpeed:
+                if (playerStats.AttackSpeed >= 1.6f)
+                    return true;
+                break;
+            case Type.ProyectileSpeed:
+                if (playerStats.ProyectileSpeed >= 1.6f)
+                    return true;
+                break;
+        }
+        return false;
+    }
+
     private void SearchForStats(Type stat, float modificator)
     {
         switch (stat)
         {
             case Type.WeaponsDamage:
-                foreach (var weapon in inventory.Weapons)
-                {
-                    weapon.meleeData.Damage *= modificator;
-                    weapon.shootData.ProyectileDamage *= modificator;
-                }
+                playerStats.Damage += modificator;
                 break;
             case Type.PlayerSpeed:
-                playerData.speed *= modificator;
-                playerData.dashSpeed *= modificator;
+                playerStats.Speed += modificator;
+                break;
+            case Type.AttackSpeed:
+                playerStats.AttackSpeed += modificator;
+                break;
+            case Type.ProyectileSpeed: 
+                playerStats.ProyectileSpeed += modificator;
                 break;
         }
     }
@@ -55,6 +85,6 @@ public class ControlStats : MonoBehaviour
     {
         SearchForStats(stat, modificator);
         yield return new WaitForSeconds(time);
-        SearchForStats(stat, 1/modificator);
+        SearchForStats(stat, modificator*-1);
     }
 }

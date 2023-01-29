@@ -7,5 +7,5 @@ public class ItemData : ScriptableObject
     public float CountDown;
     public float RateAperance;
     public float Price;
-    public float Puntuation;
+    public int Puntuation;
 }

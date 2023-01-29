@@ -19,7 +19,7 @@ MonoBehaviour:
   RateAperance: 30
   Price: 5
   Puntuation: 2
-  modUp: 1.5
+  modUp: 0.2
   temporal: 0
   Stat: 0
   timeDuration: 0

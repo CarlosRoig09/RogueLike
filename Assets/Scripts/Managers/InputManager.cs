@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    private Player _player;
+    private PlayerController _player;
     private GestionInventory _gestionInventory;
     private float _countDash;
     // Start is called before the first frame update
     void Start()
     {
-        _player = gameObject.GetComponent<Player>();
+        _player = gameObject.GetComponent<PlayerController>();
         _gestionInventory = gameObject.GetComponent<GestionInventory>();
         _countDash = _player._playerDataSO.dashCountdown;
     }

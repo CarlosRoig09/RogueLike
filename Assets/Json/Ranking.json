@@ -1,0 +1,5 @@
+{"Id":0,"Puntuation":13,"RoomsCompleated":0,"EnemyDefeated":13,"Inventory":["Scythe","Saber"],"ModStats":["MeleeDamgage : 1,2","MeleeSpeed : 1","ShootDamage : 1","ShootSpeed: 1","PlayerSpeed : 1"]}
+{"Id":1,"Puntuation":37,"RoomsCompleated":1,"EnemyDefeated":37,"Inventory":["Saber","Scythe"],"ModStats":["MeleeDamgage : 1","MeleeSpeed : 1","ShootDamage : 1","ShootSpeed: 1","PlayerSpeed : 1"]}
+{"Id":2,"Puntuation":6,"RoomsCompleated":0,"EnemyDefeated":6,"Inventory":["Saber"],"ModStats":["MeleeDamgage : 1","MeleeSpeed : 1","ShootDamage : 1","ShootSpeed: 1","PlayerSpeed : 1"]}
+{"Id":3,"Puntuation":143,"RoomsCompleated":2,"EnemyDefeated":15,"Inventory":["Saber","Scythe","Lance","Rapier"],"ModStats":["MeleeDamgage : 1,2","MeleeSpeed : 1","ShootDamage : 1","ShootSpeed: 1","PlayerSpeed : 1"]}
+{"Id":4,"Puntuation":25,"RoomsCompleated":1,"EnemyDefeated":18,"Inventory":["Saber","Scythe","Lance"],"ModStats":["MeleeDamgage : 1","MeleeSpeed : 1","ShootDamage : 1","ShootSpeed: 1","PlayerSpeed : 1"]}

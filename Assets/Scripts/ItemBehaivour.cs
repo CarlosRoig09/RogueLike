@@ -8,7 +8,7 @@ public abstract class ItemBehaivour : MonoBehaviour, IGivePuntuation
     public abstract void DestroyItem();
     public abstract IEnumerator TimeTillItemDesapeare(float time);
 
-    public void GivePuntuation(float Puntuation)
+    public void GivePuntuation(int Puntuation)
     {
         GameManager.Instance.Puntuation += Puntuation;
     }

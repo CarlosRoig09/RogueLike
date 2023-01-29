@@ -15,7 +15,7 @@ public class EnemyWaveControler : MonoBehaviour, IGivePuntuation
     private GameObject _turret;
     [SerializeField]
     private GameObject _kamikazee;
-    private float _currentEnemy;
+    private int _currentEnemy;
     private WaveState _waveState;
     private List<GameObject> _enemySpawned;
     [SerializeField]
@@ -58,12 +58,12 @@ public class EnemyWaveControler : MonoBehaviour, IGivePuntuation
     {
         _currentEnemy = 0;
        var waves = _waves[currentSala].CallWave();
-        foreach (var kamiKazeeNumber in waves.KamikazeeNumber)
+        foreach (int kamiKazeeNumber in waves.KamikazeeNumber)
         {
             EnemySpawn(_kamikazee, kamiKazeeNumber,scenariPosition);
             _currentEnemy += kamiKazeeNumber;
         }
-        foreach (var turretNumber in waves.TurretNumber)
+        foreach (int turretNumber in waves.TurretNumber)
         {
             EnemySpawn(_turret, turretNumber,scenariPosition);
             _currentEnemy += turretNumber;
@@ -71,7 +71,7 @@ public class EnemyWaveControler : MonoBehaviour, IGivePuntuation
         _activeWave = true;
     }
 
-    public bool ControlIfWaveIsFinished(out float currentEnemy, out float totalEnemy)
+    public bool ControlIfWaveIsFinished(out int currentEnemy, out int totalEnemy)
     {
         if (_activeWave)
         {
@@ -90,12 +90,12 @@ public class EnemyWaveControler : MonoBehaviour, IGivePuntuation
         return false;
     }
 
-    public void EnemySpawn(GameObject enemy, float number, Vector3 scenariPosition)
+    public void EnemySpawn(GameObject enemy, int number, Vector3 scenariPosition)
     {
         for (int i = 0; i < number; i++)
             _enemySpawned.Add(ControlInstancePosition(enemy,scenariPosition));
     }
-    public void CurrentEnemy(ref float currentEnemies)
+    public void CurrentEnemy(ref int currentEnemies)
     {
         foreach (var enemy in _enemySpawned)
         {
@@ -125,7 +125,7 @@ public class EnemyWaveControler : MonoBehaviour, IGivePuntuation
             return false;
     }
 
-    public void GivePuntuation(float Puntuation)
+    public void GivePuntuation(int Puntuation)
     {
         GameManager.Instance.Puntuation += Puntuation;
     }

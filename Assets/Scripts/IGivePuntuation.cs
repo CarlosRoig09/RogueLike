@@ -1,4 +1,4 @@
 public interface IGivePuntuation
 {
-    public abstract void GivePuntuation(float Puntuation);
+    public abstract void GivePuntuation(int Puntuation);
 }

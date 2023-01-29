@@ -1,7 +1,9 @@
 public enum Type
 {
     WeaponsDamage,
-    PlayerSpeed
+    PlayerSpeed,
+    ProyectileSpeed,
+    AttackSpeed
 }
 public class StatUpItemSO : ItemData
 {

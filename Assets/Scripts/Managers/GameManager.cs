@@ -38,25 +38,25 @@ public class GameManager : MonoBehaviour
     }
     [SerializeField]
     private PlayerData _playerData;
-    private float _puntuation;
+    private int _puntuation;
     private GetPuntuation _controlPuntuation;
-    public float Puntuation
+    public int Puntuation
     {
         get => _puntuation;
         set { _puntuation = value;
             _controlPuntuation.PuntuationChanged();
             }
     }
-    private float _numberOfEnemyKilled;
-    public float NumberOfEnemyKilled
+    private int _numberOfEnemyKilled;
+    public int NumberOfEnemyKilled
     {
         get => _numberOfEnemyKilled;
     }
-    private float _enemyKilledInCurrentRoom;
-    private float _currentEnemy;
-    private float _totalEnemy;
-    private float _rooms;
-    public float Rooms
+    private int _enemyKilledInCurrentRoom;
+    private int _currentEnemy;
+    private int _totalEnemy;
+    private int _rooms;
+    public int Rooms
     { 
         get => _rooms;
     }
