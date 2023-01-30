@@ -13,7 +13,7 @@ public class LanceController : MonoBehaviour, IWeaponControler
     private float _weaponSpeed;
     public float WeaponSpeed { get => _weaponSpeed; set => _weaponSpeed = _weaponSO.meleeData.CadenceTime * value; }
     private float _proyectileSpeed;
-    public float ProyectileSpeed { get => _proyectileSpeed; set => _proyectileSpeed = _weaponSO.shootData.CadenceTime * value; }
+    public float ProyectileSpeed { get => _proyectileSpeed; set => _proyectileSpeed = _weaponSO.shootData.ProyectileSpeed * value; }
     private float _proyectileDamage;
     public float ProyectileDamage { get => _proyectileDamage; set => _proyectileDamage = _weaponSO.shootData.ProyectileDamage * value; }
 

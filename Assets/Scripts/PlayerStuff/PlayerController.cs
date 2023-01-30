@@ -83,8 +83,8 @@ public class PlayerController : Character
     {
         if (_weapon != null)
         {
-            _weapon.WeaponDamage = _playerStatsSO.ProyectileDamage;
-            _weapon.WeaponSpeed = _playerStatsSO.ProyectileSpeed;
+            _weapon.ProyectileDamage = _playerStatsSO.ProyectileDamage;
+            _weapon.ProyectileSpeed = _playerStatsSO.ProyectileSpeed;
             _weapon?.SecondButtonAttack();
         }
     }
