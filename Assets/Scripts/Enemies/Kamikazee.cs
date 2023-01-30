@@ -32,7 +32,7 @@ public class Kamikazee : Enemy
         {
             case KamikazeeMovement.Movement:
                 Movement(transform.right.x, transform.right.y);
-                IsGoingToExplote();
+               // IsGoingToExplote();
                 break;
             case KamikazeeMovement.Explode:
             case KamikazeeMovement.Explosion:
@@ -100,16 +100,14 @@ public class Kamikazee : Enemy
             _rb.velocity = cloneEnemyData.speed * Time.fixedDeltaTime * new Vector3(directionX, directionY);
     }
 
-    private void IsGoingToExplote()
+   /* private void IsGoingToExplote()
     {
         if (lookDirection.magnitude <= 4 && cloneEnemyData.Damagable == Invulnerability.Damagable && !cloneEnemyData._stunned)
         {
-            _anim.SetBool("GoingToExplote", true);
-            _rb.constraints = RigidbodyConstraints2D.FreezeAll;
-            _movement = KamikazeeMovement.Explode;
+
             
         }
-    }
+    }*/
 
     private void Explosion()
     {
@@ -129,14 +127,19 @@ public class Kamikazee : Enemy
     }
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (_movement == KamikazeeMovement.Movement&& collision.gameObject.CompareTag("Player"))
+        {
+            _anim.SetBool("GoingToExplote", true);
+            _rb.constraints = RigidbodyConstraints2D.FreezeAll;
+            _movement = KamikazeeMovement.Explode;
+        }
+        if (collision.gameObject.CompareTag("Player")&&_movement==KamikazeeMovement.Explosion)
         {
              Vector3 playerDirection = collision.gameObject.transform.position - transform.position;
              KamikazeeData kamikazeeData = (KamikazeeData)cloneEnemyData;
              collision.gameObject.GetComponent<PlayerController>().TakeDamage(kamikazeeData.explosionDamage);
             collision.gameObject.GetComponent<PlayerController>().GetImpulse(playerDirection.normalized * kamikazeeData.explosionImpulse);
         }
-      
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -148,9 +151,5 @@ public class Kamikazee : Enemy
             collision.gameObject.GetComponent<PlayerController>().TakeDamage(kamikazeeData.explosionDamage);
             collision.gameObject.GetComponent<PlayerController>().GetImpulse(playerDirection.normalized * kamikazeeData.explosionImpulse);
         }
-    }
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-       
     }
 }
