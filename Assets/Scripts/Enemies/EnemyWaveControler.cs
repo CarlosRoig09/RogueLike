@@ -111,10 +111,10 @@ public class EnemyWaveControler : MonoBehaviour, IGivePuntuation
     private GameObject ControlInstancePosition(GameObject enemy, Vector3 scenariPosition)
     {
         Vector3 position;
-        do
-        {
+        //do
+        //{
             position = new Vector3(Random.Range(-32.4f, 12.62f) + scenariPosition.x, Random.Range(-8.75f, 10.42f)+scenariPosition.y);
-        } while (GameObjectInThatPosition(position));
+       // } while (GameObjectInThatPosition(position));
         return Instantiate(enemy, position, Quaternion.identity);
     }
 
