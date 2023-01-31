@@ -17,8 +17,8 @@ public class GestionInventory : MonoBehaviour
         inventory.Weapons = new List<WeaponData>();
         _counter = 0;
         _weaponController = GameObject.Find("Weapon").GetComponent<ChangeWeaponController>();
-      //  AddWeapon(firstWeapon);
-      //  SetWeaponValues(inventory.Weapons[0]);
+       AddWeapon(firstWeapon);
+        SetWeaponValues(inventory.Weapons[0]);
     }
 
     // Update is called once per frame

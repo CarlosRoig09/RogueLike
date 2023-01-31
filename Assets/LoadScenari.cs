@@ -18,7 +18,7 @@ public class LoadScenari : MonoBehaviour
     private Transform _player;
     [SerializeField]
     private GameObject _spawner;
-    public delegate void OpenDoor();
+    public delegate void OpenDoor(int id);
     public event OpenDoor OnOpenDoor;
 
     private void Start()
@@ -56,6 +56,6 @@ public class LoadScenari : MonoBehaviour
     public void CallOpenDoor()
     {
         _spawner.GetComponent<ControlScenari>().newScene = false;
-        OnOpenDoor();
+        OnOpenDoor(_id);
     }
 }

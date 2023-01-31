@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class DoorBehaivours : MonoBehaviour
 {
@@ -6,27 +7,34 @@ public class DoorBehaivours : MonoBehaviour
     [SerializeField]
     private int _doorId;
     private bool _openDoor;
+    private TilemapRenderer _renderer;
+    private Collider2D _collider;
     // Start is called before the first frame update
     void Awake()
     {
-        _parent = transform.parent.parent.gameObject;
+        _parent = transform.parent.parent.parent.gameObject;
         _parent.GetComponent<LoadScenari>().OnOpenDoor += Open;
         _openDoor = false;
+        _renderer= GetComponent<TilemapRenderer>();
+        _collider= GetComponent<Collider2D>();
+        _collider.enabled = false;
+        _renderer.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
     }
 
     // Update is called once per frame
     void Update()
     {
     }
-    void Open()
+    void Open(int id)
     {
-        gameObject.GetComponent<SpriteRenderer>().color = new Color(0,0,0,0);
-        gameObject.GetComponent<Collider2D>().isTrigger = true;
+
         _openDoor = true;
-       // _parent.GetComponent<LoadScenari>().OnOpenDoor -= Open;
+        _collider.enabled = true;
+        _renderer.maskInteraction = SpriteMaskInteraction.VisibleOutsideMask;
+        // _parent.GetComponent<LoadScenari>().OnOpenDoor -= Open;
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (_openDoor && collision.gameObject.CompareTag("Player")) {
             Debug.Log(transform.parent.parent.name);
