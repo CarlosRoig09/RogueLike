@@ -15,6 +15,10 @@ public class LoadScenari : MonoBehaviour
     [SerializeField]
     private GameObject _door2;
     [SerializeField]
+    private GameObject _door3;
+    [SerializeField]
+    private GameObject _door4;
+    [SerializeField]
     private Transform _player;
     [SerializeField]
     private GameObject _spawner;
@@ -47,6 +51,12 @@ public class LoadScenari : MonoBehaviour
                 break;
             case "Door2":
                 _player.transform.position = new Vector3(_door2.transform.position.x -5f, _door2.transform.position.y);
+                break;
+            case "Door3":
+                _player.transform.position = new Vector3(_door3.transform.position.x + 5f, _door3.transform.position.y);
+                break;
+            case "Door4":
+                _player.transform.position = new Vector3(_door4.transform.position.x + 5f, _door4.transform.position.y);
                 break;
             default:
                 break;
