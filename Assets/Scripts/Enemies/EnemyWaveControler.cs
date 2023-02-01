@@ -56,19 +56,19 @@ public class EnemyWaveControler : MonoBehaviour, IGivePuntuation
                 _waves.Add(null);
         }
     }
-    public void CallWave(int currentSala, Vector3 scenariPosition)
+    public void CallWave(int currentSala, Vector3 scenariPosition,Vector3 scenariInitialPos, Vector3 scenariFinalPos)
     {
         transform.position = scenariPosition;
         _currentEnemy = 0;
        var waves = _waves[currentSala].CallWave();
         foreach (int kamiKazeeNumber in waves.KamikazeeNumber)
         {
-            EnemySpawn(_kamikazee, kamiKazeeNumber,scenariPosition);
+            EnemySpawn(_kamikazee, kamiKazeeNumber,scenariPosition,scenariInitialPos,scenariFinalPos);
             _currentEnemy += kamiKazeeNumber;
         }
         foreach (int turretNumber in waves.TurretNumber)
         {
-            EnemySpawn(_turret, turretNumber,scenariPosition);
+            EnemySpawn(_turret, turretNumber,scenariPosition,scenariInitialPos,scenariFinalPos);
             _currentEnemy += turretNumber;
         }
         _activeWave = true;
@@ -93,10 +93,10 @@ public class EnemyWaveControler : MonoBehaviour, IGivePuntuation
         return false;
     }
 
-    public void EnemySpawn(GameObject enemy, int number, Vector3 scenariPosition)
+    public void EnemySpawn(GameObject enemy, int number, Vector3 scenariPosition, Vector3 scenariInitialPos, Vector3 scenariFinalPos)
     {
         for (int i = 0; i < number; i++)
-            _enemySpawned.Add(ControlInstancePosition(enemy,scenariPosition));
+            _enemySpawned.Add(ControlInstancePosition(enemy,scenariPosition,scenariInitialPos,scenariFinalPos));
     }
     public void CurrentEnemy(ref int currentEnemies)
     {
@@ -111,20 +111,20 @@ public class EnemyWaveControler : MonoBehaviour, IGivePuntuation
         }
     }
 
-    private GameObject ControlInstancePosition(GameObject enemy, Vector3 scenariPosition)
+    private GameObject ControlInstancePosition(GameObject enemy, Vector3 scenariPosition, Vector3 scenariInitialPos, Vector3 scenariFinalPos)
     {
-       var AllPositions = AllPosiblePositions(new Vector3(-34.4f+scenariPosition.x,13f+scenariPosition.y),new Vector3(15f+scenariPosition.x,-13f+scenariPosition.y));
-        Vector3 position;
-        /*do
-        {*/
-       var positionEnemy = AllPositions[Random.Range(0, AllPositions.Length)];
-       //} while (GameObjectInThatPosition(position));
+       var AllPositions = AllPosiblePositions(new Vector3(scenariInitialPos.x+scenariPosition.x,scenariInitialPos.y+scenariPosition.y),new Vector3(scenariFinalPos.x+scenariPosition.x,scenariFinalPos.y+scenariPosition.y));
+        Vector3 positionEnemy;
+       // do
+        //{
+             positionEnemy = AllPositions[Random.Range(0, AllPositions.Length)];
+        //} while (GameObjectInThatPosition(positionEnemy));
         return Instantiate(enemy, positionEnemy, Quaternion.identity);
     }
 
     private bool GameObjectInThatPosition(Vector3 position)
     {
-        if (Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Camera.main.transform.position), position)|| Physics2D.Raycast(position, _player.position, 100, 6))
+        if (/*Physics2D.Raycast(transform.position, position,(position - transform.position).magnitude) ||*/ Physics2D.Raycast(position, _player.position, 10, 6))
             return true;
             return false;
     }
@@ -136,7 +136,7 @@ public class EnemyWaveControler : MonoBehaviour, IGivePuntuation
         Vector3 actualPosition = firstPosition;
         do
         {
-            if (Physics2D.Raycast(transform.position, actualPosition, 10, _wall))
+            if (Physics2D.Raycast(transform.position, actualPosition, (actualPosition-transform.position).magnitude, _wall))
             {
                 if (differentToWall || actualPosition.x >= lastPosition.x)
                 {

@@ -24,6 +24,10 @@ public class LoadScenari : MonoBehaviour
     private GameObject _spawner;
     public delegate void OpenDoor(int id);
     public event OpenDoor OnOpenDoor;
+    [SerializeField]
+    private Vector3 ScenariStartPos;
+    [SerializeField]
+    private Vector3 ScenariEndPos;   
 
     private void Start()
     {
@@ -36,7 +40,7 @@ public class LoadScenari : MonoBehaviour
         _player = GameObject.Find("Player").GetComponent<Transform>();
         _player.transform.position = new Vector3(_door1.transform.position.x+0.2f,_door1.transform.position.y);
         if (transform.GetChild(0).CompareTag("combat"))
-            _spawner.GetComponent<EnemyWaveControler>().CallWave(id, transform.position);
+            _spawner.GetComponent<EnemyWaveControler>().CallWave(id, transform.position, ScenariStartPos,ScenariEndPos);
         else
             CallOpenDoor();
    }

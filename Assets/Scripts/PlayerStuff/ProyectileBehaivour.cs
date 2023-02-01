@@ -55,7 +55,7 @@ public class ProyectileBehaivour : MonoBehaviour, ICanBeImpulsed
                     collision.gameObject.GetComponent<PlayerController>().TakeDamage(_damage);
                 if (collision.CompareTag("Weapon"))
                     _proyectileUser = ProyectileUser.Player;
-                if (!collision.CompareTag("Enemy") && !collision.CompareTag("Item") && !collision.CompareTag("Weapon"))
+                if (!collision.CompareTag("Enemy") && !collision.CompareTag("Item") && !collision.CompareTag("Weapon")&&!collision.CompareTag("wotah"))
                     DestroyProyectile();
                 break;
         }

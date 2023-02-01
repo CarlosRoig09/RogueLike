@@ -13,7 +13,8 @@ public class ControlScenari : MonoBehaviour
     {
         get => _newOrder;
     }
-    private int _scenariCount;
+    private int _scenariCountX;
+    private int _scenariCountY;
     [SerializeField]
     private Transform _player;
     private GameObject _currentScenari;
@@ -25,7 +26,7 @@ public class ControlScenari : MonoBehaviour
         newScene = false;
         _startGame = GameManager.Instance;
         _startGame.OnStartGame += CreateEscenaris;
-        _scenariCount = 0;
+        _scenariCountX = 0;
         _newOrder = new List<GameObject>();
         _eWC = gameObject.GetComponent<EnemyWaveControler>();
     }
@@ -37,16 +38,14 @@ public class ControlScenari : MonoBehaviour
         while(count < _escenari.Count)
         {
             isRepitive = false;
-            /*do
-            {*/
                 _newOrder.Add(_escenari[Random.Range(0, _escenari.Count)]);
-               /* if(count > 0)
-                    for (int i = count - 1; i < _escenari.Count&&!isRepitive; i--)
-                    {
-                       // if (_newOrder[count] == _newOrder[i])
-                           // isRepitive = true;*/
-                   // }
-           // } while (isRepitive);
+            /*   for (int y = 0;y < _newOrder; y++)
+       {
+         for (int x = 0; x < length; x++)
+         {
+
+         }
+     }*/
             count++;
         }
         _eWC.CreateWaves();
@@ -56,48 +55,51 @@ public class ControlScenari : MonoBehaviour
    public void LoadScenari(float door)
     {
         Transform previosposition = null;
-        float addDistance = 0;
         string instantDoor = null;
-       switch (door)
+        float addDistance = 0;
+        switch (door)
         {
             case 1:
-                _scenariCount-=1;
+                _scenariCountX -= 1;
                 instantDoor = "Door2";
                 break;
             case 2:
-                 previosposition = ReturnALoadedScenari(GameObject.FindGameObjectsWithTag("scenari"),_scenariCount).transform;
-                _scenariCount += 1;
-                addDistance = 100;
+                _scenariCountX += 1;
                 instantDoor = "Door1";
                 break;
             case 0:
-                _scenariCount = 0;
+                _scenariCountX = 0;
                 addDistance = 0;
-                previosposition = _newOrder[_scenariCount].transform;
+                previosposition = _newOrder[_scenariCountX].transform;
                 break;
         }
-        if (_scenariCount >= 0 || _scenariCount < _newOrder.Count)
+        if (_scenariCountX >= 0 || _scenariCountX < _newOrder.Count)
         {
-            Debug.Log(_scenariCount);
-            if (!SearchIfASceneariIsLoaded(GameObject.FindGameObjectsWithTag("scenari"), _scenariCount))
+            Debug.Log(_scenariCountX);
+            if (!SearchIfASceneariIsLoaded(GameObject.FindGameObjectsWithTag("scenari"), _scenariCountX))
             {
+                if (door != 0)
+                {
+                    addDistance = 100;
+                    previosposition = ReturnALoadedScenari(GameObject.FindGameObjectsWithTag("scenari"), _scenariCountX).transform;
+                }
                 newScene = true;
                 var newPosition = new Vector3(previosposition.position.x + addDistance, previosposition.position.y);
-                _currentScenari = Instantiate(_newOrder[_scenariCount], newPosition, Quaternion.identity);
+                _currentScenari = Instantiate(_newOrder[_scenariCountX], newPosition, Quaternion.identity);
             }
             else
             {
-                _currentScenari = ReturnALoadedScenari(GameObject.FindGameObjectsWithTag("scenari"), _scenariCount);
+                _currentScenari = ReturnALoadedScenari(GameObject.FindGameObjectsWithTag("scenari"), _scenariCountX);
                 _currentScenari.GetComponent<LoadScenari>().ScenariAlredyLoaded(instantDoor);
             }
-            _currentScenari.GetComponent<LoadScenari>().Id = _scenariCount;
+            _currentScenari.GetComponent<LoadScenari>().Id = _scenariCountX;
         }
         else
         {
-            if (_scenariCount < 0)
-                _scenariCount = 0;
-            else if (_scenariCount >= _newOrder.Count)
-                _scenariCount = _newOrder.Count - 1;
+            if (_scenariCountX < 0)
+                _scenariCountX = 0;
+            else if (_scenariCountX >= _newOrder.Count)
+                _scenariCountX = _newOrder.Count - 1;
         }
     }
 
