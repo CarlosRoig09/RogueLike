@@ -60,6 +60,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _door1: {fileID: 4950430074712535148}
   _door2: {fileID: 7005358978376905139}
+  _door3: {fileID: 0}
+  _door4: {fileID: 0}
   _player: {fileID: 0}
   _spawner: {fileID: 0}
 --- !u!1001 &109346041
@@ -837,6 +839,10 @@ PrefabInstance:
       value: Escenari
       objectReference: {fileID: 0}
     - target: {fileID: 955888775003692770, guid: 68d02ae92483be64fbc262cfdf28dc53, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 955888775003692770, guid: 68d02ae92483be64fbc262cfdf28dc53, type: 3}
       propertyPath: m_TagString
       value: combat
       objectReference: {fileID: 0}
@@ -910,6 +916,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 955888775003692775, guid: 68d02ae92483be64fbc262cfdf28dc53, type: 3}
       propertyPath: m_TileColorArray.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 955888775003692775, guid: 68d02ae92483be64fbc262cfdf28dc53, type: 3}
+      propertyPath: m_TileOrientationMatrix.e00
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 955888775003692775, guid: 68d02ae92483be64fbc262cfdf28dc53, type: 3}

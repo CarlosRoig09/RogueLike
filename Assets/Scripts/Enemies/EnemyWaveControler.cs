@@ -21,6 +21,8 @@ public class EnemyWaveControler : MonoBehaviour, IGivePuntuation
     [SerializeField]
     private Transform _player;
     private bool _activeWave;
+    [SerializeField]
+    private LayerMask _wall;
     public WaveState WaveState
     {
         get => _waveState;
@@ -56,6 +58,7 @@ public class EnemyWaveControler : MonoBehaviour, IGivePuntuation
     }
     public void CallWave(int currentSala, Vector3 scenariPosition)
     {
+        transform.position = scenariPosition;
         _currentEnemy = 0;
        var waves = _waves[currentSala].CallWave();
         foreach (int kamiKazeeNumber in waves.KamikazeeNumber)
@@ -110,19 +113,46 @@ public class EnemyWaveControler : MonoBehaviour, IGivePuntuation
 
     private GameObject ControlInstancePosition(GameObject enemy, Vector3 scenariPosition)
     {
+       var AllPositions = AllPosiblePositions(new Vector3(-34.4f+scenariPosition.x,13f+scenariPosition.y),new Vector3(15f+scenariPosition.x,-13f+scenariPosition.y));
         Vector3 position;
-        //do
-        //{
-            position = new Vector3(Random.Range(-32.4f, 12.62f) + scenariPosition.x, Random.Range(-8.75f, 10.42f)+scenariPosition.y);
-       // } while (GameObjectInThatPosition(position));
-        return Instantiate(enemy, position, Quaternion.identity);
+        /*do
+        {*/
+       var positionEnemy = AllPositions[Random.Range(0, AllPositions.Length)];
+       //} while (GameObjectInThatPosition(position));
+        return Instantiate(enemy, positionEnemy, Quaternion.identity);
     }
 
     private bool GameObjectInThatPosition(Vector3 position)
     {
-        if (Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Camera.main.transform.position), position) || Physics2D.Raycast(position, _player.position, 100, 6))
+        if (Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Camera.main.transform.position), position)|| Physics2D.Raycast(position, _player.position, 100, 6))
             return true;
             return false;
+    }
+
+    private Vector3[] AllPosiblePositions(Vector3 firstPosition, Vector3 lastPosition)
+    {
+        var differentToWall = false;
+        var AllPosiblePositions = new Vector3[0];
+        Vector3 actualPosition = firstPosition;
+        do
+        {
+            if (Physics2D.Raycast(transform.position, actualPosition, 10, _wall))
+            {
+                if (differentToWall || actualPosition.x >= lastPosition.x)
+                {
+                    actualPosition = new Vector3(firstPosition.x, actualPosition.y - 1f);
+                    differentToWall = false;
+                }
+            }
+            else
+            {
+                System.Array.Resize(ref AllPosiblePositions, AllPosiblePositions.Length + 1);
+                AllPosiblePositions[^1] = actualPosition;
+                differentToWall = true;
+            }
+            actualPosition = new Vector3(actualPosition.x + 1f, actualPosition.y);
+        } while (actualPosition.y>=lastPosition.y);
+        return AllPosiblePositions;
     }
 
     public void GivePuntuation(int Puntuation)

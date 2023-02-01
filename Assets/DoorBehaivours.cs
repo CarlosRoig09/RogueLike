@@ -12,7 +12,7 @@ public class DoorBehaivours : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        _parent = transform.parent.parent.parent.gameObject;
+        _parent = transform.parent.parent.gameObject;
         _parent.GetComponent<LoadScenari>().OnOpenDoor += Open;
         _openDoor = false;
         _renderer= GetComponent<TilemapRenderer>();
