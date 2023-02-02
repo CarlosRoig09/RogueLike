@@ -77,8 +77,8 @@ MonoBehaviour:
   _door4: {fileID: 0}
   _player: {fileID: 0}
   _spawner: {fileID: 0}
-  ScenariStartPos: {x: -8.2, y: 16, z: 0}
-  ScenariEndPos: {x: 38.3, y: -16.6, z: 0}
+  ScenariStartPos: {x: -8.2, y: 13, z: 0}
+  ScenariEndPos: {x: 38.3, y: -13.6, z: 0}
 --- !u!1001 &109346041
 PrefabInstance:
   m_ObjectHideFlags: 0

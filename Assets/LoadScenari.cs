@@ -27,20 +27,49 @@ public class LoadScenari : MonoBehaviour
     [SerializeField]
     private Vector3 ScenariStartPos;
     [SerializeField]
-    private Vector3 ScenariEndPos;   
+    private Vector3 ScenariEndPos;
+    private string[] _noShowDoors;
+    public string[] NoShowDoors
+    {
+        get { return _noShowDoors; }
+        set { _noShowDoors = value;}
+    }
 
     private void Start()
     {
         _player = GameObject.Find("Player").GetComponent<Transform>();
         _spawner = GameObject.Find("Spawner");
         ScenariLoaded(_id);
+        foreach (string door in _noShowDoors)
+        {
+            NoInstantDoor(door);
+        }
+    }
+
+    private void NoInstantDoor(string door)
+    {
+        switch (door)
+        {
+            case "Door1":
+                Destroy(_door1);
+                break;
+            case "Door2":
+                Destroy(_door2);
+                break;
+            case "Door3":
+                Destroy(_door3);
+                break;
+            case "Door4":
+                Destroy(_door4);
+                break;
+        }
     }
   private void ScenariLoaded(int id)
    {
         _player = GameObject.Find("Player").GetComponent<Transform>();
         _player.transform.position = new Vector3(_door1.transform.position.x+0.2f,_door1.transform.position.y);
         if (transform.GetChild(0).CompareTag("combat"))
-            _spawner.GetComponent<EnemyWaveControler>().CallWave(id, transform.position, ScenariStartPos,ScenariEndPos);
+            _spawner.GetComponent<EnemyWaveControler>().CallWave(transform.position, ScenariStartPos,ScenariEndPos);
         else
             CallOpenDoor();
    }

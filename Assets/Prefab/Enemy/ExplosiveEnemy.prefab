@@ -144,7 +144,7 @@ MonoBehaviour:
   wallMask:
     serializedVersion: 2
     m_Bits: 128
-  explosionTimer: 1
+  explosionTimer: 0.5
   _playerMask:
     serializedVersion: 2
     m_Bits: 64

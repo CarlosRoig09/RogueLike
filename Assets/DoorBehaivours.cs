@@ -40,5 +40,10 @@ public class DoorBehaivours : MonoBehaviour
             Debug.Log(transform.parent.parent.name);
         GameObject.Find("Spawner").GetComponent<ControlScenari>().LoadScenari(_doorId);
     }
+   }
+    private void OnDestroy()
+    {
+        _parent.GetComponent<LoadScenari>().OnOpenDoor -= Open;
+        Destroy(transform.parent.gameObject);
     }
 }

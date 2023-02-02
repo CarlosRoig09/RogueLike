@@ -83,31 +83,41 @@ public class GameManager : MonoBehaviour
         ChangeScene();
         if (_scene == Escenas.GameScreen)
         {
-            if (!_calledStartGame)
+
+                if (!_calledStartGame)
+                {
+                    _controlPuntuation = GameObject.Find("Puntuation").GetComponent<GetPuntuation>();
+                    _cS = GameObject.Find("Spawner").GetComponent<ControlScenari>();
+                    _puntuation = 0;
+                    _rooms = 0;
+                    _numberOfEnemyKilled = 0;
+                    _calledStartGame = true;
+                    OnStartGame();
+                }
+            if (GameObject.Find("Spawner").GetComponent<EnemyWaveControler>().Waves.Count > 0)
             {
-                _controlPuntuation = GameObject.Find("Puntuation").GetComponent<GetPuntuation>();
-                _cS = GameObject.Find("Spawner").GetComponent<ControlScenari>();
-                _puntuation = 0;
-                _rooms = 0;
-                _numberOfEnemyKilled = 0;
-                _calledStartGame = true;
-                OnStartGame();
-            }
-            if (_playerData.State == Life.Death)
-            {
-                _numberOfEnemyKilled += _enemyKilledInCurrentRoom;
-                _gameFinish = GameFinish.Lose;
-                SceneManager.LoadScene("GameOver");
-            }
-            if (GameObject.Find("Spawner").GetComponent<EnemyWaveControler>().ControlIfWaveIsFinished(out _currentEnemy, out _totalEnemy) && _cS.newScene)
-            {
-                GameObject.Find("Spawner").GetComponent<ControlScenari>().DoorOpens();
-                _numberOfEnemyKilled += _enemyKilledInCurrentRoom;
-                _rooms += 1;
+                if (_playerData.State == Life.Death)
+                {
+                    _numberOfEnemyKilled += _enemyKilledInCurrentRoom;
+                    _gameFinish = GameFinish.Lose;
+                    SceneManager.LoadScene("GameOver");
+                }
+                if (GameObject.Find("Spawner").GetComponent<EnemyWaveControler>().ControlIfWaveIsFinished(out _currentEnemy, out _totalEnemy) && _cS.newScene)
+                {
+                    GameObject.Find("Spawner").GetComponent<ControlScenari>().DoorOpens();
+                    _numberOfEnemyKilled += _enemyKilledInCurrentRoom;
+                    _rooms += 1;
+                    GameObject.Find("Spawner").GetComponent<EnemyWaveControler>().Waves.Remove(GameObject.Find("Spawner").GetComponent<EnemyWaveControler>().Waves[0]);
+                }
+                else
+                    if (_numberOfEnemyKilled < _totalEnemy - _currentEnemy)
+                    _enemyKilledInCurrentRoom = _totalEnemy - _currentEnemy;
             }
             else
-                if (_numberOfEnemyKilled < _totalEnemy - _currentEnemy)
-            _enemyKilledInCurrentRoom = _totalEnemy - _currentEnemy;
+            {
+                _gameFinish = GameFinish.Win;
+                SceneManager.LoadScene("GameOver");
+            }    
         }
         void ChangeScene()
         {

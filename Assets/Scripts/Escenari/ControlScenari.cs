@@ -7,14 +7,11 @@ public class ControlScenari : MonoBehaviour
     private GameManager _startGame;
     [SerializeField]
     private List<GameObject> _escenari;
-
-    private List<GameObject> _newOrder;
     public List<GameObject> Escenaris
     {
-        get => _newOrder;
+        get => _escenari;
     }
     private int _scenariCountX;
-    private int _scenariCountY;
     [SerializeField]
     private Transform _player;
     private GameObject _currentScenari;
@@ -27,26 +24,20 @@ public class ControlScenari : MonoBehaviour
         _startGame = GameManager.Instance;
         _startGame.OnStartGame += CreateEscenaris;
         _scenariCountX = 0;
-        _newOrder = new List<GameObject>();
         _eWC = gameObject.GetComponent<EnemyWaveControler>();
     }
 
     void CreateEscenaris()
     {
-        bool isRepitive;
-        int count = 0;
-        while(count < _escenari.Count)
+        for (int i = 0; i < Escenaris.Count;)
         {
-            isRepitive = false;
-                _newOrder.Add(_escenari[Random.Range(0, _escenari.Count)]);
-            /*   for (int y = 0;y < _newOrder; y++)
-       {
-         for (int x = 0; x < length; x++)
-         {
-
-         }
-     }*/
-            count++;
+            int y;
+            int x;
+            if ((x = Random.Range(0, _escenari.Count)) != (y = Random.Range(0, _escenari.Count)))
+            {
+                i++;
+                (_escenari[x], _escenari[y]) = (_escenari[y], _escenari[x]);
+            }
         }
         _eWC.CreateWaves();
         LoadScenari(0);
@@ -56,6 +47,7 @@ public class ControlScenari : MonoBehaviour
     {
         Transform previosposition = null;
         string instantDoor = null;
+        string[] noInstanceDoor = new string[1];
         float addDistance = 0;
         switch (door)
         {
@@ -70,10 +62,15 @@ public class ControlScenari : MonoBehaviour
             case 0:
                 _scenariCountX = 0;
                 addDistance = 0;
-                previosposition = _newOrder[_scenariCountX].transform;
+                instantDoor = "Door1";
+                previosposition = _escenari[_scenariCountX].transform;
                 break;
         }
-        if (_scenariCountX >= 0 || _scenariCountX < _newOrder.Count)
+        if (_scenariCountX == 0)
+            noInstanceDoor[0] = "Door1";
+        if (_scenariCountX == _escenari.Count - 1)
+            noInstanceDoor[0] = "Door2";
+        if (_scenariCountX >= 0 || _scenariCountX < _escenari.Count)
         {
             Debug.Log(_scenariCountX);
             if (!SearchIfASceneariIsLoaded(GameObject.FindGameObjectsWithTag("scenari"), _scenariCountX))
@@ -81,11 +78,12 @@ public class ControlScenari : MonoBehaviour
                 if (door != 0)
                 {
                     addDistance = 100;
-                    previosposition = ReturnALoadedScenari(GameObject.FindGameObjectsWithTag("scenari"), _scenariCountX).transform;
+                    previosposition = ReturnALoadedScenari(GameObject.FindGameObjectsWithTag("scenari"), _scenariCountX-1).transform;
                 }
                 newScene = true;
                 var newPosition = new Vector3(previosposition.position.x + addDistance, previosposition.position.y);
-                _currentScenari = Instantiate(_newOrder[_scenariCountX], newPosition, Quaternion.identity);
+                _currentScenari = Instantiate(_escenari[_scenariCountX], newPosition, Quaternion.identity);
+                _currentScenari.GetComponent<LoadScenari>().NoShowDoors = noInstanceDoor;
             }
             else
             {
@@ -98,8 +96,8 @@ public class ControlScenari : MonoBehaviour
         {
             if (_scenariCountX < 0)
                 _scenariCountX = 0;
-            else if (_scenariCountX >= _newOrder.Count)
-                _scenariCountX = _newOrder.Count - 1;
+            else if (_scenariCountX >= _escenari.Count)
+                _scenariCountX = _escenari.Count - 1;
         }
     }
 

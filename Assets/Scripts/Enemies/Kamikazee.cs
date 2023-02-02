@@ -25,6 +25,7 @@ public class Kamikazee : Enemy
         _movement = KamikazeeMovement.Movement;
         _rb = gameObject.GetComponent<Rigidbody2D>();
         _anim= GetComponent<Animator>();
+        _counTillDisapear = 0;
     }
     protected override void Update()
     {
@@ -37,8 +38,10 @@ public class Kamikazee : Enemy
                IsGoingToExplote();
                 break;
             case KamikazeeMovement.Explode:
-            case KamikazeeMovement.Explosion:
                 Explosion();
+                break;
+            case KamikazeeMovement.Explosion:
+                _anim.SetFloat("ExplosionTimer", _counTillDisapear);
                 break;
         }
     }
@@ -104,7 +107,7 @@ public class Kamikazee : Enemy
 
    private void IsGoingToExplote()
     {
-        if (Physics2D.Raycast(transform.position,_player.transform.position,10,_playerMask)&& !cloneEnemyData._stunned)
+        if ((_player.transform.position-transform.position).magnitude<=3&& !cloneEnemyData._stunned)
         {
             _anim.SetBool("GoingToExplote", true);
             _rb.constraints = RigidbodyConstraints2D.FreezeAll;
@@ -121,7 +124,6 @@ public class Kamikazee : Enemy
         { 
             cloneEnemyData.Damagable = Invulnerability.NoDamagable;
             _movement = KamikazeeMovement.Explosion;
-            _anim.SetFloat("ExplosionTimer", _counTillDisapear);
         }
     }
     public void Death()

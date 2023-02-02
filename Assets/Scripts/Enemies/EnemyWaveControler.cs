@@ -27,6 +27,11 @@ public class EnemyWaveControler : MonoBehaviour, IGivePuntuation
     {
         get => _waveState;
     }
+    public List<EnemyWave> Waves
+    {
+        get { return _waves; }
+        set { _waves = value; }
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -52,15 +57,13 @@ public class EnemyWaveControler : MonoBehaviour, IGivePuntuation
                 }
                 _waves.Add(new EnemyWave(numberOfWave,kamikazes,turrets));
             }
-            else
-                _waves.Add(null);
         }
     }
-    public void CallWave(int currentSala, Vector3 scenariPosition,Vector3 scenariInitialPos, Vector3 scenariFinalPos)
+    public void CallWave(Vector3 scenariPosition,Vector3 scenariInitialPos, Vector3 scenariFinalPos)
     {
         transform.position = scenariPosition;
         _currentEnemy = 0;
-       var waves = _waves[currentSala].CallWave();
+       var waves = _waves[0].CallWave();
         foreach (int kamiKazeeNumber in waves.KamikazeeNumber)
         {
             EnemySpawn(_kamikazee, kamiKazeeNumber,scenariPosition,scenariInitialPos,scenariFinalPos);
@@ -114,17 +117,29 @@ public class EnemyWaveControler : MonoBehaviour, IGivePuntuation
     private GameObject ControlInstancePosition(GameObject enemy, Vector3 scenariPosition, Vector3 scenariInitialPos, Vector3 scenariFinalPos)
     {
        var AllPositions = AllPosiblePositions(new Vector3(scenariInitialPos.x+scenariPosition.x,scenariInitialPos.y+scenariPosition.y),new Vector3(scenariFinalPos.x+scenariPosition.x,scenariFinalPos.y+scenariPosition.y));
-        Vector3 positionEnemy;
-       // do
+        // do
         //{
-             positionEnemy = AllPositions[Random.Range(0, AllPositions.Length)];
-        //} while (GameObjectInThatPosition(positionEnemy));
-        return Instantiate(enemy, positionEnemy, Quaternion.identity);
+        for (int i = 0; i < AllPositions.Length;)
+        {
+            int y;
+            int x;
+            if ((x = Random.Range(0, AllPositions.Length)) != (y = Random.Range(0, AllPositions.Length)))
+            {
+                i++;
+                (AllPositions[x], AllPositions[y]) = (AllPositions[y], AllPositions[x]);
+            }
+        }
+        for (int i = 0; i < AllPositions.Length; i++)
+        {
+            if (GameObjectInThatPosition(AllPositions[i]))
+                return Instantiate(enemy, AllPositions[i], Quaternion.identity);
+        }
+        return Instantiate(enemy, transform.position, Quaternion.identity);
     }
 
     private bool GameObjectInThatPosition(Vector3 position)
     {
-        if (/*Physics2D.Raycast(transform.position, position,(position - transform.position).magnitude) ||*/ Physics2D.Raycast(position, _player.position, 10, 6))
+        if ((_player.transform.position-position).magnitude>3&&!Physics2D.Raycast(transform.position,position,(position-transform.position).magnitude))
             return true;
             return false;
     }

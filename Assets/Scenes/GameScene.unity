@@ -1146,7 +1146,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4596021103494977613, guid: d86efcb84ee33094fac8a9219504f506, type: 3}
       propertyPath: _escenari.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4596021103494977613, guid: d86efcb84ee33094fac8a9219504f506, type: 3}
       propertyPath: _escenari.Array.data[0]
