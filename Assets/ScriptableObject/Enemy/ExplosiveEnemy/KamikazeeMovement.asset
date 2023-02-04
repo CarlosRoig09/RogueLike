@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5c6e105ef39364439246473ee1f3018, type: 3}
-  m_Name: ExplosionState
+  m_Script: {fileID: 11500000, guid: fa23d104c94982a43894a21db29139c6, type: 3}
+  m_Name: KamikazeeMovement
   m_EditorClassIdentifier: 
-  Action: {fileID: 11400000, guid: fc932bf107cfc9145a8ba7ff89586464, type: 2}
-  ScriptableStateTransitor:
-  - {fileID: 11400000, guid: 8d6223ace6708844a81fd17738696680, type: 2}
+  damage: 0
+  rb: {fileID: 0}
+  directionX: 0
+  directionY: 0
+  speed: 0

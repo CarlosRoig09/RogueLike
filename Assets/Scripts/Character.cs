@@ -4,7 +4,7 @@ using UnityEngine;
 public abstract class Character : StateController, ICanBeImpulsed
 {
     public ScriptableState Stop;
-    public abstract void Movement(float directionX, float directionY);
+    public abstract void MovementBehaivour(float directionX, float directionY);
     public abstract void TakeDamage(float damage);
    public abstract void OnDeath();
 
@@ -19,10 +19,5 @@ public abstract class Character : StateController, ICanBeImpulsed
     {
         StopMomentum();
         gameObject.GetComponent<Rigidbody2D>().AddForce(impulse);
-    }
-
-    protected IEnumerator CountDownForState(float time)
-    {
-        yield return new WaitForSeconds(time);
     }
 }

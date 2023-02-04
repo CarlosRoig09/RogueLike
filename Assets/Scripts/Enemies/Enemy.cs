@@ -6,6 +6,7 @@ public class Enemy : Character, IDestroyable, IGivePuntuation
     [SerializeField]
     private EnemyData enemyData;
     protected EnemyData cloneEnemyData;
+    private ScriptableState previousState;
     public Life State;
     protected Vector3 lookDirection;
     private float lookAngle;
@@ -26,22 +27,22 @@ public class Enemy : Character, IDestroyable, IGivePuntuation
         cloneEnemyData.Damagable = Invulnerability.Damagable;
         _player = GameObject.Find("Player");
     }
-    protected virtual void Update()
+    protected override void Update()
     {
+        base.Update();
         FindTarget();
     }
 
     public void Stunned(float time)
     {
+        previousState = currentState;
         StopMomentum();
-        cloneEnemyData._stunned = true;
         StartCoroutine(StunTime(time));
     }
 
     public void DeStunned()
     {
-        StopCoroutine(StunTime(0));
-        cloneEnemyData._stunned = false;
+        StateTransitor(previousState);
     }
     protected Quaternion FindTarget()
     {
@@ -93,7 +94,7 @@ public class Enemy : Character, IDestroyable, IGivePuntuation
         return false;
     }
 
-    public override void Movement(float directionX, float directionY)
+    public override void MovementBehaivour(float directionX, float directionY)
     {
         //Is for the childs if they move
     }
@@ -108,7 +109,7 @@ public class Enemy : Character, IDestroyable, IGivePuntuation
     private IEnumerator StunTime(float time)
     {
         yield return new WaitForSeconds(time);
-        cloneEnemyData._stunned = false;
+        StateTransitor(previousState);
     }
     public void GivePuntuation(int Puntuation)
     {

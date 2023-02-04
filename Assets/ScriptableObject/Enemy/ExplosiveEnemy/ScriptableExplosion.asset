@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5c6e105ef39364439246473ee1f3018, type: 3}
-  m_Name: FolowState
+  m_Script: {fileID: 11500000, guid: 6f5d48fb05814324fb59d24e8aa8c501, type: 3}
+  m_Name: ScriptableExplosion
   m_EditorClassIdentifier: 
-  Action: {fileID: 0}
-  ScriptableStateTransitor: []
+  Timer: 0

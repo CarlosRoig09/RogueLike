@@ -42,12 +42,12 @@ public class PlayerController : Character
         float angle = Mathf.Atan2(vector.y, vector.x) * Mathf.Rad2Deg;
         float xPosition = Mathf.Cos(Mathf.Deg2Rad * angle);
         float yPosition = Mathf.Sin(Mathf.Deg2Rad * angle);
-        _anim.SetFloat("Movement", Mathf.Abs(_rb.velocity.x) + Mathf.Abs(_rb.velocity.y));
+        _anim.SetFloat("MovementBehaivour", Mathf.Abs(_rb.velocity.x) + Mathf.Abs(_rb.velocity.y));
         _anim.SetFloat("MPositionX", xPosition);
         _anim.SetFloat("MPositionY", yPosition);
         _anim.SetFloat("Life", _playerDataSO.life);
     }
-    public override void Movement(float directionX, float directionY)
+    public override void MovementBehaivour(float directionX, float directionY)
     {
         ScriptableMovement movement;
         if (currentState == Walk)

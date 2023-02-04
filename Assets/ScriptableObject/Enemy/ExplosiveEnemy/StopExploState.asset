@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5c6e105ef39364439246473ee1f3018, type: 3}
   m_Name: StopExploState
   m_EditorClassIdentifier: 
-  Action: {fileID: 0}
-  ScriptableStateTransitor: []
+  Action: {fileID: 11400000, guid: 236b438602d15b34c813efd86af20d54, type: 2}
+  ScriptableStateTransitor:
+  - {fileID: 11400000, guid: 5043dbdf4943b5d41aeb2edc7977f1f3, type: 2}
+  - {fileID: 11400000, guid: 4c755948b08c1c74bab00d5155339de1, type: 2}

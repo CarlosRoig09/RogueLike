@@ -25,7 +25,7 @@ public class InputManager : MonoBehaviour
 
     private void MovementInput()
     {
-        _player.Movement(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        _player.MovementBehaivour(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
     }
 
     private void ShootInput()
