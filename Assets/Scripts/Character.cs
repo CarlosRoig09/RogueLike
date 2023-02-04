@@ -1,6 +1,7 @@
+using System.Collections;
 using UnityEngine;
 
-public abstract class Character : MonoBehaviour, ICanBeImpulsed
+public abstract class Character : StateController, ICanBeImpulsed
 {
     public abstract void Movement(float directionX, float directionY);
     public abstract void TakeDamage(float damage);
@@ -15,5 +16,10 @@ public abstract class Character : MonoBehaviour, ICanBeImpulsed
     {
         StopMomentum();
         gameObject.GetComponent<Rigidbody2D>().AddForce(impulse);
+    }
+
+    protected IEnumerator CountDownForState(float time)
+    {
+        yield return new WaitForSeconds(time);
     }
 }

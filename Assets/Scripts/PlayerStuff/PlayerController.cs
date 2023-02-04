@@ -1,5 +1,6 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
+using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 
 public enum Invulnerability
@@ -9,7 +10,7 @@ public enum Invulnerability
 }
 public class PlayerController : Character
 {
-    
+    public ScriptableState Walk, DashAction;
     public PlayerData _playerDataSO;
     [SerializeField]
     private PlayerStats _playerStatsSO;
@@ -29,8 +30,9 @@ public class PlayerController : Character
         _controlStats = gameObject.GetComponent<ControlStats>();
      }
     // Update is called once per frame
-    void Update()
+   protected override void Update()
     {
+        base.Update();
         ChangeSpriteByRotation();
     }
 
@@ -47,8 +49,16 @@ public class PlayerController : Character
     }
     public override void Movement(float directionX, float directionY)
     {
-        if(_playerDataSO.Damagable==Invulnerability.Damagable)
-        _rb.velocity = new Vector3(directionX * _playerDataSO.speed * Time.fixedDeltaTime*_playerStatsSO.Speed, directionY * _playerDataSO.speed * Time.fixedDeltaTime * _playerStatsSO.Speed, transform.position.z);
+        ScriptableMovement movement;
+        if (currentState == Walk)
+        {
+            movement = (ScriptableMovement)currentState.Action;
+            movement.directionX = directionX;
+            movement.directionY = directionY;
+            movement.speed = _playerDataSO.speed;
+            movement.rb = _rb;
+            _playerDataSO.Damagable = Invulnerability.Damagable;
+        }
     }
     public Vector3 VectorMousePlayerAngle()
     {
@@ -94,18 +104,22 @@ public class PlayerController : Character
     }
     public void Dash()
     {
+        var dash = (ScriptableDash)DashAction.Action;
+        dash.dashSpeed = _playerDataSO.dashSpeed;
+        dash.controlStats = _controlStats;
+        dash.dashDuration= _playerDataSO.dashDuration;
+        dash.position = transform.position;
+        dash.rb = _rb;
+        StateTransitor(DashAction);
         _anim.SetBool("Dash", true);
-        var vectorPM = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-     _rb.AddForce(vectorPM.normalized * _playerDataSO.dashSpeed * _playerStatsSO.Speed, ForceMode2D.Impulse);
         _playerDataSO.Damagable = Invulnerability.NoDamagable;
         StartCoroutine(InvulnerabilityTime(_playerDataSO.dashDuration, "Dash"));
-        _controlStats.ModificadorDeStat(Type.WeaponsDamage,0.5f,_playerDataSO.dashDuration);
     }
     private IEnumerator InvulnerabilityTime(float time, string animation)
     {
         yield return new WaitForSeconds(time);
         _anim.SetBool(animation, false);
         _playerDataSO.Damagable = Invulnerability.Damagable;
-        StopMomentum();
+        StateTransitor(Walk);
     }
 }

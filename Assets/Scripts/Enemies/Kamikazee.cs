@@ -143,12 +143,12 @@ public class Kamikazee : Enemy
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (_movement == KamikazeeMovement.Explosion && collision.gameObject.CompareTag("Player"))
+        /*if (_movement == KamikazeeMovement.Explosion && collision.gameObject.CompareTag("Player"))
         {
             Vector3 playerDirection = collision.gameObject.transform.position - transform.position;
             KamikazeeData kamikazeeData = (KamikazeeData)cloneEnemyData;
             collision.gameObject.GetComponent<PlayerController>().TakeDamage(kamikazeeData.explosionDamage);
             collision.gameObject.GetComponent<PlayerController>().GetImpulse(playerDirection.normalized * kamikazeeData.explosionImpulse);
-        }
+        }*/
     }
 }
