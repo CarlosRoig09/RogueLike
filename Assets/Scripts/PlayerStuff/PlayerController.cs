@@ -71,7 +71,7 @@ public class PlayerController : Character
             gameObject.GetComponent<LifeControler>().ModifyLife(damage * -1, ref _playerDataSO.life, _playerDataSO.maxlife);
             _anim.SetBool("Damage", true);
             _playerDataSO.Damagable = Invulnerability.NoDamagable;
-            _rb.velocity = new Vector3(0, 0);
+            StopMomentum();
             StartCoroutine(InvulnerabilityTime(0.5f, "Damage"));
         }
     }

@@ -152,6 +152,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f31d04c200ff3be418d491e66e0e35b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentState: {fileID: 11400000, guid: 1d64ab597c7e60e428e8d64f16482fc2, type: 2}
+  Stop: {fileID: 11400000, guid: ec68754575a263a47a81af901ebd1937, type: 2}
+  Walk: {fileID: 11400000, guid: 1d64ab597c7e60e428e8d64f16482fc2, type: 2}
+  DashAction: {fileID: 11400000, guid: 7b16bc4da61fb034c8e015ef7c9b7aea, type: 2}
   _playerDataSO: {fileID: 11400000, guid: e25446c7cb2760a4bade900ff47e2a14, type: 2}
   _playerStatsSO: {fileID: 11400000, guid: 900a3e6767725bc4388667676b5109d8, type: 2}
 --- !u!114 &4615364402666367220

@@ -3,13 +3,16 @@ using UnityEngine;
 
 public abstract class Character : StateController, ICanBeImpulsed
 {
+    public ScriptableState Stop;
     public abstract void Movement(float directionX, float directionY);
     public abstract void TakeDamage(float damage);
    public abstract void OnDeath();
 
     public void StopMomentum()
     {
-        gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(0,0);
+        var stop = (ScriptableStopMomentum)Stop.Action;
+        stop.rb = gameObject.GetComponent<Rigidbody2D>();
+        StateTransitor(Stop);
     }
 
     public void GetImpulse(Vector2 impulse)

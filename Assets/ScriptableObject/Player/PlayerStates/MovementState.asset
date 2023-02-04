@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5c6e105ef39364439246473ee1f3018, type: 3}
   m_Name: MovementState
   m_EditorClassIdentifier: 
-  Action: {fileID: 0}
-  ScriptableStateTransitor: []
+  Action: {fileID: 11400000, guid: 7a6c99d3e564bf44a8a5fd0a33648927, type: 2}
+  ScriptableStateTransitor:
+  - {fileID: 11400000, guid: 7b16bc4da61fb034c8e015ef7c9b7aea, type: 2}
+  - {fileID: 11400000, guid: ec68754575a263a47a81af901ebd1937, type: 2}

@@ -7,7 +7,7 @@ public enum KamikazeeMovement
     Explode,
     Explosion
 }
-public class Kamikazee : Enemy
+public class Kamikazee : Enemy, ISpawnExplosion
 {
     private Rigidbody2D _rb;
     private KamikazeeMovement _movement;
@@ -124,6 +124,7 @@ public class Kamikazee : Enemy
         { 
             cloneEnemyData.Damagable = Invulnerability.NoDamagable;
             _movement = KamikazeeMovement.Explosion;
+            SpawnExplosion();
         }
     }
     public void Death()
@@ -150,5 +151,17 @@ public class Kamikazee : Enemy
             collision.gameObject.GetComponent<PlayerController>().TakeDamage(kamikazeeData.explosionDamage);
             collision.gameObject.GetComponent<PlayerController>().GetImpulse(playerDirection.normalized * kamikazeeData.explosionImpulse);
         }*/
+    }
+
+    public void SpawnExplosion()
+    {
+        var kamikazee = (KamikazeeData)cloneEnemyData;
+        BeforeExplosion();
+        Instantiate(kamikazee.explosion,transform.position,Quaternion.identity);
+    }
+
+    public void BeforeExplosion()
+    {
+        Death();
     }
 }

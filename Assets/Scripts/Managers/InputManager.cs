@@ -44,7 +44,7 @@ public class InputManager : MonoBehaviour
     {
         if (_countDash >= _player._playerDataSO.dashCountdown)
         {
-            if (Input.GetKey(KeyCode.LeftControl))
+            if (Input.GetKey(KeyCode.LeftShift))
             {
                 _player.Dash();
                 _countDash = 0;

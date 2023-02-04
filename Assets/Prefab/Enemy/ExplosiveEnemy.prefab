@@ -137,6 +137,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67cc44e6e6c43b440bf0e8ef12c70ab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentState: {fileID: 11400000, guid: 1d64ab597c7e60e428e8d64f16482fc2, type: 2}
+  Stop: {fileID: 0}
   enemyData: {fileID: 11400000, guid: 260283e20aa913042934bfea00117e09, type: 2}
   State: 0
   _items: {fileID: 11400000, guid: 57871780b4704c1498d5139959f0c8d8, type: 2}

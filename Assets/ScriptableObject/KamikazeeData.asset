@@ -26,4 +26,4 @@ MonoBehaviour:
   PuntuationXDeath: 5
   durationOfExplosion: 0.5
   explosionDamage: 25
-  explosionImpulse: 500
+  explosionImpulse: 10000
