@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
@@ -23,7 +21,7 @@ public class UIManager : MonoBehaviour
            Array.Resize(ref Weapons, Weapons.Length+1);
             Weapons[^1] = weapon.Name;
         }
-        string[] stats = { "MeleeDamgage : " + playerStats.Damage, "MeleeSpeed : " + playerStats.AttackSpeed, "ShootDamage : " + playerStats.ProyectileDamage, "ShootSpeed: " + playerStats.ProyectileSpeed, "PlayerSpeed : " + playerStats.Speed };
+        string[] stats = { playerStats.Damage.ToString(), playerStats.AttackSpeed.ToString(), playerStats.ProyectileDamage.ToString(), playerStats.ProyectileSpeed.ToString(), playerStats.Speed.ToString()};
         
        JsonFitxerMethods.CreateFiledJsonFile("Ranking.json",GameManager.Instance.Puntuation, GameManager.Instance.Rooms, GameManager.Instance.NumberOfEnemyKilled,Weapons,stats);
         if(!JsonFitxerMethods.ComproveIfIsTheMaxPunt(GameManager.Instance.Puntuation,"Ranking.json"))

@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5c6e105ef39364439246473ee1f3018, type: 3}
+  m_Name: TeleportState
+  m_EditorClassIdentifier: 
+  Action: {fileID: 11400000, guid: d0099386a9dd96643b786ebeb8bbe41b, type: 2}
+  ScriptableStateTransitor:
+  - {fileID: 11400000, guid: 78c48dc71be4b5f40a53c6f23d201739, type: 2}
+  - {fileID: 11400000, guid: ed3678cfc8db7ff49a7657d9e5b1ca29, type: 2}

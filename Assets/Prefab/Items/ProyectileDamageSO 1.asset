@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f11e95a5ee1409c4c88b3d45c448cc9e, type: 3}
+  m_Name: ProyectileDamageSO 1
+  m_EditorClassIdentifier: 
+  Name: ProyectileDamageUp
+  Description: 
+  prefab: {fileID: 1247142666078342301, guid: 7d02d3d0870b6414dbf86e7347bcfb7b, type: 3}
+  CountDown: 10
+  RateAperance: 50
+  Price: 5
+  Puntuation: 2
+  modUp: 0.2
+  temporal: 0
+  Stat: 4
+  timeDuration: 0

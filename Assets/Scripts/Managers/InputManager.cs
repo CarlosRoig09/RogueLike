@@ -5,12 +5,16 @@ public class InputManager : MonoBehaviour
     private PlayerController _player;
     private GestionInventory _gestionInventory;
     private float _countDash;
+    private float bombCountdown;
+    private float bombCount;
     // Start is called before the first frame update
     void Start()
     {
         _player = gameObject.GetComponent<PlayerController>();
         _gestionInventory = gameObject.GetComponent<GestionInventory>();
         _countDash = _player.PlayerDataSO.dashCountdown;
+        bombCountdown = 0.5f;
+        bombCount = bombCountdown;
     }
 
     // Update is called once per frame
@@ -21,6 +25,7 @@ public class InputManager : MonoBehaviour
         ShootInput();
         DashInput();
         ChangeWeapon();
+        ThrowBomb();
     }
 
     private void MovementInput()
@@ -38,6 +43,20 @@ public class InputManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
             _player.MeleeAttack();
+    }
+
+    private void ThrowBomb()
+    {
+        if (bombCountdown <= bombCount)
+        {
+            if (Input.GetKey(KeyCode.Q))
+            {
+                bombCount = 0;
+                _player.ThrowBombs();
+            }
+        }
+        else bombCount += Time.deltaTime;
+        
     }
 
     private void DashInput()

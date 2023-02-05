@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Kamikazee
   speed: 250
-  life: 12
-  maxlife: 20
+  life: 30
+  maxlife: 30
   State: 0
   invulerability: 0
   Damagable: 0

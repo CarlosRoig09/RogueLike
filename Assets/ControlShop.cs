@@ -5,15 +5,19 @@ using UnityEngine;
 public class ControlShop : MonoBehaviour
 {
     private GameObject _item;
+    [SerializeField]
+    private TMPro.TextMeshPro _price;
     // Start is called before the first frame update
     void Start()
     {
+        AudioManager.Instance.ChangeOST("Shop");
         _item = transform.GetChild(0).gameObject;
         _item.GetComponent<ItemBehaivour>().enabled= false;
         foreach (var item in _item.GetComponents<Collider2D>())
         {
             item.enabled = false;
         }
+        _price.text = _item.GetComponent<ItemBehaivour>().itemData.Price.ToString();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

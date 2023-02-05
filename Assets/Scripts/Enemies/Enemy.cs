@@ -18,12 +18,14 @@ public class Enemy : Character, IDestroyable, IGivePuntuation
     [SerializeField]
     private float _chanceOfDropNothing;
     private int _lastAnimation;
+    protected ScriptableState CloneStop;
     public GameObject Player
     {
         get => _player;
     }
     protected virtual void Start()
     {
+        CloneStop = Instantiate(Stop);
         _animator = GetComponent<Animator>();
         cloneEnemyData = Instantiate(enemyData);
         cloneEnemyData._stunned = false;
@@ -41,8 +43,7 @@ public class Enemy : Character, IDestroyable, IGivePuntuation
         previousState = currentState;
        _lastAnimation = _animator.GetCurrentAnimatorStateInfo(0).fullPathHash;
         _animator.StopPlayback();
-        StopMomentum();
-        StartCoroutine(StunTime(time));
+        StopMomentum(time);
     }
 
     public void DeStunned()
@@ -109,7 +110,22 @@ public class Enemy : Character, IDestroyable, IGivePuntuation
     {
         yield return new WaitForSeconds(time);
         cloneEnemyData.Damagable = Invulnerability.Damagable;
-        StopMomentum();
+        StopMomentum(0.3f);
+    }
+
+    public void StopMomentum(float time)
+    {
+        var stop = (ScriptableStopMomentum)CloneStop.Action;
+        stop.rb = gameObject.GetComponent<Rigidbody2D>();
+        previousState = currentState;
+        StateTransitor(CloneStop);
+        StartCoroutine(StunTime(time));
+    }
+
+    public override void GetImpulse(Vector2 impulse)
+    {
+        StopMomentum(0.4f);
+        gameObject.GetComponent<Rigidbody2D>().AddForce(impulse);
     }
 
     private IEnumerator StunTime(float time)

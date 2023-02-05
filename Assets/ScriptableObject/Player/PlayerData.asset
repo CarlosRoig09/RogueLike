@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Player
   speed: 500
-  life: 0
+  life: 100
   maxlife: 100
   State: 1
   invulerability: 0

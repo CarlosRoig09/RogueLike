@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Turret
   speed: 0
-  life: 12
+  life: 20
   maxlife: 20
   State: 0
   invulerability: 0

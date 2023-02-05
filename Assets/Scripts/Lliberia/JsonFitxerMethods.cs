@@ -47,7 +47,11 @@ public static class JsonFitxerMethods
         }
         return player1;
     }
-
+    public static Player ReturnLastPlayer(string nameFitxer)
+    {
+        var players = SelectAll(nameFitxer);
+        return players[^1];
+    }
     public static bool ComproveIfIsTheMaxPunt(int newPuntuation, string nameFitxer)
     {
         foreach (var played in SelectAll(nameFitxer))

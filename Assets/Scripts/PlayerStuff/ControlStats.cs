@@ -45,21 +45,25 @@ public class ControlStats : MonoBehaviour
         switch (stat)
         {
             case Type.WeaponsDamage:
-                if(playerStats.Damage>=1.6f)
+                if(playerStats.Damage>=1.4f)
                     return true;
                 break;
             case Type.PlayerSpeed:
-                if (playerStats.Speed >= 1.6f)
+                if (playerStats.Speed >= 1.4f)
                     return true;
                 break;
             case Type.AttackSpeed:
-                if (playerStats.AttackSpeed >= 1.6f)
+                if (playerStats.AttackSpeed <= 0.1f)
                     return true;
                 break;
             case Type.ProyectileSpeed:
-                if (playerStats.ProyectileSpeed >= 1.6f)
+                if (playerStats.ProyectileSpeed <= 1.4f)
                     return true;
                 break;
+            case Type.ProyectileDamage:
+                 if(playerStats.ProyectileDamage <= 1.4f)
+                    return true;
+                 break;
         }
         return false;
     }
@@ -76,10 +80,13 @@ public class ControlStats : MonoBehaviour
                 _applyModificator.UpdateSpeed();
                 break;
             case Type.AttackSpeed:
-                playerStats.AttackSpeed += modificator;
+                playerStats.AttackSpeed -= modificator;
                 break;
             case Type.ProyectileSpeed: 
                 playerStats.ProyectileSpeed += modificator;
+                break;
+            case Type.ProyectileDamage:
+                playerStats.ProyectileDamage += modificator;
                 break;
         }
     }

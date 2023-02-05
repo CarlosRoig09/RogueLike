@@ -10,6 +10,7 @@ public enum Invulnerability
 }
 public class PlayerController : Character
 {
+    private AudioSource _aS;
     public ScriptableState Walk, DashAction;
     [SerializeField]
     private PlayerData _playerDataSO;
@@ -28,8 +29,9 @@ public class PlayerController : Character
     private ControlStats _controlStats;
     private ApplyModificator _applyModificator;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        _aS= GetComponent<AudioSource>();
         _clonePlayerDataSO = Instantiate(_playerDataSO);
         _clonePlayerDataSO.Damagable = Invulnerability.Damagable;
         _rb = gameObject.GetComponent<Rigidbody2D>();
@@ -107,7 +109,11 @@ public class PlayerController : Character
     }
     public override void OnDeath()
     {
-        _playerDataSO.State = Life.Death;
+        _clonePlayerDataSO.State = Life.Death;
+    }
+    public void ThrowBombs()
+    {
+        gameObject.GetComponent<GestionInventory>().ThrowBombs();
     }
     public void Dash()
     {

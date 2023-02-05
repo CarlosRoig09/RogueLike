@@ -11,9 +11,12 @@ public class GestionInventory : MonoBehaviour
     private int _counter;
     [SerializeField]
     private WeaponData firstWeapon;
+    [SerializeField]
+    private GameObject _bombs;
     // Start is called before the first frame update
     void Awake()
     {
+        inventory.Bombs = 5;
         inventory.Weapons = new List<WeaponData>();
         _counter = 0;
         _weaponController = GameObject.Find("Weapon").GetComponent<ChangeWeaponController>();
@@ -88,6 +91,21 @@ public class GestionInventory : MonoBehaviour
     public void AddCoins(float value)
     {
         inventory.Coins += value;
+    }
+
+    public void AddBombs(float value)
+    {
+        inventory.Bombs += value;
+    }
+
+    public void ThrowBombs()
+    {
+        if (inventory.Bombs > 0)
+        {
+         var bomb = Instantiate(_bombs, transform.position, Quaternion.identity);
+            bomb.GetComponent<BombBehaivour>().ThrewBomb(50, Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position);
+        }
+        inventory.Bombs -= 1;
     }
 
     public void SetWeaponValues(WeaponData newweapon)

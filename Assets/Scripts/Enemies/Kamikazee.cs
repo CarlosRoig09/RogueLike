@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 public class Kamikazee : Enemy, ISpawnExplosion
 {
@@ -12,20 +13,36 @@ public class Kamikazee : Enemy, ISpawnExplosion
     private KamikazeeData kamikazeeData;
     [SerializeField]
     private LayerMask _playerMask;
+    private ScriptableState _movement;
+    private ScriptableState _explode;
     protected override void Start()
     {
         base.Start();
         _rb = gameObject.GetComponent<Rigidbody2D>();
         _anim= GetComponent<Animator>();
         kamikazeeData = (KamikazeeData)cloneEnemyData;
+        _movement = Instantiate(Movement);
+        _explode = Instantiate(Explode);
+        var actionMovement = Instantiate(Movement.Action);
+        var actionExplode = Instantiate(Explode.Action);
+        _movement.Action = actionMovement;
+        _explode.Action = actionExplode;
+        _movement.ScriptableStateTransitor[0] = _explode;
+        _movement.ScriptableStateTransitor[1] = CloneStop;
+        _explode.ScriptableStateTransitor[0] = CloneStop;
+        CloneStop.ScriptableStateTransitor[0] = _movement;
+        CloneStop.ScriptableStateTransitor[1] = _explode;
+        currentState = _movement;
     }
     protected override void Update()
     {
-        MovementBehaivour(transform.right.x, transform.right.y);
+        if (currentState == _movement)
+        {
+            MovementBehaivour(transform.right.x, transform.right.y);
+            IsGoingToExplote();
+        }
         base.Update();
         transform.rotation = FindTarget();
-        if(currentState==Movement)
-        IsGoingToExplote();
     }
    /* private void ChangeDirectionWhenImpact()
     {
@@ -83,7 +100,7 @@ public class Kamikazee : Enemy, ISpawnExplosion
     }*/
     public override void MovementBehaivour(float directionX, float directionY)
     {
-       var movement = (ScriptableMovement)Movement.Action;
+       var movement = (ScriptableMovement)_movement.Action;
         movement.directionX = directionX;
         movement.directionY = directionY;
         movement.speed = cloneEnemyData.speed;
@@ -104,25 +121,29 @@ public class Kamikazee : Enemy, ISpawnExplosion
     private void Explosion()
     {
         StopMomentum();
-        var explode = (ScriptableExplosion)Explode.Action;
+        var explode = (ScriptableExplosion)_explode.Action;
         explode.OnExplosion += SpawnExplosion;
         explode.Timer = explosionTimer;
         cloneEnemyData.Damagable = Invulnerability.NoDamagable;
-        StateTransitor(Explode);
+        StateTransitor(_explode);
     }
     public void Death()
     {
-        var explode = (ScriptableExplosion)Explode.Action;
-        explode.OnExplosion -= SpawnExplosion;
         StopMomentum();
         State = Life.Death;
+    }
+
+    private void OnDestroy()
+    {
+        var explode = (ScriptableExplosion)_explode.Action;
+        explode.OnExplosion -= SpawnExplosion;
     }
     public void SpawnExplosion()
     {
        var explosion = Instantiate(kamikazeeData.explosion,transform.position,Quaternion.identity);
         explosion.GetComponent<ExplosionBehaivour>().ExplosionDamage = kamikazeeData.explosionDamage;
         explosion.GetComponent<ExplosionBehaivour>().ExplosionImpulse = kamikazeeData.explosionImpulse;
-        StateTransitor(Explode);
+        StateTransitor(_explode);
         BeforeExplosion();
     }
 

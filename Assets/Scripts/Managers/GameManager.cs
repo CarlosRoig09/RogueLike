@@ -36,7 +36,6 @@ public class GameManager : MonoBehaviour
     {
         get => _gameFinish;
     }
-    [SerializeField]
     private PlayerData _playerData;
     private int _puntuation;
     private GetPuntuation _controlPuntuation;
@@ -54,8 +53,15 @@ public class GameManager : MonoBehaviour
     }
     private int _enemyKilledInCurrentRoom;
     private int _currentEnemy;
+    public int CurrentEnemy
+    {
+        get => _currentEnemy;
+    }
     private int _totalEnemy;
     private int _rooms;
+    public delegate void ChangeScene(string scene);
+    public event ChangeScene OnChangeScene;
+    private bool _alreadyCalled;
     public int Rooms
     { 
         get => _rooms;
@@ -75,6 +81,7 @@ public class GameManager : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
         _calledStartGame = false;
+        _alreadyCalled = false;
     }
 
     // Update is called once per frame
@@ -86,12 +93,16 @@ public class GameManager : MonoBehaviour
 
                 if (!_calledStartGame)
                 {
+                _alreadyCalled = false;
+                _playerData = GameObject.Find("Player").GetComponent<PlayerController>().PlayerDataSO;
                     _controlPuntuation = GameObject.Find("Puntuation").GetComponent<GetPuntuation>();
                     _cS = GameObject.Find("Spawner").GetComponent<ControlScenari>();
                     _puntuation = 0;
                     _rooms = 0;
                     _numberOfEnemyKilled = 0;
                     _calledStartGame = true;
+                     _playerData.life = _playerData.maxlife;
+                _playerData.State = Life.Alive;
                     OnStartGame();
                 }
             if (GameObject.Find("Spawner").GetComponent<EnemyWaveControler>().Waves.Count > 0)
@@ -100,6 +111,7 @@ public class GameManager : MonoBehaviour
                 {
                     _numberOfEnemyKilled += _enemyKilledInCurrentRoom;
                     _gameFinish = GameFinish.Lose;
+                    OnChangeScene("GameOver");
                     SceneManager.LoadScene("GameOver");
                 }
                 if (GameObject.Find("Spawner").GetComponent<EnemyWaveControler>().ControlIfWaveIsFinished(out _currentEnemy, out _totalEnemy) && _cS.newScene)

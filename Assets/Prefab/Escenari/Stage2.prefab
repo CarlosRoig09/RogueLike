@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6042630664643125736}
   m_Layer: 0
   m_Name: Wotah
-  m_TagString: Untagged
+  m_TagString: wotah
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
