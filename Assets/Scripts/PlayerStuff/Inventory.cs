@@ -7,4 +7,6 @@ public class Inventory : ScriptableObject
 {
     public List<WeaponData> Weapons;
     public float LimitWeapons;
+    public float Coins;
+    public float Bombs;
 }

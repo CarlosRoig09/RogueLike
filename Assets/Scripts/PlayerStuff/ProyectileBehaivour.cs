@@ -47,15 +47,15 @@ public class ProyectileBehaivour : MonoBehaviour, ICanBeImpulsed
                     if (collision.CompareTag("Enemy"))
                         PushOtherGO(collision, _shootSO.ImpulseForce);
                 }
-                if (!collision.CompareTag("Player")&&!collision.CompareTag("Proyectile")&&!collision.CompareTag("Item")&&!collision.CompareTag("Weapon"))
+                if (!collision.CompareTag("Player")&&!collision.CompareTag("Proyectile")&&!collision.CompareTag("Item")&&!collision.CompareTag("Weapon")&&!collision.CompareTag("wotah"))
                     DestroyProyectile();
                 break;
             case ProyectileUser.Enemy:
                 if (collision.CompareTag("Player"))
-                    collision.gameObject.GetComponent<Player>().TakeDamage(_damage);
+                    collision.gameObject.GetComponent<PlayerController>().TakeDamage(_damage);
                 if (collision.CompareTag("Weapon"))
                     _proyectileUser = ProyectileUser.Player;
-                if (!collision.CompareTag("Enemy") && !collision.CompareTag("Item") && !collision.CompareTag("Weapon"))
+                if (!collision.CompareTag("Enemy") && !collision.CompareTag("Item") && !collision.CompareTag("Weapon")&&!collision.CompareTag("wotah"))
                     DestroyProyectile();
                 break;
         }

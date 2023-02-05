@@ -76,9 +76,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -1987061333
+  m_SortingLayer: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: -2032190741, guid: 4846fe9675b69484f839b556b16bc117, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -140,7 +140,7 @@ PolygonCollider2D:
       - {x: 0.022509925, y: 0.0043103658}
 --- !u!95 &7852697871770142181
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -157,7 +157,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &3000409297527678990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,6 +203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4368a9ed6e9d8c84caef6990abec00f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemData: {fileID: 11400000, guid: a14b32f2525907a4b86afff92cef1497, type: 2}
   weaponData: {fileID: 11400000, guid: a14b32f2525907a4b86afff92cef1497, type: 2}
 --- !u!60 &7320245981338266539
 PolygonCollider2D:

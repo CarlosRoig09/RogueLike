@@ -1,63 +1,86 @@
 using System.Collections;
 using UnityEngine;
 
-public class Enemy : Character, IDestroyable
+public class Enemy : Character, IDestroyable, IGivePuntuation
 {
     [SerializeField]
-    protected EnemyData enemyData;
+    private EnemyData enemyData;
+    protected EnemyData cloneEnemyData;
+    private ScriptableState previousState;
     public Life State;
-    private float currentLife;
     protected Vector3 lookDirection;
     private float lookAngle;
     protected GameObject _player;
     [SerializeField]
     private DropegableItems _items;
+    protected GameObject _wall;
+    private Animator _animator;
     [SerializeField]
     private float _chanceOfDropNothing;
+    private int _lastAnimation;
+    protected ScriptableState CloneStop;
     public GameObject Player
     {
         get => _player;
     }
     protected virtual void Start()
     {
-        currentLife = enemyData.maxlife;
-        State = Life.Alive;
-        enemyData.Damagable = Invulnerability.Damagable;
+        CloneStop = Instantiate(Stop);
+        _animator = GetComponent<Animator>();
+        cloneEnemyData = Instantiate(enemyData);
+        cloneEnemyData._stunned = false;
+        cloneEnemyData.Damagable = Invulnerability.Damagable;
         _player = GameObject.Find("Player");
     }
-    protected virtual void Update()
+    protected override void Update()
     {
+        base.Update();
         FindTarget();
     }
-   /* protected void DealContactDamage(GameObject gameObject)
+
+    public void Stunned(float time)
     {
-        gameObject.GetComponent<Player>().TakeDamage(enemyData.ContactDamage);
-    }*/
-    protected void FindTarget()
+        previousState = currentState;
+       _lastAnimation = _animator.GetCurrentAnimatorStateInfo(0).fullPathHash;
+        _animator.StopPlayback();
+        StopMomentum(time);
+    }
+
+    public void DeStunned()
     {
-        lookDirection = _player.transform.position - transform.position;
-        lookAngle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, lookAngle);
+        _animator.Play(_lastAnimation);
+        StateTransitor(previousState);
+    }
+    protected Quaternion FindTarget()
+    {
+        if (!cloneEnemyData._stunned)
+        {
+            lookDirection = _player.transform.position - transform.position;
+            lookAngle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
+            return Quaternion.Euler(0, 0, lookAngle);
+        }
+        return transform.rotation;
     }
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
         //No muy bien equilibrado aún
-       /* if (collision.gameObject.CompareTag("Player"))
+       /* if (collision.gameObject.CompareTag("PlayerController"))
             DealContactDamage(collision.gameObject); */
     }
     public override void TakeDamage(float damage)
     {
-        gameObject.GetComponent<LifeControler>().ModifyLife(damage * -1,ref currentLife, enemyData.maxlife);
+        gameObject.GetComponent<LifeControler>().ModifyLife(damage * -1, ref cloneEnemyData.life, cloneEnemyData.maxlife);
     }
     public override void OnDeath()
     {
         State = Life.Death;
+        GivePuntuation(cloneEnemyData.PuntuationXDeath);
     }
     public void GetHitByPlayer(float damage)
     {
-            Debug.Log("I got Damaged");
-            TakeDamage(damage);
-            enemyData.Damagable = Invulnerability.NoDamagable;
+        GivePuntuation(cloneEnemyData.PuntuationXHit);
+        TakeDamage(damage);
+            cloneEnemyData.Damagable = Invulnerability.NoDamagable;
             StartCoroutine(InvulnerabilityTime(0.5f));
     }
 
@@ -69,23 +92,16 @@ public class Enemy : Character, IDestroyable
 
     public bool DropAnObject()
     {
-        float minRange = 0;
-        var random = Random.Range(minRange, _items.Items.Length * 10 + _chanceOfDropNothing);
-        for (var i = 0; i < _items.Items.Length; i++)
+      var item = RandomMethods.ReturnARandomObject(_items.Items, 50, _items.Items.Length, 0);
+        if (item > -1)
         {
-            Debug.Log(random);
-            if (random >= minRange && random <= _items.Items[i].RateAperance / _items.Items.Length * (i + 1))
-            {
-                Instantiate(_items.Items[i].prefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
-                return true;
-            }
-            else
-                minRange = _items.Items[i].RateAperance / _items.Items.Length;
+            Instantiate(_items.Items[item].prefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+            return true;
         }
         return false;
     }
 
-    public override void Movement(float directionX, float directionY)
+    public override void MovementBehaivour(float directionX, float directionY)
     {
         //Is for the childs if they move
     }
@@ -93,7 +109,32 @@ public class Enemy : Character, IDestroyable
     private IEnumerator InvulnerabilityTime(float time)
     {
         yield return new WaitForSeconds(time);
-        enemyData.Damagable = Invulnerability.Damagable;
-        StopMomentum();
+        cloneEnemyData.Damagable = Invulnerability.Damagable;
+        StopMomentum(0.3f);
+    }
+
+    public void StopMomentum(float time)
+    {
+        var stop = (ScriptableStopMomentum)CloneStop.Action;
+        stop.rb = gameObject.GetComponent<Rigidbody2D>();
+        previousState = currentState;
+        StateTransitor(CloneStop);
+        StartCoroutine(StunTime(time));
+    }
+
+    public override void GetImpulse(Vector2 impulse)
+    {
+        StopMomentum(0.4f);
+        gameObject.GetComponent<Rigidbody2D>().AddForce(impulse);
+    }
+
+    private IEnumerator StunTime(float time)
+    {
+        yield return new WaitForSeconds(time);
+        StateTransitor(previousState);
+    }
+    public void GivePuntuation(int Puntuation)
+    {
+        GameManager.Instance.Puntuation += Puntuation;
     }
 }

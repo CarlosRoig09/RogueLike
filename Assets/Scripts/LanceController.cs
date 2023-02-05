@@ -6,7 +6,16 @@ public class LanceController : MonoBehaviour, IWeaponControler
     private WeaponData _weaponSO;
     private GameObject _parent;
     private GameObject _grandParent;
+    private Enemy _enemyStunned;
     public WeaponData WeaponSO { get => _weaponSO; set => _weaponSO = value; }
+    private float _weaponDamage;
+    public float WeaponDamage { get => _weaponDamage; set => _weaponDamage = _weaponSO.meleeData.Damage * value; }
+    private float _weaponSpeed;
+    public float WeaponSpeed { get => _weaponSpeed; set => _weaponSpeed = _weaponSO.meleeData.CadenceTime * value; }
+    private float _proyectileSpeed;
+    public float ProyectileSpeed { get => _proyectileSpeed; set => _proyectileSpeed = _weaponSO.shootData.ProyectileSpeed * value; }
+    private float _proyectileDamage;
+    public float ProyectileDamage { get => _proyectileDamage; set => _proyectileDamage = _weaponSO.shootData.ProyectileDamage * value; }
 
     // Start is called before the first frame update
     void Start()
@@ -24,9 +33,17 @@ public class LanceController : MonoBehaviour, IWeaponControler
         if (_weaponSO.WA != WeaponState.Item)
         {
             _weaponSO.MaxDistance(_parent, WeaponState.Stop);
-            _weaponSO.ComeBack(_grandParent, _parent, 1.5f);
+            _weaponSO.ComeBack(_grandParent, _parent, 1.5f,ProyectileSpeed);
             if (_weaponSO.WA == WeaponState.ComeBack)
+            {
                 CollisionEnable();
+                if(_enemyStunned!= null)
+                {
+                   _enemyStunned.DeStunned();
+                   _enemyStunned.GetHitByPlayer(ProyectileDamage);
+                    _enemyStunned= null;
+                }
+            }
             else
                 if (!_weaponSO.shootData.rangeAttack)
                 StartCoroutine(_weaponSO.ResetProyectileCount());
@@ -41,7 +58,7 @@ public class LanceController : MonoBehaviour, IWeaponControler
         if (WeaponSO.WA == WeaponState.Normal && WeaponSO.shootData.rangeAttack)
         {
             _weaponSO.PrepareToThrowWeapon(_grandParent, _parent);
-            _weaponSO.ThrowWeapon(_parent);
+            _weaponSO.ThrowWeapon(_parent,ProyectileSpeed);
         }
         else
             if (_weaponSO.WA == WeaponState.Stop) 
@@ -63,17 +80,26 @@ public class LanceController : MonoBehaviour, IWeaponControler
         if (enabled)
         {
             if (collision.gameObject.GetComponent<IDestroyable>() != null)
-                collision.gameObject.GetComponent<IDestroyable>().GetHitByPlayer(_weaponSO.WA == WeaponState.MeleeAttack ? _weaponSO.meleeData.Damage : _weaponSO.shootData.ProyectileDamage);
+            {
+                collision.gameObject.GetComponent<IDestroyable>().GetHitByPlayer(_weaponSO.WA == WeaponState.MeleeAttack ? WeaponDamage : ProyectileDamage);
+                if(_weaponSO.WA == WeaponState.DistanceAttack&&collision.gameObject.CompareTag("Enemy"))
+                {
+                    _parent.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0);
+                    _weaponSO.WA = WeaponState.Stop;
+                  _enemyStunned = collision.gameObject.GetComponent<Enemy>();
+                    _enemyStunned.Stunned(5);
+                }
+            }
+            
 
-            if (collision.CompareTag("Enemy") || collision.CompareTag("Proyectile"))
-                PushOtherGO(collision, _weaponSO.WA == WeaponState.MeleeAttack ? _weaponSO.meleeData.ImpulseForce : _weaponSO.shootData.ImpulseForce);
+          //  if (collision.CompareTag("Enemy") || collision.CompareTag("Proyectile"))
+                //PushOtherGO(collision, _weaponSO.WA == WeaponState.MeleeAttack ? _weaponSO.meleeData.ImpulseForce : _weaponSO.shootData.ImpulseForce);
         }
     }
-        public void PushOtherGO(Collider2D collision, float impulse)
+    public void PushOtherGO(Collider2D collision, float impulse)
     {
         Vector3 enemyDirection = collision.gameObject.transform.position - transform.position;
-        var canBeImpulse = collision.gameObject.GetComponent<ICanBeImpulsed>();
-        if (canBeImpulse != null)
+        if (collision.gameObject.TryGetComponent<ICanBeImpulsed>(out var canBeImpulse))
             canBeImpulse.GetImpulse(enemyDirection.normalized * impulse);
     }
     public void CollisionEnable()

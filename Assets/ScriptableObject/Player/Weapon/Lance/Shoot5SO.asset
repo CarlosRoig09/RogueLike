@@ -18,7 +18,7 @@ MonoBehaviour:
   BulletsXShoot: 0
   TotalBullets: 0
   currentBullets: 0
-  maxDistance: 8
+  maxDistance: 15
   CadenceTime: 0.5
   Reload: 0
   ImpulseForce: 350

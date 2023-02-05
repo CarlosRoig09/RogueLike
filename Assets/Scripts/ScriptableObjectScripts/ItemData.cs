@@ -6,4 +6,6 @@ public class ItemData : ScriptableObject
     public GameObject prefab;
     public float CountDown;
     public float RateAperance;
+    public float Price;
+    public int Puntuation;
 }

@@ -15,3 +15,4 @@ MonoBehaviour:
   Damage: 10
   CadenceTime: 0.2
   ImpulseForce: 500
+  meleeAttack: 1

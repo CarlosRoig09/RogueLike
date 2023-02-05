@@ -13,12 +13,14 @@ MonoBehaviour:
   m_Name: TurretWeapon
   m_EditorClassIdentifier: 
   Proyectile: {fileID: 5163282210510779587, guid: 9decf7727c1896746ad155efffb94087, type: 3}
-  ProyectileDamage: 5
+  ProyectileDamage: 10
   ProyectileSpeed: 500
   BulletsXShoot: 1
+  TotalBullets: 5
   currentBullets: 5
-  TotalBullets: 6
-  CadenceTime: 1
-  CountCadenceTime: 0.58
-  Reload: 0
+  maxDistance: 0
+  CadenceTime: 2
+  Reload: 0.5
+  ImpulseForce: 0
   proyectileUser: 1
+  rangeAttack: 0

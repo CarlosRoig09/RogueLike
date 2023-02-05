@@ -3,6 +3,13 @@ using UnityEngine;
 public interface IWeaponControler 
 {
     public WeaponData WeaponSO { get; set; }
+
+    public float WeaponDamage { get; set; }
+
+    public float WeaponSpeed { get; set; }
+
+    public float ProyectileDamage { get; set; }
+    public float ProyectileSpeed { get; set;}
     public abstract void SecondButtonAttack();
 
     public abstract void FirstButtonAttack();

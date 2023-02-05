@@ -24,13 +24,16 @@ public class WeaponItemController : ItemBehaivour
         if (collision.CompareTag("Player"))
         {
             GiveToPlayer(collision.gameObject);
-            DestroyItem();
         }
     }
 
     public override void GiveToPlayer(GameObject player)
     {
-      player.GetComponent<GestionInventory>().AddWeapon(weaponData);
+        if (player.GetComponent<GestionInventory>().AddWeapon(weaponData))
+        {
+            GivePuntuation(weaponData.Puntuation);
+            DestroyItem();
+        }
     }
 
     public override void DestroyItem()

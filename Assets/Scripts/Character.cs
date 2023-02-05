@@ -1,17 +1,23 @@
+using System.Collections;
 using UnityEngine;
 
-public abstract class Character : MonoBehaviour, ICanBeImpulsed
+public abstract class Character : StateController, ICanBeImpulsed
 {
-    public abstract void Movement(float directionX, float directionY);
+    [SerializeField]
+    protected AudioClip getDamaged;
+    public ScriptableState Stop;
+    public abstract void MovementBehaivour(float directionX, float directionY);
     public abstract void TakeDamage(float damage);
    public abstract void OnDeath();
 
-    public void StopMomentum()
+    public virtual void StopMomentum()
     {
-        gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(0,0);
+        var stop = (ScriptableStopMomentum)Stop.Action;
+        stop.rb = gameObject.GetComponent<Rigidbody2D>();
+        StateTransitor(Stop);
     }
 
-    public void GetImpulse(Vector2 impulse)
+    public virtual void GetImpulse(Vector2 impulse)
     {
         StopMomentum();
         gameObject.GetComponent<Rigidbody2D>().AddForce(impulse);

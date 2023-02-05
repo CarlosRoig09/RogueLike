@@ -2,108 +2,132 @@ using System.Collections.Generic;
 using UnityEngine;
 public enum WaveState
 {
-    CallFirstWave,
-    FirstWave,
-    CallSecondWave,
-    SecondWave, 
-    CallThirtWave,
-    ThirthWave,
+    CallWave,
     WaveEnded
 }
-public class EnemyWaveControler : MonoBehaviour
+public class EnemyWaveControler : MonoBehaviour, IGivePuntuation
 {
     //Haré probablemente para variar un ScriptableObject de cada zona y sus Wave en un futuro.
-    [SerializeField]
-    private float _firstWaveTurret;
-    [SerializeField]
-    private float _firstWaveKamikazee;
-    [SerializeField]
-    private float _secondWaveTurret;
-    [SerializeField]
-    private float _secondWaveKamikazee;
-    [SerializeField]
-    private float _thirtWaveTurret;
-    [SerializeField]
-    private float _thirtWaveKamikazee;
+    private List<EnemyWave> _waves;
+   // [SerializeField]
+
     [SerializeField]
     private GameObject _turret;
     [SerializeField]
     private GameObject _kamikazee;
-    private List<EnemyWave> _enemyWaves;
-    private float _currentEnemy;
+    private int _currentEnemy;
     private WaveState _waveState;
     private List<GameObject> _enemySpawned;
     [SerializeField]
     private Transform _player;
+    private bool _activeWave;
+    [SerializeField]
+    private LayerMask _wall;
+    private Vector3[] _allPosiblePositions;
+    public Vector3[] AllPositions { get { return _allPosiblePositions;} }
     public WaveState WaveState
     {
         get => _waveState;
     }
+    public List<EnemyWave> Waves
+    {
+        get { return _waves; }
+        set { _waves = value; }
+    }
+    private static EnemyWaveControler _instance;
+
+    public static EnemyWaveControler Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                Debug.LogError("Spawner is NULL");
+            }
+            return _instance;
+        }
+    }
+    void Awake()
+    {
+        if (_instance != null)
+            Destroy(gameObject);
+        else
+        {
+            _instance = this;
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
-        _enemyWaves = new List<EnemyWave> { new EnemyWave(1, _firstWaveKamikazee, _firstWaveTurret), new EnemyWave(2, _secondWaveKamikazee, _secondWaveTurret), new EnemyWave(3, _thirtWaveKamikazee, _thirtWaveTurret) };
-        _waveState = WaveState.CallFirstWave;
+        _activeWave = false;
         _enemySpawned = new List<GameObject>();
     }
-
-    void Update()
+    public void CreateWaves()
     {
-        switch (_waveState)
+        Debug.Log("CreatedWaves");
+        int numberOfWave = 0;
+        _waves = new List<EnemyWave>();
+        foreach (var scenari in gameObject.GetComponent<ControlScenari>().Escenaris)
         {
-            case WaveState.CallFirstWave:
-                Debug.Log("Wave1");
-                CallWave(WaveState.FirstWave,0);
-                break;
-            case WaveState.FirstWave:
-                ControlIfWaveIsFinished(WaveState.CallSecondWave);
-                break;
-            case WaveState.CallSecondWave:
-                Debug.Log("Wave2");
-               CallWave(WaveState.SecondWave,1);
-                break;
-            case WaveState.SecondWave:
-                ControlIfWaveIsFinished(WaveState.CallThirtWave);
-                break;
-            case WaveState.CallThirtWave:
-                Debug.Log("Wave3");
-               CallWave(WaveState.ThirthWave,2);
-                break;
-            case WaveState.ThirthWave:
-                ControlIfWaveIsFinished(WaveState.WaveEnded);
-                break;
+            if (scenari.transform.GetChild(0).CompareTag("combat"))
+            {
+                numberOfWave += 1;
+                var turrets = new float[numberOfWave];
+                var kamikazes = new float[numberOfWave];
+                for (int i = 0; i < numberOfWave; i++)
+                {
+                    turrets[i] = Random.Range(numberOfWave, numberOfWave * 2) / numberOfWave;
+                    kamikazes[i] = Random.Range(numberOfWave, numberOfWave * 2) / numberOfWave;
+                }
+                _waves.Add(new EnemyWave(numberOfWave,kamikazes,turrets));
+            }
         }
     }
-
-    private void CallWave(WaveState newState, int waveNumber)
+    public void CallWave(Vector3 scenariPosition,Vector3 scenariInitialPos, Vector3 scenariFinalPos)
     {
-        //No hay muchas más variantes, más allá de sumar o restar enemigos. 
-        float extraKamikazee = 0;
-        float extraTurret = 0;
-        if (Random.Range(1,100)<=20)
+        AudioManager.Instance.ChangeOST("Combat");
+        transform.position = scenariPosition;
+        _currentEnemy = 0;
+       var waves = _waves[0].CallWave();
+        foreach (int kamiKazeeNumber in waves.KamikazeeNumber)
         {
-            extraKamikazee = Random.Range(1, 2);
-            extraTurret = Random.Range(1, 2);
+            EnemySpawn(_kamikazee, kamiKazeeNumber,scenariPosition,scenariInitialPos,scenariFinalPos);
+            _currentEnemy += kamiKazeeNumber;
         }
-        EnemySpawn(_kamikazee, _enemyWaves[waveNumber].KamikazeeNumber + extraKamikazee);
-        EnemySpawn(_turret, _enemyWaves[waveNumber].TurretNumber + extraTurret);
-        _currentEnemy = _enemyWaves[waveNumber].KamikazeeNumber + _enemyWaves[waveNumber].TurretNumber + extraKamikazee + extraTurret;
-        _waveState = newState;
+        foreach (int turretNumber in waves.TurretNumber)
+        {
+            EnemySpawn(_turret, turretNumber,scenariPosition,scenariInitialPos,scenariFinalPos);
+            _currentEnemy += turretNumber;
+        }
+        _activeWave = true;
     }
 
-    private void ControlIfWaveIsFinished(WaveState nextWave)
+    public bool ControlIfWaveIsFinished(out int currentEnemy, out int totalEnemy)
     {
-        CurrentEnemy(ref _currentEnemy);
-        if (_currentEnemy <= 0)
-            _waveState = nextWave;
+        if (_activeWave)
+        {
+            CurrentEnemy(ref _currentEnemy);
+            currentEnemy = _currentEnemy;
+            totalEnemy = _enemySpawned.Count;
+            if (_currentEnemy <= 0)
+            {
+                GivePuntuation(_enemySpawned.Count*10);
+                _activeWave = false;
+                AudioManager.Instance.ChangeOST("GameScene");
+                return true;
+            }
+        }
+        currentEnemy = _currentEnemy;
+        totalEnemy = _enemySpawned.Count;
+        return false;
     }
 
-    public void EnemySpawn(GameObject enemy, float number)
+    public void EnemySpawn(GameObject enemy, int number, Vector3 scenariPosition, Vector3 scenariInitialPos, Vector3 scenariFinalPos)
     {
         for (int i = 0; i < number; i++)
-            _enemySpawned.Add(ControlInstancePosition(enemy));
+            _enemySpawned.Add(ControlInstancePosition(enemy,scenariPosition,scenariInitialPos,scenariFinalPos));
     }
-    public void CurrentEnemy(ref float currentEnemies)
+    public void CurrentEnemy(ref int currentEnemies)
     {
         foreach (var enemy in _enemySpawned)
         {
@@ -116,20 +140,64 @@ public class EnemyWaveControler : MonoBehaviour
         }
     }
 
-    private GameObject ControlInstancePosition(GameObject enemy)
+    private GameObject ControlInstancePosition(GameObject enemy, Vector3 scenariPosition, Vector3 scenariInitialPos, Vector3 scenariFinalPos)
     {
-        Vector3 position;
-        do
+       var AllPositions = AllPosiblePositions(new Vector3(scenariInitialPos.x+scenariPosition.x,scenariInitialPos.y+scenariPosition.y),new Vector3(scenariFinalPos.x+scenariPosition.x,scenariFinalPos.y+scenariPosition.y));
+        // do
+        //{
+        for (int i = 0; i < AllPositions.Length;)
         {
-            position = new Vector3(Random.Range(-32.4f, 12.62f), Random.Range(-8.75f, 10.42f));
-        } while (GameObjectInThatPosition(position));
-        return Instantiate(enemy, position, Quaternion.identity);
+            int y;
+            int x;
+            if ((x = Random.Range(0, AllPositions.Length)) != (y = Random.Range(0, AllPositions.Length)))
+            {
+                i++;
+                (AllPositions[x], AllPositions[y]) = (AllPositions[y], AllPositions[x]);
+            }
+        }
+        for (int i = 0; i < AllPositions.Length; i++)
+        {
+            if (GameObjectInThatPosition(AllPositions[i]))
+                return Instantiate(enemy, AllPositions[i], Quaternion.identity);
+        }
+        return Instantiate(enemy, transform.position, Quaternion.identity);
     }
 
     private bool GameObjectInThatPosition(Vector3 position)
     {
-        if (Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Camera.main.transform.position), position) || Physics2D.Raycast(position, _player.position, 100, 6))
+        if ((_player.transform.position-position).magnitude>3&&!Physics2D.Raycast(transform.position,position,(position-transform.position).magnitude))
             return true;
             return false;
+    }
+
+    private Vector3[] AllPosiblePositions(Vector3 firstPosition, Vector3 lastPosition)
+    {
+        var differentToWall = false;
+        _allPosiblePositions = new Vector3[0];
+        Vector3 actualPosition = firstPosition;
+        do
+        {
+            if (Physics2D.Raycast(transform.position, actualPosition, (actualPosition-transform.position).magnitude, _wall))
+            {
+                if (differentToWall || actualPosition.x >= lastPosition.x)
+                {
+                    actualPosition = new Vector3(firstPosition.x, actualPosition.y - 1f);
+                    differentToWall = false;
+                }
+            }
+            else
+            {
+                System.Array.Resize(ref _allPosiblePositions, _allPosiblePositions.Length + 1);
+                _allPosiblePositions[^1] = actualPosition;
+                differentToWall = true;
+            }
+            actualPosition = new Vector3(actualPosition.x + 1f, actualPosition.y);
+        } while (actualPosition.y>=lastPosition.y);
+        return _allPosiblePositions;
+    }
+
+    public void GivePuntuation(int Puntuation)
+    {
+        GameManager.Instance.Puntuation += Puntuation;
     }
 }

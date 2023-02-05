@@ -1,44 +1,50 @@
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
-public enum KamikazeeMovement
+public class Kamikazee : Enemy, ISpawnExplosion
 {
-    Movement,
-    AvoidObstacle,
-    Explode
-}
-public class Kamikazee : Enemy
-{
+    public ScriptableState Movement, Explode;
     private Rigidbody2D _rb;
-    private KamikazeeMovement _movement;
-    private GameObject _wall;
     [SerializeField]
     private LayerMask wallMask;
     [SerializeField]
     private float explosionTimer;
-    private float _counTillDisapear;
+    private Animator _anim;
+    private KamikazeeData kamikazeeData;
+    [SerializeField]
+    private LayerMask _playerMask;
+    private ScriptableState _movement;
+    private ScriptableState _explode;
     protected override void Start()
     {
         base.Start();
-        _movement = KamikazeeMovement.Movement;
         _rb = gameObject.GetComponent<Rigidbody2D>();
+        _anim= GetComponent<Animator>();
+        kamikazeeData = (KamikazeeData)cloneEnemyData;
+        _movement = Instantiate(Movement);
+        _explode = Instantiate(Explode);
+        var actionMovement = Instantiate(Movement.Action);
+        var actionExplode = Instantiate(Explode.Action);
+        _movement.Action = actionMovement;
+        _explode.Action = actionExplode;
+        _movement.ScriptableStateTransitor[0] = _explode;
+        _movement.ScriptableStateTransitor[1] = CloneStop;
+        _explode.ScriptableStateTransitor[0] = CloneStop;
+        CloneStop.ScriptableStateTransitor[0] = _movement;
+        CloneStop.ScriptableStateTransitor[1] = _explode;
+        currentState = _movement;
     }
     protected override void Update()
     {
-        base.Update();
-        switch (_movement)
+        if (currentState == _movement)
         {
-            case KamikazeeMovement.Movement:
-                Movement(transform.right.x, transform.right.y);
-                IsGoingToExplote();
-                break;
-            case KamikazeeMovement.AvoidObstacle:
-                ChangeDirectionWhenImpact();
-                break;
-            case KamikazeeMovement.Explode:
-                Explosion();
-                break;
+            MovementBehaivour(transform.right.x, transform.right.y);
+            IsGoingToExplote();
         }
+        base.Update();
+        transform.rotation = FindTarget();
     }
-    private void ChangeDirectionWhenImpact()
+   /* private void ChangeDirectionWhenImpact()
     {
         if (ContactWithAnObject(Vector2.down))
             PrioritzateMovement(Vector2.down, _player.transform.position);
@@ -49,21 +55,21 @@ public class Kamikazee : Enemy
         else if ((ContactWithAnObject(Vector2.left)))
             PrioritzateMovement(Vector2.left, _player.transform.position);
         else
-            _movement = KamikazeeMovement.Movement;
-    }
+            _movement = KamikazeeMovement.MovementBehaivour;
+    }*/
 
-    private void PrioritzateMovement(Vector2 direction, Vector2 playerPosition)
+    /*private void PrioritzateMovement(Vector2 direction, Vector2 playerPosition)
     {
         if (direction.x == 0)
         {
                 if (playerPosition.y >= transform.position.y)
-                    _movement = KamikazeeMovement.Movement;
+                    _movement = KamikazeeMovement.MovementBehaivour;
                 else
                 {
                     if (Physics2D.Raycast(transform.position, new Vector2(playerPosition.x, 0), playerPosition.x-transform.position.x, wallMask))
-                        Movement((new Vector2(transform.right.x, 0)).normalized.x*-1, 0);
+                        MovementBehaivour((new Vector2(transform.right.x, 0)).normalized.x*-1, 0);
                     else
-                        Movement(new Vector2(transform.right.x, 0).normalized.x, 0);
+                        MovementBehaivour(new Vector2(transform.right.x, 0).normalized.x, 0);
                 }
         }
         else
@@ -71,58 +77,78 @@ public class Kamikazee : Enemy
             if (direction.x < 0)
             {
                 if (playerPosition.x <= transform.position.x)
-                    _movement = KamikazeeMovement.Movement;
+                    _movement = KamikazeeMovement.MovementBehaivour;
                 else
                 {
                     if (Physics2D.Raycast(transform.position, new Vector2(playerPosition.y, 0), Mathf.Infinity, wallMask))
-                        Movement((new Vector2(transform.right.y, 0)).normalized.y * -1, 0);
+                        MovementBehaivour((new Vector2(transform.right.y, 0)).normalized.y * -1, 0);
                     else
-                        Movement(new Vector2(transform.right.y, 0).normalized.y, 0);
+                        MovementBehaivour(new Vector2(transform.right.y, 0).normalized.y, 0);
                 }
             }
             else
             {
                 if (playerPosition.x >= transform.position.x)
-                    _movement = KamikazeeMovement.Movement;
+                    _movement = KamikazeeMovement.MovementBehaivour;
             }
         }
-    }
+    }*/
 
-    private bool ContactWithAnObject(Vector2 direction)
+ /*   private bool ContactWithAnObject(Vector2 direction)
     {
         return Physics2D.Raycast(transform.position, direction, 0.65f);
-    }
-    public override void Movement(float directionX, float directionY)
+    }*/
+    public override void MovementBehaivour(float directionX, float directionY)
     {
-        if (enemyData.Damagable == Invulnerability.Damagable)
-            _rb.velocity = enemyData.speed * Time.fixedDeltaTime * new Vector3(directionX, directionY);
+       var movement = (ScriptableMovement)_movement.Action;
+        movement.directionX = directionX;
+        movement.directionY = directionY;
+        movement.speed = cloneEnemyData.speed;
+        movement.rb = _rb;
+        cloneEnemyData.Damagable = Invulnerability.Damagable;
     }
 
-    private void IsGoingToExplote()
+   private void IsGoingToExplote()
     {
-        if (lookDirection.magnitude<=2)
-            _movement = KamikazeeMovement.Explode;
+        if ((_player.transform.position-transform.position).magnitude<=3)
+        {
+            _anim.SetBool("GoingToExplote", true);
+            _rb.constraints = RigidbodyConstraints2D.FreezeAll;
+            Explosion();
+        }
     }
 
     private void Explosion()
     {
         StopMomentum();
-        if (explosionTimer > _counTillDisapear)
-            transform.localScale = new Vector3(transform.localScale.x + 2f * Time.deltaTime, transform.localScale.y + 2f * Time.deltaTime);
-        else State = Life.Death;
-        _counTillDisapear += Time.deltaTime;
+        var explode = (ScriptableExplosion)_explode.Action;
+        explode.OnExplosion += SpawnExplosion;
+        explode.Timer = explosionTimer;
+        cloneEnemyData.Damagable = Invulnerability.NoDamagable;
+        StateTransitor(_explode);
+    }
+    public void Death()
+    {
+        StopMomentum();
+        State = Life.Death;
     }
 
-    protected override void OnCollisionEnter2D(Collision2D collision)
+    private void OnDestroy()
     {
-        if (_movement == KamikazeeMovement.Explode && collision.gameObject.CompareTag("Player"))
-        {
-            collision.gameObject.GetComponent<Player>().TakeDamage(enemyData.ContactDamage);
-        }
-        if (collision.gameObject.layer == 7)
-        {
-            _movement = KamikazeeMovement.AvoidObstacle;
-            _wall = collision.gameObject;
-        }
+        var explode = (ScriptableExplosion)_explode.Action;
+        explode.OnExplosion -= SpawnExplosion;
+    }
+    public void SpawnExplosion()
+    {
+       var explosion = Instantiate(kamikazeeData.explosion,transform.position,Quaternion.identity);
+        explosion.GetComponent<ExplosionBehaivour>().ExplosionDamage = kamikazeeData.explosionDamage;
+        explosion.GetComponent<ExplosionBehaivour>().ExplosionImpulse = kamikazeeData.explosionImpulse;
+        StateTransitor(_explode);
+        BeforeExplosion();
+    }
+
+    public void BeforeExplosion()
+    {
+        Death();
     }
 }

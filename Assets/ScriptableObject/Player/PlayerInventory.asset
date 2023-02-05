@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcd05f89d02ec2241ba952ae3794ac86, type: 3}
   m_Name: PlayerInventory
   m_EditorClassIdentifier: 
-  Weapons: []
+  Weapons:
+  - {fileID: 0}
   LimitWeapons: 5
+  Coins: 0
+  Bombs: 5

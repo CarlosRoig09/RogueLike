@@ -2,15 +2,19 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    private Player _player;
+    private PlayerController _player;
     private GestionInventory _gestionInventory;
     private float _countDash;
+    private float bombCountdown;
+    private float bombCount;
     // Start is called before the first frame update
     void Start()
     {
-        _player = gameObject.GetComponent<Player>();
+        _player = gameObject.GetComponent<PlayerController>();
         _gestionInventory = gameObject.GetComponent<GestionInventory>();
-        _countDash = _player._playerDataSO.dashCountdown;
+        _countDash = _player.PlayerDataSO.dashCountdown;
+        bombCountdown = 0.5f;
+        bombCount = bombCountdown;
     }
 
     // Update is called once per frame
@@ -21,11 +25,12 @@ public class InputManager : MonoBehaviour
         ShootInput();
         DashInput();
         ChangeWeapon();
+        ThrowBomb();
     }
 
     private void MovementInput()
     {
-        _player.Movement(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        _player.MovementBehaivour(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
     }
 
     private void ShootInput()
@@ -40,11 +45,25 @@ public class InputManager : MonoBehaviour
             _player.MeleeAttack();
     }
 
+    private void ThrowBomb()
+    {
+        if (bombCountdown <= bombCount)
+        {
+            if (Input.GetKey(KeyCode.Q))
+            {
+                bombCount = 0;
+                _player.ThrowBombs();
+            }
+        }
+        else bombCount += Time.deltaTime;
+        
+    }
+
     private void DashInput()
     {
-        if (_countDash >= _player._playerDataSO.dashCountdown)
+        if (_countDash >= _player.PlayerDataSO.dashCountdown)
         {
-            if (Input.GetKey(KeyCode.LeftControl))
+            if (Input.GetKey(KeyCode.LeftShift))
             {
                 _player.Dash();
                 _countDash = 0;

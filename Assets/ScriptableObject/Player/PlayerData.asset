@@ -16,10 +16,10 @@ MonoBehaviour:
   speed: 500
   life: 100
   maxlife: 100
-  State: 0
+  State: 1
   invulerability: 0
-  Damagable: 0
+  Damagable: 1
   IsDamaged: 0
-  dashSpeed: 30
+  dashSpeed: 35
   dashCountdown: 1
   dashDuration: 0.5

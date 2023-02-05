@@ -10,7 +10,15 @@ public class AxeController : MonoBehaviour, IWeaponControler
     private GameObject _grandParent;
     private bool _noRepitivePosition;
     private Quaternion _initialRotation;
-    public WeaponData WeaponSO { get => _weaponSO; set => _weaponSO = value; }
+    public WeaponData WeaponSO { get => _weaponSO; set => _weaponSO = value;}
+    private float _weaponDamage;
+    public float WeaponDamage { get => _weaponDamage; set => _weaponDamage = _weaponSO.meleeData.Damage * value; }
+    private float _weaponSpeed;
+    public float WeaponSpeed { get => _weaponSpeed; set => _weaponSpeed = _weaponSO.meleeData.CadenceTime * value; }
+    private float _proyectileSpeed;
+    public float ProyectileSpeed { get => _proyectileSpeed; set => _proyectileSpeed = _weaponSO.shootData.ProyectileSpeed * value; }
+    private float _proyectileDamage;
+    public float ProyectileDamage { get => _proyectileDamage; set => _proyectileDamage = _weaponSO.shootData.ProyectileDamage * value; }
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +38,7 @@ public class AxeController : MonoBehaviour, IWeaponControler
             _weaponSO.MaxDistance(_parent, WeaponState.Stop);
             if (_weaponSO.WA == WeaponState.Stop)
                 StartCoroutine(_weaponSO.WeaponSpin(1, _parent,WeaponState.ComeBack));
-            _weaponSO.ComeBack(_grandParent, _parent, 1.5f);
+            _weaponSO.ComeBack(_grandParent, _parent, 1.5f, ProyectileSpeed);
             if (_weaponSO.WA == WeaponState.ComeBack)
                 CollisionDisable();
             else
@@ -49,7 +57,7 @@ public class AxeController : MonoBehaviour, IWeaponControler
         {
             CollisionEnable();
             _weaponSO.PrepareToThrowWeapon(_grandParent, _parent);
-            _weaponSO.ThrowWeapon(_parent);
+            _weaponSO.ThrowWeapon(_parent,ProyectileSpeed);
         }
     }
     public void FirstButtonAttack()
@@ -75,7 +83,7 @@ public class AxeController : MonoBehaviour, IWeaponControler
         if (enabled)
         {
             if (collision.gameObject.GetComponent<IDestroyable>() != null)
-                collision.gameObject.GetComponent<IDestroyable>().GetHitByPlayer(_weaponSO.WA == WeaponState.MeleeAttack ? _weaponSO.meleeData.Damage : _weaponSO.shootData.ProyectileDamage);
+                collision.gameObject.GetComponent<IDestroyable>().GetHitByPlayer(_weaponSO.WA == WeaponState.MeleeAttack ? WeaponDamage : ProyectileDamage);
 
             if (collision.CompareTag("Enemy") || collision.CompareTag("Proyectile"))
                 PushOtherGO(collision, _weaponSO.WA == WeaponState.MeleeAttack ? _weaponSO.meleeData.ImpulseForce : _weaponSO.shootData.ImpulseForce);

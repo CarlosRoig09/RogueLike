@@ -14,12 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Turret
   speed: 0
-  life: 12
+  life: 20
   maxlife: 20
   State: 0
   invulerability: 0
   Damagable: 0
   ContactDamage: 5
   TimeBeforeNoticePlayer: 0
+  _stunned: 0
+  PuntuationXHit: 1
+  PuntuationXDeath: 5
   Proyectile: {fileID: 5163282210510779587, guid: 9decf7727c1896746ad155efffb94087, type: 3}
   CadenceTime: 2
