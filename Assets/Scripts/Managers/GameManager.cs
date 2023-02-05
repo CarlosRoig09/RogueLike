@@ -108,7 +108,6 @@ public class GameManager : MonoBehaviour
                 {
                     _numberOfEnemyKilled += _enemyKilledInCurrentRoom;
                     _gameFinish = GameFinish.Lose;
-                    OnChangeScene("GameOver");
                     SceneManager.LoadScene("GameOver");
                 }
                 if (GameObject.Find("Spawner").GetComponent<EnemyWaveControler>().ControlIfWaveIsFinished(out _currentEnemy, out _totalEnemy) && _cS.newScene)
