@@ -10,6 +10,7 @@ public class ControlStats : MonoBehaviour
 {
     [SerializeField]
     private PlayerStats playerStats;
+    private ApplyModificator _applyModificator;
     void Start()
     {
         playerStats.AttackSpeed = 1;
@@ -17,6 +18,7 @@ public class ControlStats : MonoBehaviour
         playerStats.ProyectileDamage = 1;
         playerStats.ProyectileSpeed = 1;
         playerStats.Speed = 1;
+        _applyModificator= GetComponent<ApplyModificator>();
     }
 
     // Update is called once per frame
@@ -71,6 +73,7 @@ public class ControlStats : MonoBehaviour
                 break;
             case Type.PlayerSpeed:
                 playerStats.Speed += modificator;
+                _applyModificator.UpdateSpeed();
                 break;
             case Type.AttackSpeed:
                 playerStats.AttackSpeed += modificator;

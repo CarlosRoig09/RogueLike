@@ -11,23 +11,33 @@ public enum Invulnerability
 public class PlayerController : Character
 {
     public ScriptableState Walk, DashAction;
-    public PlayerData _playerDataSO;
+    [SerializeField]
+    private PlayerData _playerDataSO;
     [SerializeField]
     private PlayerStats _playerStatsSO;
+    private PlayerData _clonePlayerDataSO;
+    public PlayerData PlayerDataSO
+    {
+        get { return _clonePlayerDataSO;}
+        set { _clonePlayerDataSO = value;}
+    }
     public IWeaponControler Weapon { set => _weapon = value; }
     private IWeaponControler _weapon;
     private Rigidbody2D _rb;
     private Animator _anim;
     private ControlStats _controlStats;
+    private ApplyModificator _applyModificator;
     // Start is called before the first frame update
     void Start()
     {
-        _playerDataSO.Damagable = Invulnerability.Damagable;
+        _clonePlayerDataSO = Instantiate(_playerDataSO);
+        _clonePlayerDataSO.Damagable = Invulnerability.Damagable;
         _rb = gameObject.GetComponent<Rigidbody2D>();
-        _playerDataSO.life = _playerDataSO.maxlife;
-        _playerDataSO.State = Life.Alive;
+        _clonePlayerDataSO.life = _clonePlayerDataSO.maxlife;
+        _clonePlayerDataSO.State = Life.Alive;
         _anim = gameObject.GetComponent<Animator>();
         _controlStats = gameObject.GetComponent<ControlStats>();
+        _applyModificator = GetComponent<ApplyModificator>();
      }
     // Update is called once per frame
    protected override void Update()
@@ -42,10 +52,9 @@ public class PlayerController : Character
         float angle = Mathf.Atan2(vector.y, vector.x) * Mathf.Rad2Deg;
         float xPosition = Mathf.Cos(Mathf.Deg2Rad * angle);
         float yPosition = Mathf.Sin(Mathf.Deg2Rad * angle);
-        _anim.SetFloat("MovementBehaivour", Mathf.Abs(_rb.velocity.x) + Mathf.Abs(_rb.velocity.y));
         _anim.SetFloat("MPositionX", xPosition);
         _anim.SetFloat("MPositionY", yPosition);
-        _anim.SetFloat("Life", _playerDataSO.life);
+        _anim.SetFloat("Life", _clonePlayerDataSO.life);
     }
     public override void MovementBehaivour(float directionX, float directionY)
     {
@@ -55,9 +64,9 @@ public class PlayerController : Character
             movement = (ScriptableMovement)currentState.Action;
             movement.directionX = directionX;
             movement.directionY = directionY;
-            movement.speed = _playerDataSO.speed;
+            movement.speed = _clonePlayerDataSO.speed;
             movement.rb = _rb;
-            _playerDataSO.Damagable = Invulnerability.Damagable;
+            _clonePlayerDataSO.Damagable = Invulnerability.Damagable;
         }
     }
     public Vector3 VectorMousePlayerAngle()
@@ -66,26 +75,25 @@ public class PlayerController : Character
     }
     public override void TakeDamage(float damage)
     {
-        if (_playerDataSO.Damagable == Invulnerability.Damagable)
+        if (_clonePlayerDataSO.Damagable == Invulnerability.Damagable)
         {
-            gameObject.GetComponent<LifeControler>().ModifyLife(damage * -1, ref _playerDataSO.life, _playerDataSO.maxlife);
+            gameObject.GetComponent<LifeControler>().ModifyLife(damage * -1, ref _clonePlayerDataSO.life, _clonePlayerDataSO.maxlife);
             _anim.SetBool("Damage", true);
-            _playerDataSO.Damagable = Invulnerability.NoDamagable;
+            _clonePlayerDataSO.Damagable = Invulnerability.NoDamagable;
             StopMomentum();
             StartCoroutine(InvulnerabilityTime(0.5f, "Damage"));
         }
     }
     public void SumLife(float extraLife)
     {
-        gameObject.GetComponent<LifeControler>().ModifyLife(extraLife, ref _playerDataSO.life, _playerDataSO.maxlife);
+        gameObject.GetComponent<LifeControler>().ModifyLife(extraLife, ref _clonePlayerDataSO.life, _clonePlayerDataSO.maxlife);
     }
 
     public void MeleeAttack()
     {
         if (_weapon != null)
         {
-            _weapon.WeaponDamage = _playerStatsSO.Damage;
-            _weapon.WeaponSpeed = _playerStatsSO.Speed;
+            _applyModificator.UpdateWeaponStats(_weapon);
             _weapon?.FirstButtonAttack();
         }
     }
@@ -93,8 +101,7 @@ public class PlayerController : Character
     {
         if (_weapon != null)
         {
-            _weapon.ProyectileDamage = _playerStatsSO.ProyectileDamage;
-            _weapon.ProyectileSpeed = _playerStatsSO.ProyectileSpeed;
+            _applyModificator.UpdateWeaponStats(_weapon);
             _weapon?.SecondButtonAttack();
         }
     }
@@ -105,21 +112,21 @@ public class PlayerController : Character
     public void Dash()
     {
         var dash = (ScriptableDash)DashAction.Action;
-        dash.dashSpeed = _playerDataSO.dashSpeed;
+        dash.dashSpeed = _clonePlayerDataSO.dashSpeed;
         dash.controlStats = _controlStats;
-        dash.dashDuration= _playerDataSO.dashDuration;
+        dash.dashDuration= _clonePlayerDataSO.dashDuration;
         dash.position = transform.position;
         dash.rb = _rb;
         StateTransitor(DashAction);
         _anim.SetBool("Dash", true);
-        _playerDataSO.Damagable = Invulnerability.NoDamagable;
-        StartCoroutine(InvulnerabilityTime(_playerDataSO.dashDuration, "Dash"));
+        _clonePlayerDataSO.Damagable = Invulnerability.NoDamagable;
+        StartCoroutine(InvulnerabilityTime(_clonePlayerDataSO.dashDuration, "Dash"));
     }
     private IEnumerator InvulnerabilityTime(float time, string animation)
     {
         yield return new WaitForSeconds(time);
         _anim.SetBool(animation, false);
-        _playerDataSO.Damagable = Invulnerability.Damagable;
+        _clonePlayerDataSO.Damagable = Invulnerability.Damagable;
         StateTransitor(Walk);
     }
 }

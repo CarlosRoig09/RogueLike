@@ -14,14 +14,17 @@ public class Enemy : Character, IDestroyable, IGivePuntuation
     [SerializeField]
     private DropegableItems _items;
     protected GameObject _wall;
+    private Animator _animator;
     [SerializeField]
     private float _chanceOfDropNothing;
+    private int _lastAnimation;
     public GameObject Player
     {
         get => _player;
     }
     protected virtual void Start()
     {
+        _animator = GetComponent<Animator>();
         cloneEnemyData = Instantiate(enemyData);
         cloneEnemyData._stunned = false;
         cloneEnemyData.Damagable = Invulnerability.Damagable;
@@ -36,12 +39,15 @@ public class Enemy : Character, IDestroyable, IGivePuntuation
     public void Stunned(float time)
     {
         previousState = currentState;
+       _lastAnimation = _animator.GetCurrentAnimatorStateInfo(0).fullPathHash;
+        _animator.StopPlayback();
         StopMomentum();
         StartCoroutine(StunTime(time));
     }
 
     public void DeStunned()
     {
+        _animator.Play(_lastAnimation);
         StateTransitor(previousState);
     }
     protected Quaternion FindTarget()

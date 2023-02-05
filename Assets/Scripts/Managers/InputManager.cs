@@ -10,7 +10,7 @@ public class InputManager : MonoBehaviour
     {
         _player = gameObject.GetComponent<PlayerController>();
         _gestionInventory = gameObject.GetComponent<GestionInventory>();
-        _countDash = _player._playerDataSO.dashCountdown;
+        _countDash = _player.PlayerDataSO.dashCountdown;
     }
 
     // Update is called once per frame
@@ -42,7 +42,7 @@ public class InputManager : MonoBehaviour
 
     private void DashInput()
     {
-        if (_countDash >= _player._playerDataSO.dashCountdown)
+        if (_countDash >= _player.PlayerDataSO.dashCountdown)
         {
             if (Input.GetKey(KeyCode.LeftShift))
             {

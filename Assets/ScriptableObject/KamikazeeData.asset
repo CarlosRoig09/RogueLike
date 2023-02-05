@@ -26,5 +26,5 @@ MonoBehaviour:
   PuntuationXDeath: 5
   durationOfExplosion: 0.5
   explosionDamage: 25
-  explosionImpulse: 10000
+  explosionImpulse: 500
   explosion: {fileID: 7409293528464402712, guid: 15f2baaa427aaae4880914c01a2ffa31, type: 3}

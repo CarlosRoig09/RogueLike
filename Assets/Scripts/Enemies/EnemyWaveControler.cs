@@ -23,6 +23,8 @@ public class EnemyWaveControler : MonoBehaviour, IGivePuntuation
     private bool _activeWave;
     [SerializeField]
     private LayerMask _wall;
+    private Vector3[] _allPosiblePositions;
+    public Vector3[] AllPositions { get { return _allPosiblePositions;} }
     public WaveState WaveState
     {
         get => _waveState;
@@ -31,6 +33,29 @@ public class EnemyWaveControler : MonoBehaviour, IGivePuntuation
     {
         get { return _waves; }
         set { _waves = value; }
+    }
+    private static EnemyWaveControler _instance;
+
+    public static EnemyWaveControler Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                Debug.LogError("Spawner is NULL");
+            }
+            return _instance;
+        }
+    }
+    void Awake()
+    {
+        if (_instance != null)
+            Destroy(gameObject);
+        else
+        {
+            DontDestroyOnLoad(gameObject);
+            _instance = this;
+        }
     }
     // Start is called before the first frame update
     void Start()
@@ -147,7 +172,7 @@ public class EnemyWaveControler : MonoBehaviour, IGivePuntuation
     private Vector3[] AllPosiblePositions(Vector3 firstPosition, Vector3 lastPosition)
     {
         var differentToWall = false;
-        var AllPosiblePositions = new Vector3[0];
+        _allPosiblePositions = new Vector3[0];
         Vector3 actualPosition = firstPosition;
         do
         {
@@ -161,13 +186,13 @@ public class EnemyWaveControler : MonoBehaviour, IGivePuntuation
             }
             else
             {
-                System.Array.Resize(ref AllPosiblePositions, AllPosiblePositions.Length + 1);
-                AllPosiblePositions[^1] = actualPosition;
+                System.Array.Resize(ref _allPosiblePositions, _allPosiblePositions.Length + 1);
+                _allPosiblePositions[^1] = actualPosition;
                 differentToWall = true;
             }
             actualPosition = new Vector3(actualPosition.x + 1f, actualPosition.y);
         } while (actualPosition.y>=lastPosition.y);
-        return AllPosiblePositions;
+        return _allPosiblePositions;
     }
 
     public void GivePuntuation(int Puntuation)

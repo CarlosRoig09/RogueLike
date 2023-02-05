@@ -18,7 +18,6 @@ public class Turret : Enemy
     }
     private void Shoot()
     {
-       if(cloneEnemyData.Damagable == Invulnerability.Damagable&& !cloneEnemyData._stunned)
         gameObject.GetComponent<ShootControler>().ProyectileSpawn();
     }
 }

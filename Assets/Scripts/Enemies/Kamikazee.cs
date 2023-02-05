@@ -1,17 +1,9 @@
 using TMPro;
 using UnityEngine;
-public enum KamikazeeMovement
-{
-    Movement,
-   // AvoidObstacle,
-    Explode,
-    Explosion
-}
 public class Kamikazee : Enemy, ISpawnExplosion
 {
     public ScriptableState Movement, Explode;
     private Rigidbody2D _rb;
-    private KamikazeeMovement _movement;
     [SerializeField]
     private LayerMask wallMask;
     [SerializeField]
@@ -23,7 +15,6 @@ public class Kamikazee : Enemy, ISpawnExplosion
     protected override void Start()
     {
         base.Start();
-        _movement = KamikazeeMovement.Movement;
         _rb = gameObject.GetComponent<Rigidbody2D>();
         _anim= GetComponent<Animator>();
         kamikazeeData = (KamikazeeData)cloneEnemyData;
@@ -121,15 +112,16 @@ public class Kamikazee : Enemy, ISpawnExplosion
     }
     public void Death()
     {
+        var explode = (ScriptableExplosion)Explode.Action;
+        explode.OnExplosion -= SpawnExplosion;
         StopMomentum();
         State = Life.Death;
     }
     public void SpawnExplosion()
     {
-        var kamikazee = (KamikazeeData)cloneEnemyData;
-       var explosion = Instantiate(kamikazee.explosion,transform.position,Quaternion.identity);
-        explosion.GetComponent<ExplosionBehaivour>().ExplosionDamage = kamikazee.explosionDamage;
-        explosion.GetComponent<ExplosionBehaivour>().ExplosionImpulse = kamikazee.explosionImpulse;
+       var explosion = Instantiate(kamikazeeData.explosion,transform.position,Quaternion.identity);
+        explosion.GetComponent<ExplosionBehaivour>().ExplosionDamage = kamikazeeData.explosionDamage;
+        explosion.GetComponent<ExplosionBehaivour>().ExplosionImpulse = kamikazeeData.explosionImpulse;
         StateTransitor(Explode);
         BeforeExplosion();
     }
