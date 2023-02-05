@@ -1,0 +1,680 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AudioManager" Collapsed="true">
+    <Position X="13.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQMAABAACAAQCAAAAAAAQAAABAAAAAAQAAAACAAAEQ=</HashCode>
+      <FileName>Assets\AudioManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BombItem" Collapsed="true">
+    <Position X="0.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AASAAAAAAAAAAAAACAAAAAAEAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\BombItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ControlShop" Collapsed="true">
+    <Position X="13.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAACAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\ControlShop.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DoorBehaivours" Collapsed="true">
+    <Position X="31.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQBAIAAAAAAIAAACAABAAAQEEAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\DoorBehaivours.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LoadScenari" Collapsed="true">
+    <Position X="24.25" Y="4" Width="1.5" />
+    <NestedTypes>
+      <Delegate Name="LoadScenari.OpenDoor" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\LoadScenari.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAACAABAAqABAEgAAABECAAAAAAAEAAASAAAAAAAAAA=</HashCode>
+      <FileName>Assets\LoadScenari.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_spawner" />
+      <Field Name="_player" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="AxeController" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gQRgCAAQECAAAABICAAAAAAQAkAAAIAAABAEAEAAQCg=</HashCode>
+      <FileName>Assets\Scripts\AxeController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_weaponSO" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="BombBehaivour" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="17" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAgAAACIAQAAAAAAAAwAAAAAABAAAACAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\BombBehaivour.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="BowController" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="1" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gQRgCAAQACAAAADICAAAgAAQAkAAAIAAABAEAEEAQCg=</HashCode>
+      <FileName>Assets\Scripts\BowController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_weaponSO" />
+      <Field Name="_controler" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Character" Collapsed="true">
+    <Position X="10.75" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAEAAAAAAAAAAAAAAIAAAAACAAAAIAAAgAAAAAg=</HashCode>
+      <FileName>Assets\Scripts\Character.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Coin" Collapsed="true">
+    <Position X="2.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AASAAAAAACAABAAACAAAAAAEAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Coin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Player" Collapsed="true">
+    <Position X="22.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAACAwAAAAAAAAAAAAAAAAAAAAAAAAAIAgAAAAA=</HashCode>
+      <FileName>Assets\Scripts\DatePersistence\Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DestroyableObstacle" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAABEAAAAAABAAQAAAAACAAAAAAYA=</HashCode>
+      <FileName>Assets\Scripts\DestroyableObstacle.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_items" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Enemy" Collapsed="true">
+    <Position X="11.75" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABRwAIEAACAAACAAABAAGIACIpAIQAAAIAgghQAAAYg=</HashCode>
+      <FileName>Assets\Scripts\Enemies\Enemy.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="EnemyWave" Collapsed="true">
+    <Position X="18.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAIAAAAAABAAAAAAEAAgBAADAACAA=</HashCode>
+      <FileName>Assets\Scripts\Enemies\EnemyWave.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kamikazee" Collapsed="true">
+    <Position X="10.75" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAQhAAAAACAgAIAABIAAAwkEAAAAQAAgACAQAAAAEAA=</HashCode>
+      <FileName>Assets\Scripts\Enemies\Kamikazee.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Turret">
+    <Position X="13" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAJkAAAEAAAAAEEAAAAEAAAAAABCAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Enemies\Turret.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_shootControler" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="EnemySpawnControler" Collapsed="true">
+    <Position X="16.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAGAAAAAAAAQAAABAAAABAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\EnemySpawnController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ControlScenari" Collapsed="true">
+    <Position X="14.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIGAAAABAAAAJCAAQAAAAEAAIgAIAAABBgAA=</HashCode>
+      <FileName>Assets\Scripts\Escenari\ControlScenari.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ExplosionBehaivour" Collapsed="true">
+    <Position X="29.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAgAAACAAAAAAAAAAAQAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\ExplosionBehaivour.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ItemBehaivour" Collapsed="true">
+    <Position X="5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAACAAAAAAEAIAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\ItemBehaivour.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="LanceController" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gQRgCAAQACAAAABKCAAAAAAQAkAAAIAAABAEAEAAQCg=</HashCode>
+      <FileName>Assets\Scripts\LanceController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_weaponSO" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="LifeControler" Collapsed="true">
+    <Position X="15.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\LifeControler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LifeItemController" Collapsed="true">
+    <Position X="9.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AASAAAAAACAAAAQACAAAAAAEAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\LifeItemController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameManager" Collapsed="true">
+    <Position X="13.25" Y="6.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <NestedTypes>
+      <Delegate Name="GameManager.StartGame" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\Managers\GameManager.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Delegate Name="GameManager.ChangeScene" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\Managers\GameManager.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAUGAQgKQCAAAkAABEQAAABCAIAAAkAAQAIAAAABAEA=</HashCode>
+      <FileName>Assets\Scripts\Managers\GameManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_playerData" />
+      <Field Name="_controlPuntuation" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="InputManager" Collapsed="true">
+    <Position X="13.25" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQCAAAgACAEAAABAAAACAAAAAAAAAEgAYABAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Managers\InputManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_player" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ApplyModificator" Collapsed="true">
+    <Position X="7.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAACABCAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Assets\Scripts\PlayerStuff\ApplyModificator.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_controller" />
+      <Field Name="_stats" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ChangeWeaponController" Collapsed="true">
+    <Position X="19" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\PlayerStuff\ChangeWeaponController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ControlStats" Collapsed="true">
+    <Position X="12" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgQAAAQAACAAAAAABAAAAAAAAAAAAAABAAAAEAAAABA=</HashCode>
+      <FileName>Assets\Scripts\PlayerStuff\ControlStats.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_applyModificator" />
+      <Field Name="playerStats" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GestionInventory" Collapsed="true">
+    <Position X="22.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQDBAAAAAAACAABAAgAAEAAQAAAAAACACBAAgAAEEA=</HashCode>
+      <FileName>Assets\Scripts\PlayerStuff\GestionInventory.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_bombs" />
+      <Field Name="_weaponController" />
+      <Field Name="firstWeapon" />
+      <Field Name="inventory" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Inventory" Collapsed="true">
+    <Position X="20.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAEAAAAAAAAAAIAAAABA=</HashCode>
+      <FileName>Assets\Scripts\PlayerStuff\Inventory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerController" Collapsed="true">
+    <Position X="8.5" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQggAAAAAAATICQAAAAAIMAAwAAIAogACkAkAAAgEA=</HashCode>
+      <FileName>Assets\Scripts\PlayerStuff\PlayerController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_playerDataSO" />
+      <Field Name="_playerStatsSO" />
+      <Field Name="_controlStats" />
+      <Field Name="_weapon" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ProyectileBehaivour" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="26.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAQCgVACKAAAAAAAAAAgAAAEEAAABAAAAAAAQAAAAg=</HashCode>
+      <FileName>Assets\Scripts\PlayerStuff\ProyectileBehaivour.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ShootControler" Collapsed="true">
+    <Position X="1" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAQAEAAABAAAAACAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\PlayerStuff\ShootControler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SchytleController" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="6.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gQRgCAAQACAAAABICAAAAAAQAkAAAIAAABAEAEAAQCg=</HashCode>
+      <FileName>Assets\Scripts\SchytleController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_weaponSO" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="CharData" Collapsed="true">
+    <Position X="2.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAIAAAAAAAAAQAIAAAAQAAAAAABAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\ScriptableObjectScripts\CharData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CoinItemSO" Collapsed="true">
+    <Position X="7.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\ScriptableObjectScripts\CoinItemSO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DropegableItems" Collapsed="true">
+    <Position X="7.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\ScriptableObjectScripts\DropegableItems.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="Items" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="EnemyData" Collapsed="true">
+    <Position X="3.75" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABCAAQAAAAAAAAAAAAQAAABAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\ScriptableObjectScripts\EnemyData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GestorScenariSO" Collapsed="true">
+    <Position X="15.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\ScriptableObjectScripts\GestorScenariSO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ItemData" Collapsed="true">
+    <Position X="5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAQAgAAAAAAAQAAYAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\ScriptableObjectScripts\ItemData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KamikazeeData" Collapsed="true">
+    <Position X="5" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAgAAAAAABEAAAAAAAAABAAA=</HashCode>
+      <FileName>Assets\Scripts\ScriptableObjectScripts\KamikazeeData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LifeItemSO" Collapsed="true">
+    <Position X="5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\ScriptableObjectScripts\LifeItemSO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MeleeSO" Collapsed="true">
+    <Position X="1.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACgAAAAAAAAAEAAAAAAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>Assets\Scripts\ScriptableObjectScripts\MeleeSO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerData" Collapsed="true">
+    <Position X="0.5" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEBAAAAAAAQAAAAAAQAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\ScriptableObjectScripts\PlayerData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerStats" Collapsed="true">
+    <Position X="9.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAgAACAAAAAAAAAAAAAAAABAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\ScriptableObjectScripts\PlayerStats.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScriptableAction" Collapsed="true">
+    <Position X="6.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAEAEAA=</HashCode>
+      <FileName>Assets\Scripts\ScriptableObjectScripts\ScriptableAction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShootSO" Collapsed="true">
+    <Position X="3.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>kAAgAQAgAAAAAAAAAEAAAAAAAAAAAAAACQAAAABAQAA=</HashCode>
+      <FileName>Assets\Scripts\ScriptableObjectScripts\ShootSO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StatItemSO" Collapsed="true">
+    <Position X="9.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKAAAIAAAAACAA=</HashCode>
+      <FileName>Assets\Scripts\ScriptableObjectScripts\StatItemSO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StatUpItemSO" Collapsed="true">
+    <Position X="0.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\ScriptableObjectScripts\StatUpItemSO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TurretData" Collapsed="true">
+    <Position X="2.75" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\ScriptableObjectScripts\TurretData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeaponData" Collapsed="true">
+    <Position X="2.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAABAAICAQAARAAAAgBoAAAAAAIAAgAAAgAAsCAEQE=</HashCode>
+      <FileName>Assets\Scripts\ScriptableObjectScripts\WeaponData.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="meleeData" />
+      <Field Name="shootData" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="StateItemController" Collapsed="true">
+    <Position X="5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AASAAAAAACAAAAAICAAAAAAEAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\StateItemController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScriptableDash" Collapsed="true">
+    <Position X="0.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAEAIAAEAAAAIgAAAAQAAAAAAAAAAAEAEAA=</HashCode>
+      <FileName>Assets\Scripts\StateScriptd\Player\ScriptableDash.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScriptableMovement" Collapsed="true">
+    <Position X="3" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAEAAAAAgAAAAAAAQAAABgAAAEAEAA=</HashCode>
+      <FileName>Assets\Scripts\StateScriptd\Player\ScriptableMovement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScriptableExplosion" Collapsed="true">
+    <Position X="5.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAAAAAgAAAQAAAAAAAAAAAAEEEAA=</HashCode>
+      <FileName>Assets\Scripts\StateScriptd\ScriptableExplosion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScriptableState">
+    <Position X="8.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAQ=</HashCode>
+      <FileName>Assets\Scripts\StateScriptd\ScriptableState.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="Action" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ScriptableStopMomentum" Collapsed="true">
+    <Position X="7.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAgAAAAAAAAAAAAAAAAEAEAA=</HashCode>
+      <FileName>Assets\Scripts\StateScriptd\ScriptableStopMomentum.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StateController" Collapsed="true">
+    <Position X="10.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQEAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\StateScriptd\StateController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScriptableShoot" Collapsed="true">
+    <Position X="9.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAAAgAAAAAAAAAAAAAAAAEAEAA=</HashCode>
+      <FileName>Assets\Scripts\StateScriptd\Turret\ScriptableShoot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScriptableTeleport" Collapsed="true">
+    <Position X="12" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAIAAkAAAAAAAAAAAAAAAAEAEAA=</HashCode>
+      <FileName>Assets\Scripts\StateScriptd\Turret\ScriptableTeleport.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SwordController" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="8.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gQRgCAAQACAAAABICAAAAAAQAkAAAIAAABAEAEAAQCg=</HashCode>
+      <FileName>Assets\Scripts\SwordController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_weaponSO" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="LifeBarControler" Collapsed="true">
+    <Position X="26" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAgAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\LifeBarControler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeaponItemController" Collapsed="true">
+    <Position X="7.25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AASAAAAAACAAAAAACAAAAAAEAEAAIAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\WeaponItemController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SetItemsShop" Collapsed="true">
+    <Position X="9.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAAAIAAAAQAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\SetItemsShop.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_itemDatas" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="EnvMapAnimator" Collapsed="true">
+    <Position X="24.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAACAAAAAAAAAgAAAAAAQAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GetPuntuation" Collapsed="true">
+    <Position X="16.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\GetPuntuation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UnityEngine.GameObject" Collapsed="true">
+    <Position X="34.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="UnityEngine.Transform" Collapsed="true">
+    <Position X="27.75" Y="4" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="ICanBeImpulsed" Collapsed="true">
+    <Position X="15.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Assets\Scripts\ICanBeImpulsed.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="IDestroyable" Collapsed="true">
+    <Position X="17.25" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAYA=</HashCode>
+      <FileName>Assets\Scripts\IDestroyable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="IGivePuntuation" Collapsed="true">
+    <Position X="19" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\IGivePuntuation.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="ISpawnExplosion" Collapsed="true">
+    <Position X="20.75" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\ISpawnExplosion.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="IWeaponControler" Collapsed="true">
+    <Position X="13" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAgCAAAAAAAAABIAAAAAAAAAgAAAAAAABAEAEAAQAA=</HashCode>
+      <FileName>Assets\Scripts\IWeaponControler.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="HandState" Collapsed="true">
+    <Position X="19" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\MoveAroundThePlayerByMousePController.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="WaveState" Collapsed="true">
+    <Position X="29.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAgAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Enemies\EnemyWaveControler.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Escenas" Collapsed="true">
+    <Position X="15.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAIAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Managers\GameManager.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GameFinish" Collapsed="true">
+    <Position X="17.25" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Managers\GameManager.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ItemEffect" Collapsed="true">
+    <Position X="22.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAACAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\PlayerStuff\ControlStats.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Invulnerability" Collapsed="true">
+    <Position X="20.75" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAAAAAAAAAAAAQAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\PlayerStuff\PlayerController.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Life" Collapsed="true">
+    <Position X="24.25" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQgAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\ScriptableObjectScripts\CharData.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ProyectileUser" Collapsed="true">
+    <Position X="26" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Assets\Scripts\ScriptableObjectScripts\ShootSO.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Type" Collapsed="true">
+    <Position X="27.75" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAgAAAAIAAAAAAAAAAAAABAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\ScriptableObjectScripts\StatUpItemSO.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="WeaponState" Collapsed="true">
+    <Position X="31.25" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EIAAAAAAAAAAAAAAAAAAAAAEEAAIAAAAIAAAAAAAACA=</HashCode>
+      <FileName>Assets\Scripts\SwordController.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -9,6 +9,7 @@ public class BowController : MonoBehaviour, IWeaponControler
     private WeaponData _weaponSO;
     private GameObject _parent;
     private GameObject _grandParent;
+    private ShootControler _controler;
     private float _weaponDamage;
     public float WeaponDamage { get => _weaponDamage; set => _weaponDamage = _weaponSO.meleeData.Damage * value; }
     private float _weaponSpeed;
@@ -25,6 +26,7 @@ public class BowController : MonoBehaviour, IWeaponControler
         _collider2D = gameObject.GetComponent<Collider2D>();
         CollisionDisable();
         _weaponSO.CallInStart();
+        _controler = gameObject.GetComponent<ShootControler>();
     }
 
     // Update is called once per frame
@@ -51,9 +53,7 @@ public class BowController : MonoBehaviour, IWeaponControler
                 if (Input.GetMouseButtonUp(0))
                 {
                     Debug.Log("Shoot");
-                    var shootControler = gameObject.GetComponent<ShootControler>();
-                    Debug.Log(shootControler);
-                    Debug.Log(WeaponSO.shootData);
+                    var shootControler = _controler;
                     var shootForProyectile = Instantiate(WeaponSO.shootData);
                     shootForProyectile.ProyectileDamage = ProyectileDamage;
                     shootForProyectile.CadenceTime = ProyectileSpeed;
