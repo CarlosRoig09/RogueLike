@@ -61,7 +61,6 @@ public class GameManager : MonoBehaviour
     private int _rooms;
     public delegate void ChangeScene(string scene);
     public event ChangeScene OnChangeScene;
-    private bool _alreadyCalled;
     public int Rooms
     { 
         get => _rooms;
@@ -81,7 +80,6 @@ public class GameManager : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
         _calledStartGame = false;
-        _alreadyCalled = false;
     }
 
     // Update is called once per frame
@@ -93,7 +91,6 @@ public class GameManager : MonoBehaviour
 
                 if (!_calledStartGame)
                 {
-                _alreadyCalled = false;
                 _playerData = GameObject.Find("Player").GetComponent<PlayerController>().PlayerDataSO;
                     _controlPuntuation = GameObject.Find("Puntuation").GetComponent<GetPuntuation>();
                     _cS = GameObject.Find("Spawner").GetComponent<ControlScenari>();
