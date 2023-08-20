@@ -85,7 +85,7 @@ public class EnemyWaveControler : MonoBehaviour, IGivePuntuation
     }
     public void CallWave(Vector3 scenariPosition,Vector3 scenariInitialPos, Vector3 scenariFinalPos)
     {
-        AudioManager.Instance.ChangeOST("Combat");
+       // AudioManager.Instance.ChangeOST("Combat");
         transform.position = scenariPosition;
         _currentEnemy = 0;
        var waves = _waves[0].CallWave();
@@ -113,7 +113,7 @@ public class EnemyWaveControler : MonoBehaviour, IGivePuntuation
             {
                 GivePuntuation(_enemySpawned.Count*10);
                 _activeWave = false;
-                AudioManager.Instance.ChangeOST("GameScene");
+                //AudioManager.Instance.ChangeOST("GameScene");
                 return true;
             }
         }

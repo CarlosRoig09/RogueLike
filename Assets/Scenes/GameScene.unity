@@ -353,28 +353,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4615364402666367215, guid: f96afe134c7afa8448e935cfab026932, type: 3}
   m_PrefabInstance: {fileID: 83316105549001483}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &229228664 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3448085219315429291, guid: ecc925d438a188546bff7a112dd42925, type: 3}
-  m_PrefabInstance: {fileID: 3448085219018559526}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &229228665
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 229228664}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b8315fe68735ac4ca85d3766afe82e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _menu: {fileID: 0}
-  _gamebattle: {fileID: 0}
-  _game: {fileID: 0}
-  _gameover: {fileID: 0}
-  _shop: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1471,6 +1449,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioManager
       objectReference: {fileID: 0}
+    - target: {fileID: 3448085219315429291, guid: ecc925d438a188546bff7a112dd42925, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ecc925d438a188546bff7a112dd42925, type: 3}
 --- !u!1001 &4596021102929555317
@@ -1484,6 +1466,10 @@ PrefabInstance:
       propertyPath: _player
       value: 
       objectReference: {fileID: 217075115}
+    - target: {fileID: 4596021103494977600, guid: d86efcb84ee33094fac8a9219504f506, type: 3}
+      propertyPath: _turret
+      value: 
+      objectReference: {fileID: 681461902211088549, guid: ee72b3a32bf03534bb72a573fab597c9, type: 3}
     - target: {fileID: 4596021103494977600, guid: d86efcb84ee33094fac8a9219504f506, type: 3}
       propertyPath: m_Enabled
       value: 1

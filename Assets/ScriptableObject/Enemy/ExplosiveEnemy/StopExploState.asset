@@ -16,3 +16,4 @@ MonoBehaviour:
   ScriptableStateTransitor:
   - {fileID: 11400000, guid: 5043dbdf4943b5d41aeb2edc7977f1f3, type: 2}
   - {fileID: 11400000, guid: 4c755948b08c1c74bab00d5155339de1, type: 2}
+  Id: KSE

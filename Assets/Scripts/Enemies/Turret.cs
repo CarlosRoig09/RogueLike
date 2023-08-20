@@ -18,23 +18,11 @@ public class Turret : Enemy
     protected override void Start()
     {
         base.Start();
-        _shoot = Instantiate(Shoot);
-        _teleport = Instantiate(Teleport);
-        var actionShoot = Instantiate(Shoot.Action);
-        var actionTeleport = Instantiate(Teleport.Action);
-        _shoot.Action= actionShoot;
-        _teleport.Action= actionTeleport;
-        _shoot.ScriptableStateTransitor[0] = _teleport;
-        _shoot.ScriptableStateTransitor[1] = CloneStop;
-        _teleport.ScriptableStateTransitor[0] = _shoot;
-        _teleport.ScriptableStateTransitor[1] = CloneStop;
-        CloneStop.ScriptableStateTransitor[0] = _shoot;
-        CloneStop.ScriptableStateTransitor[1] = _teleport;
         _shootControler = gameObject.GetComponent<ShootControler>();
         _cloneShootSO = Instantiate(_shootSO);
       _shootControler.NewWeapon(_cloneShootSO);
-        var shoot = (ScriptableShoot)_shoot.Action;
-        shoot.ShootControler = _shootControler;
+        //var shoot = (ScriptableShoot)_shoot.Action;
+        //shoot.ShootControler = _shootControler;
         currentState = _shoot;
         _reloading = false;
     }

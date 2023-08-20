@@ -56,7 +56,6 @@ public class InputManager : MonoBehaviour
             }
         }
         else bombCount += Time.deltaTime;
-        
     }
 
     private void DashInput()

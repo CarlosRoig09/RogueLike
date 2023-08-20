@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -21,17 +22,8 @@ public class Kamikazee : Enemy, ISpawnExplosion
         _rb = gameObject.GetComponent<Rigidbody2D>();
         _anim= GetComponent<Animator>();
         kamikazeeData = (KamikazeeData)cloneEnemyData;
-        _movement = Instantiate(Movement);
-        _explode = Instantiate(Explode);
-        var actionMovement = Instantiate(Movement.Action);
-        var actionExplode = Instantiate(Explode.Action);
-        _movement.Action = actionMovement;
-        _explode.Action = actionExplode;
-        _movement.ScriptableStateTransitor[0] = _explode;
-        _movement.ScriptableStateTransitor[1] = CloneStop;
-        _explode.ScriptableStateTransitor[0] = CloneStop;
-        CloneStop.ScriptableStateTransitor[0] = _movement;
-        CloneStop.ScriptableStateTransitor[1] = _explode;
+        _movement = ScriptableStateMethods.CopyAStateMachineState(Movement,new List<ScriptableState>());
+        _explode = ScriptableStateMethods.CopyAStateMachineState(Explode, new List<ScriptableState>());
         currentState = _movement;
     }
     protected override void Update()
