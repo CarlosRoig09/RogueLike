@@ -19,4 +19,9 @@ public interface IWeaponControler
     public abstract void CollisionEnable();
 
     public abstract void CollisionDisable();
+
+    public void InvoqueParticle(/*GameObject particle, Vector3 particlePosition, Quaternion particleRotation*/)
+    {
+
+    }
 }
