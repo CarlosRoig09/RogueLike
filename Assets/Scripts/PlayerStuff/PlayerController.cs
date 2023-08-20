@@ -31,7 +31,6 @@ public class PlayerController : Character
     // Start is called before the first frame update
     void Awake()
     {
-        _aS= GetComponent<AudioSource>();
         _clonePlayerDataSO = Instantiate(_playerDataSO);
         _clonePlayerDataSO.Damagable = Invulnerability.Damagable;
         _rb = gameObject.GetComponent<Rigidbody2D>();

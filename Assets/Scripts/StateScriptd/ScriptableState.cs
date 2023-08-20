@@ -7,4 +7,5 @@ public class ScriptableState : ScriptableObject
 {
     public ScriptableAction Action;
     public List<ScriptableState> ScriptableStateTransitor;
+    public string Id;
 }
