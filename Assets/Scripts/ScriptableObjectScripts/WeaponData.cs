@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "WeaponSO", menuName = "WeaponSO")]
@@ -80,11 +81,8 @@ public class WeaponData : ItemData
     //Slash, Double Slash and stab attacks.
     public void AttackByAnimator(GameObject weapon, WeaponState WS)
     {
-        if (meleeData.meleeAttack && WA == WeaponState.Normal)
-        {
             weapon.GetComponent<Animator>().SetBool("Attack", true);
             WA = WS;
-        }
     }
 
     public void RotateWeapon(GameObject grandParent, Quaternion endPoint, ref bool noRepitePosition)
@@ -121,6 +119,21 @@ public class WeaponData : ItemData
     {
         yield return new WaitForSeconds(meleeData.CadenceTime);
         meleeData.meleeAttack = true;
+        MultipleAttack();
+    }
+
+    private IEnumerator MultipleAttack()
+    {
+        meleeData.CurrentAttack += 1;
+        if (meleeData.CurrentAttack < meleeData.WeaponAttacks.Count)
+        {
+            yield return new WaitForSeconds(meleeData.WeaponAttacks[meleeData.CurrentAttack-1].CountDown + meleeData.CadenceTime);
+            meleeData.CurrentAttack -= 1;
+        }
+        else
+        {
+            meleeData.CurrentAttack = 0;
+        }
     }
 
     public IEnumerator ResetProyectileCount()
