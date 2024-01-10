@@ -9,7 +9,7 @@ public class LanceController : MonoBehaviour, IWeaponControler
     private Enemy _enemyStunned;
     public WeaponData WeaponSO { get => _weaponSO; set => _weaponSO = value; }
     private float _weaponDamage;
-    public float WeaponDamage { get => _weaponDamage; set => _weaponDamage = _weaponSO.meleeData.Damage * value; }
+    public float WeaponDamage { get => _weaponDamage; set => _weaponDamage = _weaponSO.meleeData.WeaponAttacks[_weaponSO.meleeData.CurrentAttack].Damage * value; }
     private float _weaponSpeed;
     public float WeaponSpeed { get => _weaponSpeed; set => _weaponSpeed = _weaponSO.meleeData.CadenceTime * value; }
     private float _proyectileSpeed;

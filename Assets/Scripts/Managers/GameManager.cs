@@ -80,6 +80,7 @@ public class GameManager : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
         _calledStartGame = false;
+        _controlPuntuation = GameObject.Find("Puntuation").GetComponent<GetPuntuation>();
     }
 
     // Update is called once per frame

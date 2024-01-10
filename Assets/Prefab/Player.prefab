@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 4615364402666367222}
   - component: {fileID: 4615364402666367223}
   - component: {fileID: 448610659}
+  - component: {fileID: 623073080}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -173,7 +174,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventory: {fileID: 11400000, guid: 62fbf13d0f435494381f5abe52e9a112, type: 2}
   firstWeapon: {fileID: 11400000, guid: a14b32f2525907a4b86afff92cef1497, type: 2}
-  _bombs: {fileID: 0}
+  _bombs: {fileID: 2697207267220131333, guid: c7c285cdb97c0804180f01403afd18f6, type: 3}
 --- !u!114 &4615364402666367221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,6 +232,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStats: {fileID: 11400000, guid: 900a3e6767725bc4388667676b5109d8, type: 2}
+--- !u!114 &623073080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4615364402666367216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f13bbc465a885e45aa480ac753888ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stats: {fileID: 11400000, guid: 900a3e6767725bc4388667676b5109d8, type: 2}
 --- !u!1 &4615364403448587682
 GameObject:
   m_ObjectHideFlags: 0

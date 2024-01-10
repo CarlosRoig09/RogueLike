@@ -8,7 +8,7 @@ public static class RandomMethods
     {
         float minRange = 0;
         float maxRange = 0;
-        var random = UnityEngine.Random.Range(minRange, SetMaxValueOfRandom(SO) + dropNothingChane);
+        var random = Random.Range(minRange, SetMaxValueOfRandom(SO) + dropNothingChane);
         for (var i = min; i < max; i++)
         {
             //Debug.Log(random);

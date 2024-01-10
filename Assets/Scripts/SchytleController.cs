@@ -8,7 +8,7 @@ public class SchytleController : MonoBehaviour, IWeaponControler
     private GameObject _grandParent;
     public WeaponData WeaponSO { get => _weaponSO; set => _weaponSO = value; }
     private float _weaponDamage;
-    public float WeaponDamage { get => _weaponDamage; set => _weaponDamage = _weaponSO.meleeData.Damage * value; }
+    public float WeaponDamage { get => _weaponDamage; set => _weaponDamage = _weaponSO.meleeData.WeaponAttacks[_weaponSO.meleeData.CurrentAttack].Damage * value; }
     private float _weaponSpeed;
     public float WeaponSpeed { get => _weaponSpeed; set => _weaponSpeed = _weaponSO.meleeData.CadenceTime * value; }
     private float _proyectileSpeed;
@@ -68,7 +68,7 @@ public class SchytleController : MonoBehaviour, IWeaponControler
                 collision.gameObject.GetComponent<IDestroyable>().GetHitByPlayer(_weaponSO.WA == WeaponState.MeleeAttack ? WeaponDamage : ProyectileDamage);
 
             if (collision.CompareTag("Enemy") || collision.CompareTag("Proyectile"))
-                PushOtherGO(collision, _weaponSO.WA == WeaponState.MeleeAttack ? _weaponSO.meleeData.ImpulseForce : _weaponSO.shootData.ImpulseForce);
+                PushOtherGO(collision, _weaponSO.WA == WeaponState.MeleeAttack ? _weaponSO.meleeData.WeaponAttacks[_weaponSO.meleeData.CurrentAttack].ImpulseForce : _weaponSO.shootData.ImpulseForce);
         }
     }
     public void PushOtherGO(Collider2D collision, float impulse)
