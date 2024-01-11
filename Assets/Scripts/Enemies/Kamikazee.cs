@@ -31,10 +31,10 @@ public class Kamikazee : Enemy, ISpawnExplosion
         if (currentState == _movement)
         {
             MovementBehaivour(transform.right.x, transform.right.y);
+            transform.rotation = FindTarget();
             IsGoingToExplote();
         }
         base.Update();
-        transform.rotation = FindTarget();
     }
    /* private void ChangeDirectionWhenImpact()
     {
