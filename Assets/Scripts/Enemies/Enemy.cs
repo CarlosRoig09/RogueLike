@@ -115,10 +115,10 @@ public class Enemy : Character, IDestroyable, IGivePuntuation
 
     public void StopMomentum(float time)
     {
-        var stop = (ScriptableStopMomentum)CloneStop.Action;
-        stop.rb = gameObject.GetComponent<Rigidbody2D>();
+        var action = (ScriptableStopMomentum)stop.Action;
+        action.rb = gameObject.GetComponent<Rigidbody2D>();
         previousState = currentState;
-        StateTransitor(CloneStop);
+        StateTransitor(stop);
         StartCoroutine(StunTime(time));
     }
 

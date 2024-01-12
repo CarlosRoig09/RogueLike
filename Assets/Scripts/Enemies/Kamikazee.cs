@@ -23,7 +23,8 @@ public class Kamikazee : Enemy, ISpawnExplosion
         _anim= GetComponent<Animator>();
         kamikazeeData = (KamikazeeData)cloneEnemyData;
         _movement = ScriptableStateMethods.CopyAStateMachineState(Movement,new List<ScriptableState>());
-        _explode = ScriptableStateMethods.CopyAStateMachineState(Explode, new List<ScriptableState>());
+        _explode = ScriptableStateMethods.ReturnStateWithId(_movement.ScriptableStateTransitor, Explode.Id);
+        stop = ScriptableStateMethods.ReturnStateWithId(_movement.ScriptableStateTransitor, Stop.Id);
         currentState = _movement;
     }
     protected override void Update()
@@ -112,11 +113,10 @@ public class Kamikazee : Enemy, ISpawnExplosion
 
     private void Explosion()
     {
-        StopMomentum();
+        StopMomentum(0);
         var explode = (ScriptableExplosion)_explode.Action;
         explode.OnExplosion += SpawnExplosion;
         explode.Timer = explosionTimer;
-        cloneEnemyData.Damagable = Invulnerability.NoDamagable;
         StateTransitor(_explode);
     }
     public void Death()

@@ -21,8 +21,10 @@ public class Turret : Enemy
         _shootControler = gameObject.GetComponent<ShootControler>();
         _cloneShootSO = Instantiate(_shootSO);
       _shootControler.NewWeapon(_cloneShootSO);
-        //var shoot = (ScriptableShoot)_shoot.Action;
-        //shoot.ShootControler = _shootControler;
+        _shoot = ScriptableStateMethods.CopyAStateMachineState(Shoot, Shoot.ScriptableStateTransitor);
+        _teleport = ScriptableStateMethods.ReturnStateWithId(_shoot.ScriptableStateTransitor,Teleport.Id);
+        var shoot = (ScriptableShoot)_shoot.Action;
+        shoot.ShootControler = _shootControler;
         currentState = _shoot;
         _reloading = false;
     }

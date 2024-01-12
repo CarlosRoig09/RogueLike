@@ -69,3 +69,4 @@
 {"Id":68,"Puntuation":8,"RoomsCompleated":0,"EnemyDefeated":1,"Inventory":["Saber"],"ModStats":["1","1","1","1","1"]}
 {"Id":69,"Puntuation":48,"RoomsCompleated":1,"EnemyDefeated":6,"Inventory":["Saber","Sword"],"ModStats":["1","1","1","1","1,2"]}
 {"Id":70,"Puntuation":321,"RoomsCompleated":3,"EnemyDefeated":28,"Inventory":["Saber","Rapier","Bow","Sword"],"ModStats":["1,2","1","1","1","1,4"]}
+{"Id":71,"Puntuation":1230,"RoomsCompleated":6,"EnemyDefeated":93,"Inventory":["Saber","Scythe","Sword","Lance"],"ModStats":["1","1","1","1","1,4"]}

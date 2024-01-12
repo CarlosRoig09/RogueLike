@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.VersionControl.Asset;
 
 public static class ScriptableStateMethods 
 {
@@ -36,5 +37,17 @@ public static class ScriptableStateMethods
             }
         }
         return false;
+    }
+
+    public static ScriptableState ReturnStateWithId(List<ScriptableState> scriptableStates, string id)
+    {
+        foreach (var state in scriptableStates)
+        {
+            if (id == state.Id)
+            {
+                return state;
+            }
+        }
+        return null;
     }
 }

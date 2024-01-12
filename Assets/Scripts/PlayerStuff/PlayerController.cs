@@ -39,6 +39,7 @@ public class PlayerController : Character
         _anim = gameObject.GetComponent<Animator>();
         _controlStats = gameObject.GetComponent<ControlStats>();
         _applyModificator = GetComponent<ApplyModificator>();
+        stop = Stop;
      }
     // Update is called once per frame
    protected override void Update()
