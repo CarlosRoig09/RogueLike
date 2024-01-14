@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 7409293528464402715}
   - component: {fileID: 7409293528464402714}
   - component: {fileID: 7409293528464402713}
-  - component: {fileID: 7409293528464402709}
+  - component: {fileID: 971127144974700239}
   m_Layer: 0
-  m_Name: Explosion
+  m_Name: EnemyExplosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 98f25cf74a72ca74388ab0076e2035a7, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8679245, g: 0.6395832, b: 0.093342766, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -123,7 +123,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &7409293528464402709
+--- !u!114 &971127144974700239
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -132,7 +132,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7409293528464402712}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 488dc4a7662d49d4b805023f25b90529, type: 3}
+  m_Script: {fileID: 11500000, guid: 368fc89796008f54e8bd8ab97d78bf36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ExplosionDamage: 0

@@ -16,7 +16,8 @@ GameObject:
   - component: {fileID: 3414443598116584654}
   - component: {fileID: 8806320614843133777}
   - component: {fileID: 4509307845180844644}
-  m_Layer: 0
+  - component: {fileID: 1672733319357428435}
+  m_Layer: 8
   m_Name: Enemy2
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -103,11 +104,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: {fileID: 11400000, guid: 78c48dc71be4b5f40a53c6f23d201739, type: 2}
+  getDamaged: {fileID: 0}
   Stop: {fileID: 11400000, guid: ed3678cfc8db7ff49a7657d9e5b1ca29, type: 2}
+  stop: {fileID: 0}
   enemyData: {fileID: 11400000, guid: 5f3d9c66f7956dd4889c9064ac6c8a52, type: 2}
   State: 0
   _items: {fileID: 11400000, guid: 57871780b4704c1498d5139959f0c8d8, type: 2}
-  _chanceOfDropNothing: 20
+  _chanceOfDropNothing: 60
   _shootSO: {fileID: 11400000, guid: 1bad70114ee7f454ab97e0085294ef3a, type: 2}
   Shoot: {fileID: 11400000, guid: 78c48dc71be4b5f40a53c6f23d201739, type: 2}
   Teleport: {fileID: 11400000, guid: 6a9f86c3ca2a1804eadaab41522b4d50, type: 2}
@@ -211,3 +214,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!58 &1672733319357428435
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3414443598116584655}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.38

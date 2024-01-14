@@ -20,8 +20,8 @@ public class BombBehaivour : MonoBehaviour, ISpawnExplosion
     public void SpawnExplosion()
     {
        var exp = Instantiate(explosion,transform.position,Quaternion.identity);
-        exp.GetComponent<ExplosionBehaivour>().ExplosionDamage = ExplosionDamage;
-        exp.GetComponent <ExplosionBehaivour>().ExplosionImpulse = ExplosionImpulse;
+        exp.GetComponent<ExplosionBehaivour<Character>>().ExplosionDamage = ExplosionDamage;
+        exp.GetComponent <ExplosionBehaivour<Character>>().ExplosionImpulse = ExplosionImpulse;
         Destroy(gameObject);
     }
 

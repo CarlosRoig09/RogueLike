@@ -23,6 +23,7 @@ public class Turret : Enemy
       _shootControler.NewWeapon(_cloneShootSO);
         _shoot = ScriptableStateMethods.CopyAStateMachineState(Shoot, Shoot.ScriptableStateTransitor);
         _teleport = ScriptableStateMethods.ReturnStateWithId(_shoot.ScriptableStateTransitor,Teleport.Id);
+        stop = ScriptableStateMethods.ReturnStateWithId(_shoot.ScriptableStateTransitor, Stop.Id);
         var shoot = (ScriptableShoot)_shoot.Action;
         shoot.ShootControler = _shootControler;
         currentState = _shoot;

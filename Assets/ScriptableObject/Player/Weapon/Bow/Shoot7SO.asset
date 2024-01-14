@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Shoot7SO
   m_EditorClassIdentifier: 
   Proyectile: {fileID: 3751626071147199352, guid: f9efd1e0cef879d468881a9c93f6f848, type: 3}
-  ProyectileDamage: 10
+  ProyectileDamage: 5
   ProyectileSpeed: 1500
   BulletsXShoot: 1
   TotalBullets: 6

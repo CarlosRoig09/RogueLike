@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExplosionBehaivour : MonoBehaviour
+public abstract class ExplosionBehaivour<T> : MonoBehaviour where T : Character
 {
     public float ExplosionDamage;
     public float ExplosionImpulse;
@@ -18,21 +19,17 @@ public class ExplosionBehaivour : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         IDestroyable destroyable = null;
-        Character character;
-        if ((character = collision.gameObject.GetComponent<Character>()) != null || (destroyable = collision.gameObject.GetComponent<IDestroyable>()) != null)
+        T character;
+        if ((character = collision.gameObject.GetComponent<T>()) != null || (destroyable = collision.gameObject.GetComponent<IDestroyable>()) != null)
         {
             if (character != null)
             {
                 Vector3 playerDirection = collision.gameObject.transform.position - transform.position;
-                collision.gameObject.GetComponent<Character>().GetImpulse(playerDirection.normalized * ExplosionImpulse);
+                collision.gameObject.GetComponent<T>().GetImpulse(playerDirection.normalized * ExplosionImpulse);
             }
-            if (destroyable != null)
-                collision.gameObject.GetComponent<IDestroyable>().GetHitByPlayer(ExplosionDamage);
-            else
-                collision.gameObject.GetComponent<Character>().TakeDamage(ExplosionDamage);
         }
     }
 }

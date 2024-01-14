@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : Character, IDestroyable, IGivePuntuation
@@ -19,12 +20,19 @@ public class Enemy : Character, IDestroyable, IGivePuntuation
     private float _chanceOfDropNothing;
     private int _lastAnimation;
     protected ScriptableState CloneStop;
+    private bool _playerDetected;
+    private bool _firstTime;
+    private bool _firstFindedTarget;
+    private ScriptableState _beforeStop;
     public GameObject Player
     {
         get => _player;
     }
     protected virtual void Start()
     {
+        _playerDetected = false;
+        _firstTime = true;
+        _firstFindedTarget = true;
         CloneStop = Instantiate(Stop);
         _animator = GetComponent<Animator>();
         cloneEnemyData = Instantiate(enemyData);
@@ -53,13 +61,33 @@ public class Enemy : Character, IDestroyable, IGivePuntuation
     }
     protected Quaternion FindTarget()
     {
-        if (!cloneEnemyData._stunned)
+        if (!cloneEnemyData._stunned&&_playerDetected)
         {
+            if(_firstFindedTarget)
+            {
+                StateTransitor(_beforeStop);
+                _firstFindedTarget = false;
+            }
             lookDirection = _player.transform.position - transform.position;
             lookAngle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
             return Quaternion.Euler(0, 0, lookAngle);
         }
-        return transform.rotation;
+        if (_firstTime)
+        {
+            _beforeStop = currentState;
+            StopMomentum();
+            _firstTime = false;
+        }
+        return Quaternion.Euler(0, 0, 0);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            _player = collision.gameObject;
+            _playerDetected = true;
+        }
     }
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {

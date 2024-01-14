@@ -106,7 +106,6 @@ public class Kamikazee : Enemy, ISpawnExplosion
         if ((_player.transform.position-transform.position).magnitude<=3)
         {
             _anim.SetBool("GoingToExplote", true);
-            _rb.constraints = RigidbodyConstraints2D.FreezeAll;
             Explosion();
         }
     }
@@ -133,8 +132,8 @@ public class Kamikazee : Enemy, ISpawnExplosion
     public void SpawnExplosion()
     {
        var explosion = Instantiate(kamikazeeData.explosion,transform.position,Quaternion.identity);
-        explosion.GetComponent<ExplosionBehaivour>().ExplosionDamage = kamikazeeData.explosionDamage;
-        explosion.GetComponent<ExplosionBehaivour>().ExplosionImpulse = kamikazeeData.explosionImpulse;
+        explosion.GetComponent<ExplosionBehaivour<PlayerController>>().ExplosionDamage = kamikazeeData.explosionDamage;
+        explosion.GetComponent<ExplosionBehaivour<PlayerController>>().ExplosionImpulse = kamikazeeData.explosionImpulse;
         StateTransitor(_explode);
         BeforeExplosion();
     }
