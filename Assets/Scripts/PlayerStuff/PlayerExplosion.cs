@@ -7,7 +7,6 @@ public class PlayerExplosion : ExplosionBehaivour<Character>
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
         base.OnTriggerEnter2D(collision);
-        collision.gameObject.GetComponent<PlayerController>().TakeDamage(ExplosionDamage);
         IDestroyable destroyable = null;
         if((destroyable = collision.gameObject.GetComponent<IDestroyable>()) != null)
         {

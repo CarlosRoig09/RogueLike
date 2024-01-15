@@ -10,7 +10,6 @@ public class ControlShop : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        AudioManager.Instance.ChangeOST("Shop");
         _item = transform.GetChild(0).gameObject;
         _item.GetComponent<ItemBehaivour>().enabled= false;
         foreach (var item in _item.GetComponents<Collider2D>())

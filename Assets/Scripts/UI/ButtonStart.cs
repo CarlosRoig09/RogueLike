@@ -6,6 +6,8 @@ public class ButtonStart : MonoBehaviour
     private string _scene;
     public void TaskOnClick()
     {
+        AudioManager.instance.StopAllThemes();
+        AudioManager.instance.Play("MenuTheme");
         SceneManager.LoadScene(_scene, LoadSceneMode.Single);
     }
    

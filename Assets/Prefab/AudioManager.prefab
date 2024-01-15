@@ -9,8 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3448085219315429288}
-  - component: {fileID: 1996836038}
-  - component: {fileID: 1996836037}
+  - component: {fileID: 2518434319404543625}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -33,103 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &1996836038
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3448085219315429291}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: 3019c624ea57c924ab1e44165ee195dc, type: 2}
-  m_audioClip: {fileID: 8300000, guid: c13d867fbdede25458f844cf9e0d6b53, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 1
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!114 &1996836037
+--- !u!114 &2518434319404543625
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,8 +44,109 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b8315fe68735ac4ca85d3766afe82e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _menu: {fileID: 8300000, guid: c13d867fbdede25458f844cf9e0d6b53, type: 3}
-  _gamebattle: {fileID: 8300000, guid: 6c32563d5cb4ace46b3fd9d98509ab8b, type: 3}
-  _game: {fileID: 8300000, guid: 1862c7a9c307e43419e63b83176dc3f2, type: 3}
-  _gameover: {fileID: 8300000, guid: 4789f21f005496f42a14e450bd2c9321, type: 3}
-  _shop: {fileID: 8300000, guid: a87fe8f80c2d99a42b13973774184a9e, type: 3}
+  sounds:
+  - name: MenuTheme
+    clip: {fileID: 8300000, guid: c13d867fbdede25458f844cf9e0d6b53, type: 3}
+    volume: 1
+    pitch: 1
+    Loop: 1
+    output: {fileID: 24300002, guid: 84c6c78ab6cee1f4d8c57840c0dc1497, type: 2}
+    source: {fileID: 0}
+  - name: MapTheme
+    clip: {fileID: 8300000, guid: 1862c7a9c307e43419e63b83176dc3f2, type: 3}
+    volume: 1
+    pitch: 1
+    Loop: 1
+    output: {fileID: 24300002, guid: 84c6c78ab6cee1f4d8c57840c0dc1497, type: 2}
+    source: {fileID: 0}
+  - name: ShopTheme
+    clip: {fileID: 8300000, guid: f95ac403b9f1a9b4c8f454ffb417824a, type: 3}
+    volume: 1
+    pitch: 1
+    Loop: 1
+    output: {fileID: 24300002, guid: 84c6c78ab6cee1f4d8c57840c0dc1497, type: 2}
+    source: {fileID: 0}
+  - name: GetHit
+    clip: {fileID: 8300000, guid: fdd3f53c6e7208e449ef37441bc2e360, type: 3}
+    volume: 1
+    pitch: 1
+    Loop: 0
+    output: {fileID: 24300002, guid: 9c291c2b551614b43beb29a6f980f0a4, type: 2}
+    source: {fileID: 0}
+  - name: HitEnemy
+    clip: {fileID: 8300000, guid: cdf451127687ba345b9470ed9cb9e004, type: 3}
+    volume: 1
+    pitch: 1
+    Loop: 0
+    output: {fileID: 24300002, guid: 9c291c2b551614b43beb29a6f980f0a4, type: 2}
+    source: {fileID: 0}
+  - name: Dash
+    clip: {fileID: 8300000, guid: f46460a3bd14130498bba89fec4e7f0f, type: 3}
+    volume: 1
+    pitch: 1
+    Loop: 0
+    output: {fileID: 24300002, guid: 9c291c2b551614b43beb29a6f980f0a4, type: 2}
+    source: {fileID: 0}
+  - name: LightWeapon
+    clip: {fileID: 8300000, guid: 1d68a2475d0377e46a6368c69d3408f7, type: 3}
+    volume: 1
+    pitch: 1
+    Loop: 0
+    output: {fileID: 24300002, guid: 9c291c2b551614b43beb29a6f980f0a4, type: 2}
+    source: {fileID: 0}
+  - name: MediumWeapon
+    clip: {fileID: 8300000, guid: 86c9c076572c4704da1dd49a7d2be390, type: 3}
+    volume: 1
+    pitch: 1
+    Loop: 0
+    output: {fileID: 24300002, guid: 9c291c2b551614b43beb29a6f980f0a4, type: 2}
+    source: {fileID: 0}
+  - name: HeavyWeapon
+    clip: {fileID: 8300000, guid: 5938a3ea0c207214cba3c42d648d4336, type: 3}
+    volume: 1
+    pitch: 1
+    Loop: 0
+    output: {fileID: 24300002, guid: 9c291c2b551614b43beb29a6f980f0a4, type: 2}
+    source: {fileID: 0}
+  - name: LifeRecovered
+    clip: {fileID: 8300000, guid: d118842cc65e943468194687f050ca64, type: 3}
+    volume: 1
+    pitch: 1
+    Loop: 0
+    output: {fileID: 24300002, guid: 9c291c2b551614b43beb29a6f980f0a4, type: 2}
+    source: {fileID: 0}
+  - name: Teleport
+    clip: {fileID: 8300000, guid: 488c0e18d99a33f4784ba8944fa2de85, type: 3}
+    volume: 1
+    pitch: 1
+    Loop: 0
+    output: {fileID: 24300002, guid: 9c291c2b551614b43beb29a6f980f0a4, type: 2}
+    source: {fileID: 0}
+  - name: AttackBuff
+    clip: {fileID: 8300000, guid: 6e1a447a2d3d7024cbc5975d553d3475, type: 3}
+    volume: 1
+    pitch: 1
+    Loop: 0
+    output: {fileID: 24300002, guid: 9c291c2b551614b43beb29a6f980f0a4, type: 2}
+    source: {fileID: 0}
+  - name: SpeedBuff
+    clip: {fileID: 8300000, guid: 13d803d6c025e014c8c058c76d41cf0f, type: 3}
+    volume: 1
+    pitch: 1
+    Loop: 0
+    output: {fileID: 0}
+    source: {fileID: 0}
+  - name: Explosion
+    clip: {fileID: 8300000, guid: d69c987e472c9e84eaefe5e9af99b0e0, type: 3}
+    volume: 1
+    pitch: 1
+    Loop: 0
+    output: {fileID: 24300002, guid: 9c291c2b551614b43beb29a6f980f0a4, type: 2}
+    source: {fileID: 0}
+  - name: BattleTheme
+    clip: {fileID: 8300000, guid: 6c32563d5cb4ace46b3fd9d98509ab8b, type: 3}
+    volume: 1
+    pitch: 1
+    Loop: 1
+    output: {fileID: 24300002, guid: 84c6c78ab6cee1f4d8c57840c0dc1497, type: 2}
+    source: {fileID: 0}

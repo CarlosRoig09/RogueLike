@@ -12,6 +12,8 @@ public abstract class Character : StateController, ICanBeImpulsed
     public abstract void TakeDamage(float damage);
    public abstract void OnDeath();
 
+    public abstract void InvulnerabilityDeath();
+
     public virtual void StopMomentum()
     {
         var state = (ScriptableStopMomentum)stop.Action;

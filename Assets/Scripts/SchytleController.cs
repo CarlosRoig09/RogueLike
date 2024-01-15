@@ -64,10 +64,10 @@ public class SchytleController : MonoBehaviour, IWeaponControler
     {
         if (enabled)
         {
-            if (collision.gameObject.GetComponent<IDestroyable>() != null)
+            if (collision.gameObject.GetComponent<IDestroyable>() != null && !collision.isTrigger)
                 collision.gameObject.GetComponent<IDestroyable>().GetHitByPlayer(_weaponSO.WA == WeaponState.MeleeAttack ? WeaponDamage : ProyectileDamage);
 
-            if (collision.CompareTag("Enemy") || collision.CompareTag("Proyectile"))
+            if (collision.CompareTag("Enemy")&&!collision.isTrigger || collision.CompareTag("Proyectile"))
                 PushOtherGO(collision, _weaponSO.WA == WeaponState.MeleeAttack ? _weaponSO.meleeData.WeaponAttacks[_weaponSO.meleeData.CurrentAttack].ImpulseForce : _weaponSO.shootData.ImpulseForce);
         }
     }

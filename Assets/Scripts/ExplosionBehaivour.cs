@@ -27,6 +27,7 @@ public abstract class ExplosionBehaivour<T> : MonoBehaviour where T : Character
         {
             if (character != null)
             {
+                collision.gameObject.GetComponent<PlayerController>().TakeDamage(ExplosionDamage);
                 Vector3 playerDirection = collision.gameObject.transform.position - transform.position;
                 collision.gameObject.GetComponent<T>().GetImpulse(playerDirection.normalized * ExplosionImpulse);
             }

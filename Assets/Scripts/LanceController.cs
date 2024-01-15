@@ -79,7 +79,7 @@ public class LanceController : MonoBehaviour, IWeaponControler
     {
         if (enabled)
         {
-            if (collision.gameObject.GetComponent<IDestroyable>() != null)
+            if (collision.gameObject.GetComponent<IDestroyable>() != null&&!collision.isTrigger)
             {
                 collision.gameObject.GetComponent<IDestroyable>().GetHitByPlayer(_weaponSO.WA == WeaponState.MeleeAttack ? WeaponDamage : ProyectileDamage);
                 if(_weaponSO.WA == WeaponState.DistanceAttack&&collision.gameObject.CompareTag("Enemy"))

@@ -116,12 +116,24 @@ public class Kamikazee : Enemy, ISpawnExplosion
         var explode = (ScriptableExplosion)_explode.Action;
         explode.OnExplosion += SpawnExplosion;
         explode.Timer = explosionTimer;
+        cloneEnemyData.Damagable = Invulnerability.NoDamagable;
         StateTransitor(_explode);
     }
     public void Death()
     {
+        var explode = (ScriptableExplosion)_explode.Action;
+        explode.OnExplosion -= SpawnExplosion;
+        StopAllCoroutines();
         StopMomentum();
         State = Life.Death;
+    }
+
+    public override void InvulnerabilityDeath()
+    {
+        base.InvulnerabilityDeath();
+        var explode = (ScriptableExplosion)_explode.Action;
+        explode.OnExplosion -= SpawnExplosion;
+        StopAllCoroutines();
     }
 
     private void OnDestroy()

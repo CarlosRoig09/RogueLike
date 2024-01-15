@@ -109,6 +109,7 @@ public class Enemy : Character, IDestroyable, IGivePuntuation
         GivePuntuation(cloneEnemyData.PuntuationXHit);
         TakeDamage(damage);
             cloneEnemyData.Damagable = Invulnerability.NoDamagable;
+        _animator.SetBool("Damage", true);
             StartCoroutine(InvulnerabilityTime(0.5f));
     }
 
@@ -139,6 +140,7 @@ public class Enemy : Character, IDestroyable, IGivePuntuation
         yield return new WaitForSeconds(time);
         cloneEnemyData.Damagable = Invulnerability.Damagable;
         StopMomentum(0.3f);
+        _animator.SetBool("Damage", false);
     }
 
     public void StopMomentum(float time)
@@ -164,5 +166,11 @@ public class Enemy : Character, IDestroyable, IGivePuntuation
     public void GivePuntuation(int Puntuation)
     {
         GameManager.Instance.Puntuation += Puntuation;
+    }
+
+    public override void InvulnerabilityDeath()
+    {
+        StopMomentum();
+        cloneEnemyData.Damagable = Invulnerability.NoDamagable;
     }
 }

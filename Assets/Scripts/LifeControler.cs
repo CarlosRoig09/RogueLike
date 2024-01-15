@@ -20,6 +20,6 @@ public class LifeControler : MonoBehaviour
     private void KillACharacter(float life)
     {
         if (life <= 0)
-            gameObject.GetComponent<Character>().OnDeath();
+            gameObject.GetComponent<Character>().GetComponent<Animator>().SetBool("Dead",true);
     }
 }

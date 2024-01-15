@@ -11,6 +11,8 @@ public class SetItemsShop : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        AudioManager.instance.StopAllThemes();
+        AudioManager.instance.Play("ShopTheme");
         itemsSpawned = new GameObject[_itemHolder.Length];
         bool isRepitive;
         int count = 0;

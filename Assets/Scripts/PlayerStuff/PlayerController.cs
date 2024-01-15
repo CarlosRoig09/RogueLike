@@ -126,6 +126,7 @@ public class PlayerController : Character
         StateTransitor(DashAction);
         _anim.SetBool("Dash", true);
         _clonePlayerDataSO.Damagable = Invulnerability.NoDamagable;
+        Physics.IgnoreLayerCollision(5,6,true);
         StartCoroutine(InvulnerabilityTime(_clonePlayerDataSO.dashDuration, "Dash"));
     }
     private IEnumerator InvulnerabilityTime(float time, string animation)
@@ -134,5 +135,12 @@ public class PlayerController : Character
         _anim.SetBool(animation, false);
         _clonePlayerDataSO.Damagable = Invulnerability.Damagable;
         StateTransitor(Walk);
+        Physics.IgnoreLayerCollision(5, 6, false);
+    }
+
+    public override void InvulnerabilityDeath()
+    {
+        StopMomentum();
+        _playerDataSO.Damagable = Invulnerability.NoDamagable;
     }
 }

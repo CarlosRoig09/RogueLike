@@ -1,69 +1,70 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-
+using System;
 public class AudioManager : MonoBehaviour
 {
-    private static AudioManager _instance;
+    public Sound[] sounds;
 
-    public static AudioManager Instance
+    public static AudioManager instance;
+    // Start is called before the first frame update
+    void Awake()
     {
-        get
-        {
-            if (_instance == null)
-            {
-                Debug.LogError("Audio Manager is NULL");
-            }
-            return _instance;
-        }
-    }
-    [SerializeField] private AudioClip _menu,_gamebattle,_game,_gameover,_shop;
-    private AudioSource _aS;
-    private bool _alreadyCallBatlleMusic;
-    private void Awake()
-    {
-        if (_instance != null)
-            Destroy(gameObject);
+        if (instance == null)
+            instance = this;
         else
         {
-            DontDestroyOnLoad(gameObject);
-            _instance = this;
+            Destroy(gameObject);
+            return;
         }
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        _alreadyCallBatlleMusic = false;
-        _aS= GetComponent<AudioSource>();
+        DontDestroyOnLoad(gameObject);
+        foreach (Sound s in sounds)
+        {
+            s.source = gameObject.AddComponent<AudioSource>();
+            s.source.clip = s.clip;
+
+            s.source.volume = s.volume;
+            s.source.pitch = s.pitch;
+            s.source.loop = s.Loop;
+            s.source.outputAudioMixerGroup = s.output;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
+
     }
-    public void ChangeOST(string scene)
+
+    public void Play(string name)
     {
-        switch (scene)
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        if (s == null)
         {
-            case "GameScene":
-                _aS.clip = _game;
-                break;
-            case "GameOver":
-                _aS.clip = _gameover;
-                break;
-            case "GameStart":
-                _aS.clip = _menu;
-                break;
-            case "Combat":
-                _aS.clip = _gamebattle;
-                break;
-            case "Shop":
-                _aS.clip = _shop;
-                break;
-            default:
-                break;
+            Debug.LogWarning("Sound: " + name + " not found!");
+            return;
         }
-        _aS.Play();
+        s.source.Play();
+    }
+
+    public void Stop(string name)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        if (s == null)
+        {
+            Debug.LogWarning("Sound: " + name + " not found!");
+            return;
+        }
+        s.source.Stop();
+    }
+
+    public void StopAllThemes()
+    {
+        foreach (Sound s in sounds)
+        {
+            if (s.name.Contains("Theme"))
+            {
+                s.source.Stop();
+            }
+        }
     }
 }

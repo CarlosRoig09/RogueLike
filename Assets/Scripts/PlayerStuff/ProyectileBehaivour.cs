@@ -41,7 +41,7 @@ public class ProyectileBehaivour : MonoBehaviour, ICanBeImpulsed
         switch (_proyectileUser)
         {
             case ProyectileUser.Player:
-                if (collision.gameObject.GetComponent<IDestroyable>() != null)
+                if (collision.gameObject.GetComponent<IDestroyable>() != null && !collision.isTrigger)
                 {
                     collision.gameObject.GetComponent<IDestroyable>().GetHitByPlayer(_damage);
                     if (collision.CompareTag("Enemy"))
@@ -55,7 +55,7 @@ public class ProyectileBehaivour : MonoBehaviour, ICanBeImpulsed
                     collision.gameObject.GetComponent<PlayerController>().TakeDamage(_damage);
                 if (collision.CompareTag("Weapon"))
                     _proyectileUser = ProyectileUser.Player;
-                if (!collision.CompareTag("Enemy") && !collision.CompareTag("Item") && !collision.CompareTag("Weapon")&&!collision.CompareTag("wotah"))
+                if (!collision.CompareTag("Enemy") && !collision.CompareTag("Item") && !collision.CompareTag("Weapon")&&!collision.CompareTag("wotah")&&!collision.CompareTag("box"))
                     DestroyProyectile();
                 break;
         }
