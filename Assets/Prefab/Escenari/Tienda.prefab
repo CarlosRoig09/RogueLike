@@ -13570,6 +13570,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: da409b2a183f81b4683f12091a868993, type: 2}
   - {fileID: 11400000, guid: ec7db1c63fd809342b4070bb26f27d87, type: 2}
   - {fileID: 11400000, guid: b4139d58672a42c4fac0c03d2908f08c, type: 2}
+  - {fileID: 11400000, guid: 6dd04e89e042d1b448356d06ac0a326d, type: 2}
   _itemHolder:
   - {fileID: 6550149366655372801}
   - {fileID: 6550149367563787702}

@@ -83,7 +83,7 @@ MonoBehaviour:
   - name: Dash
     clip: {fileID: 8300000, guid: f46460a3bd14130498bba89fec4e7f0f, type: 3}
     volume: 1
-    pitch: 1
+    pitch: 3
     Loop: 0
     output: {fileID: 24300002, guid: 9c291c2b551614b43beb29a6f980f0a4, type: 2}
     source: {fileID: 0}
@@ -124,7 +124,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: AttackBuff
     clip: {fileID: 8300000, guid: 6e1a447a2d3d7024cbc5975d553d3475, type: 3}
-    volume: 1
+    volume: 0.5
     pitch: 1
     Loop: 0
     output: {fileID: 24300002, guid: 9c291c2b551614b43beb29a6f980f0a4, type: 2}
@@ -137,7 +137,7 @@ MonoBehaviour:
     output: {fileID: 0}
     source: {fileID: 0}
   - name: Explosion
-    clip: {fileID: 8300000, guid: d69c987e472c9e84eaefe5e9af99b0e0, type: 3}
+    clip: {fileID: 8300000, guid: 103108b694e9bac45b9ff157c982ddf8, type: 3}
     volume: 1
     pitch: 1
     Loop: 0
@@ -149,4 +149,39 @@ MonoBehaviour:
     pitch: 1
     Loop: 1
     output: {fileID: 24300002, guid: 84c6c78ab6cee1f4d8c57840c0dc1497, type: 2}
+    source: {fileID: 0}
+  - name: Coin
+    clip: {fileID: 8300000, guid: 2c9df2bd6a773ea44a1d0747a127f15c, type: 3}
+    volume: 1
+    pitch: 1
+    Loop: 0
+    output: {fileID: 24300002, guid: 9c291c2b551614b43beb29a6f980f0a4, type: 2}
+    source: {fileID: 0}
+  - name: OpenDoor
+    clip: {fileID: 8300000, guid: f3baa76d014fb2146a5e3fb667d9074d, type: 3}
+    volume: 0.5
+    pitch: 1
+    Loop: 0
+    output: {fileID: 24300002, guid: 9c291c2b551614b43beb29a6f980f0a4, type: 2}
+    source: {fileID: 0}
+  - name: CloseDoor
+    clip: {fileID: 8300000, guid: bfa5abc31906f8d49a5d5a41ae485dd1, type: 3}
+    volume: 0.5
+    pitch: 1
+    Loop: 0
+    output: {fileID: 24300002, guid: 9c291c2b551614b43beb29a6f980f0a4, type: 2}
+    source: {fileID: 0}
+  - name: EnemyDead
+    clip: {fileID: 8300000, guid: e3db714cc94bf77488e538706fb183cd, type: 3}
+    volume: 0.5
+    pitch: 1
+    Loop: 0
+    output: {fileID: 24300002, guid: 9c291c2b551614b43beb29a6f980f0a4, type: 2}
+    source: {fileID: 0}
+  - name: PlayerGameOver
+    clip: {fileID: 8300000, guid: d7e171c604323e740bc11e28867fc595, type: 3}
+    volume: 0.5
+    pitch: 1
+    Loop: 0
+    output: {fileID: 24300002, guid: 9c291c2b551614b43beb29a6f980f0a4, type: 2}
     source: {fileID: 0}

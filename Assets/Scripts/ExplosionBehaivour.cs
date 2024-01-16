@@ -10,6 +10,7 @@ public abstract class ExplosionBehaivour<T> : MonoBehaviour where T : Character
     // Start is called before the first frame update
     void Start()
     {
+        AudioManager.instance.Play("Explosion");
         Destroy(gameObject,GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
     }
 
@@ -27,7 +28,7 @@ public abstract class ExplosionBehaivour<T> : MonoBehaviour where T : Character
         {
             if (character != null)
             {
-                collision.gameObject.GetComponent<PlayerController>().TakeDamage(ExplosionDamage);
+                collision.gameObject.GetComponent<T>().TakeDamage(ExplosionDamage);
                 Vector3 playerDirection = collision.gameObject.transform.position - transform.position;
                 collision.gameObject.GetComponent<T>().GetImpulse(playerDirection.normalized * ExplosionImpulse);
             }

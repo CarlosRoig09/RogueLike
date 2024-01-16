@@ -78,8 +78,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1987061333
-  m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingLayer: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: -150815284, guid: dce27f2920a8bfb48a5cb0c9bf32059d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -104,7 +104,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: {fileID: 11400000, guid: 78c48dc71be4b5f40a53c6f23d201739, type: 2}
-  getDamaged: {fileID: 0}
   Stop: {fileID: 11400000, guid: ed3678cfc8db7ff49a7657d9e5b1ca29, type: 2}
   stop: {fileID: 0}
   enemyData: {fileID: 11400000, guid: 5f3d9c66f7956dd4889c9064ac6c8a52, type: 2}

@@ -20,6 +20,6 @@ MonoBehaviour:
   invulerability: 0
   Damagable: 1
   IsDamaged: 0
-  dashSpeed: 35
-  dashCountdown: 1
+  dashSpeed: 20
+  dashCountdown: 0.8
   dashDuration: 0.5

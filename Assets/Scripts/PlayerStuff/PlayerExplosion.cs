@@ -11,7 +11,7 @@ public class PlayerExplosion : ExplosionBehaivour<Character>
         if((destroyable = collision.gameObject.GetComponent<IDestroyable>()) != null)
         {
             if (destroyable != null)
-                collision.gameObject.GetComponent<IDestroyable>().GetHitByPlayer(ExplosionDamage);
+                collision.gameObject.GetComponent<IDestroyable>().GetHitByPlayer(ExplosionDamage,0.5f);
         }
     }
 }

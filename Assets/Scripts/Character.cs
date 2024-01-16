@@ -3,8 +3,6 @@ using UnityEngine;
 
 public abstract class Character : StateController, ICanBeImpulsed
 {
-    [SerializeField]
-    protected AudioClip getDamaged;
     public ScriptableState Stop;
     [SerializeField]
     protected ScriptableState stop;

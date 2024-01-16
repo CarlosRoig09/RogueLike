@@ -91,7 +91,7 @@ public class WeaponData : ItemData
         rotationScript.HS = HandState.MoveByRotateAnim;
         rotationScript.RoationSpeed = 100;
         Debug.Log(noRepitePosition);
-        if (endPoint == grandParent.transform.rotation)
+        if (endPoint.eulerAngles.magnitude <= grandParent.transform.rotation.eulerAngles.magnitude)
         {
             if (noRepitePosition)
             {

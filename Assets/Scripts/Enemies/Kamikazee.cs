@@ -35,6 +35,7 @@ public class Kamikazee : Enemy, ISpawnExplosion
             IsGoingToExplote();
         }
         base.Update();
+        if(currentState!=stop)
         transform.rotation = FindTarget();
     }
    /* private void ChangeDirectionWhenImpact()
@@ -112,7 +113,7 @@ public class Kamikazee : Enemy, ISpawnExplosion
 
     private void Explosion()
     {
-        StopMomentum(0);
+        StopMomentum();
         var explode = (ScriptableExplosion)_explode.Action;
         explode.OnExplosion += SpawnExplosion;
         explode.Timer = explosionTimer;

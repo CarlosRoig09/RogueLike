@@ -51,7 +51,7 @@ public class GestionInventory : MonoBehaviour
         else
         {
             Debug.Log("No more space");
-           // DetachTheCurrentWeapon(cloneWeapon);
+           //DetachTheCurrentWeapon(cloneWeapon);
             return true;
         }
         return false;

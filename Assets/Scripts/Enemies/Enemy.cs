@@ -46,17 +46,14 @@ public class Enemy : Character, IDestroyable, IGivePuntuation
         FindTarget();
     }
 
-    public void Stunned(float time)
+    public void Stunned()
     {
-        previousState = currentState;
-       _lastAnimation = _animator.GetCurrentAnimatorStateInfo(0).fullPathHash;
-        _animator.StopPlayback();
-        StopMomentum(time);
+        _animator.enabled = false;
     }
 
     public void DeStunned()
     {
-        _animator.Play(_lastAnimation);
+        _animator.enabled = true;
         StateTransitor(previousState);
     }
     protected Quaternion FindTarget()
@@ -104,13 +101,14 @@ public class Enemy : Character, IDestroyable, IGivePuntuation
         State = Life.Death;
         GivePuntuation(cloneEnemyData.PuntuationXDeath);
     }
-    public void GetHitByPlayer(float damage)
+    public void GetHitByPlayer(float damage,float time)
     {
+        AudioManager.instance.Play("HitEnemy");
         GivePuntuation(cloneEnemyData.PuntuationXHit);
         TakeDamage(damage);
             cloneEnemyData.Damagable = Invulnerability.NoDamagable;
         _animator.SetBool("Damage", true);
-            StartCoroutine(InvulnerabilityTime(0.5f));
+            StartCoroutine(InvulnerabilityTime(0.5f,time));
     }
 
     public void Destroyed()
@@ -135,11 +133,11 @@ public class Enemy : Character, IDestroyable, IGivePuntuation
         //Is for the childs if they move
     }
 
-    private IEnumerator InvulnerabilityTime(float time)
+    private IEnumerator InvulnerabilityTime(float time,float stunTime)
     {
+        StopMomentum(stunTime);
         yield return new WaitForSeconds(time);
         cloneEnemyData.Damagable = Invulnerability.Damagable;
-        StopMomentum(0.3f);
         _animator.SetBool("Damage", false);
     }
 
@@ -147,6 +145,7 @@ public class Enemy : Character, IDestroyable, IGivePuntuation
     {
         var action = (ScriptableStopMomentum)stop.Action;
         action.rb = gameObject.GetComponent<Rigidbody2D>();
+        if(currentState!=stop)
         previousState = currentState;
         StateTransitor(stop);
         StartCoroutine(StunTime(time));
@@ -154,7 +153,7 @@ public class Enemy : Character, IDestroyable, IGivePuntuation
 
     public override void GetImpulse(Vector2 impulse)
     {
-        StopMomentum(0.4f);
+
         gameObject.GetComponent<Rigidbody2D>().AddForce(impulse);
     }
 
@@ -170,6 +169,8 @@ public class Enemy : Character, IDestroyable, IGivePuntuation
 
     public override void InvulnerabilityDeath()
     {
+        GetComponent<Collider2D>().enabled=false;
+        AudioManager.instance.Play("EnemyDead");
         StopMomentum();
         cloneEnemyData.Damagable = Invulnerability.NoDamagable;
     }

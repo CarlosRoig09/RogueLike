@@ -107,7 +107,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.00009118579, y: -0.010938734}
+  m_Offset: {x: -0.00055398233, y: -0.022559047}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -118,7 +118,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.1232004, y: 0.207549}
+  m_Size: {x: 0.085256994, y: 0.14807186}
   m_EdgeRadius: 0
 --- !u!50 &4615364402666367210
 Rigidbody2D:
@@ -156,6 +156,7 @@ MonoBehaviour:
   currentState: {fileID: 11400000, guid: 1d64ab597c7e60e428e8d64f16482fc2, type: 2}
   getDamaged: {fileID: 0}
   Stop: {fileID: 11400000, guid: ec68754575a263a47a81af901ebd1937, type: 2}
+  stop: {fileID: 0}
   Walk: {fileID: 11400000, guid: 1d64ab597c7e60e428e8d64f16482fc2, type: 2}
   DashAction: {fileID: 11400000, guid: 7b16bc4da61fb034c8e015ef7c9b7aea, type: 2}
   _playerDataSO: {fileID: 11400000, guid: e25446c7cb2760a4bade900ff47e2a14, type: 2}

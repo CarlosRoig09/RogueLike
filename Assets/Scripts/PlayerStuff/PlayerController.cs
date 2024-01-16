@@ -10,7 +10,6 @@ public enum Invulnerability
 }
 public class PlayerController : Character
 {
-    private AudioSource _aS;
     public ScriptableState Walk, DashAction;
     [SerializeField]
     private PlayerData _playerDataSO;
@@ -28,6 +27,7 @@ public class PlayerController : Character
     private Animator _anim;
     private ControlStats _controlStats;
     private ApplyModificator _applyModificator;
+    private GameObject _hands;
     // Start is called before the first frame update
     void Awake()
     {
@@ -40,6 +40,7 @@ public class PlayerController : Character
         _controlStats = gameObject.GetComponent<ControlStats>();
         _applyModificator = GetComponent<ApplyModificator>();
         stop = Stop;
+        _hands = gameObject.transform.GetChild(0).gameObject;
      }
     // Update is called once per frame
    protected override void Update()
@@ -79,6 +80,7 @@ public class PlayerController : Character
     {
         if (_clonePlayerDataSO.Damagable == Invulnerability.Damagable)
         {
+            AudioManager.instance.Play("GetHit");
             gameObject.GetComponent<LifeControler>().ModifyLife(damage * -1, ref _clonePlayerDataSO.life, _clonePlayerDataSO.maxlife);
             _anim.SetBool("Damage", true);
             _clonePlayerDataSO.Damagable = Invulnerability.NoDamagable;
@@ -93,7 +95,8 @@ public class PlayerController : Character
 
     public void MeleeAttack()
     {
-        if (_weapon != null)
+
+        if (_weapon != null&&_hands.transform.childCount>0)
         {
             _applyModificator.UpdateWeaponStats(_weapon);
             _weapon?.FirstButtonAttack();
@@ -117,6 +120,7 @@ public class PlayerController : Character
     }
     public void Dash()
     {
+        AudioManager.instance.Play("Dash");
         var dash = (ScriptableDash)DashAction.Action;
         dash.dashSpeed = _clonePlayerDataSO.dashSpeed;
         dash.controlStats = _controlStats;
@@ -126,20 +130,23 @@ public class PlayerController : Character
         StateTransitor(DashAction);
         _anim.SetBool("Dash", true);
         _clonePlayerDataSO.Damagable = Invulnerability.NoDamagable;
-        Physics.IgnoreLayerCollision(5,6,true);
         StartCoroutine(InvulnerabilityTime(_clonePlayerDataSO.dashDuration, "Dash"));
     }
     private IEnumerator InvulnerabilityTime(float time, string animation)
     {
+        gameObject.layer = 9;
+        _anim.SetLayerWeight(1, 1);
         yield return new WaitForSeconds(time);
         _anim.SetBool(animation, false);
         _clonePlayerDataSO.Damagable = Invulnerability.Damagable;
         StateTransitor(Walk);
-        Physics.IgnoreLayerCollision(5, 6, false);
+        gameObject.layer = 6;
+        _anim.SetLayerWeight(1, 0);
     }
 
     public override void InvulnerabilityDeath()
     {
+        AudioManager.instance.Play("PlayerGameOver");
         StopMomentum();
         _playerDataSO.Damagable = Invulnerability.NoDamagable;
     }
