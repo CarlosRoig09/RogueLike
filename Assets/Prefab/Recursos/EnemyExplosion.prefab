@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7409293528464402714}
   - component: {fileID: 7409293528464402713}
   - component: {fileID: 971127144974700239}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EnemyExplosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1987061333
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 98f25cf74a72ca74388ab0076e2035a7, type: 3}
   m_Color: {r: 0.8679245, g: 0.6395832, b: 0.093342766, a: 1}

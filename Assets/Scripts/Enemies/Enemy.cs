@@ -1,6 +1,7 @@
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : Character, IDestroyable, IGivePuntuation
 {
@@ -18,12 +19,12 @@ public class Enemy : Character, IDestroyable, IGivePuntuation
     private Animator _animator;
     [SerializeField]
     private float _chanceOfDropNothing;
-    private int _lastAnimation;
     protected ScriptableState CloneStop;
     private bool _playerDetected;
     private bool _firstTime;
     private bool _firstFindedTarget;
     private ScriptableState _beforeStop;
+    private GameObject _healthBar;
     public GameObject Player
     {
         get => _player;
@@ -39,6 +40,7 @@ public class Enemy : Character, IDestroyable, IGivePuntuation
         cloneEnemyData._stunned = false;
         cloneEnemyData.Damagable = Invulnerability.Damagable;
         _player = GameObject.Find("Player");
+        _healthBar = transform.GetChild(0).GetChild(2).gameObject;
     }
     protected override void Update()
     {
@@ -95,6 +97,8 @@ public class Enemy : Character, IDestroyable, IGivePuntuation
     public override void TakeDamage(float damage)
     {
         gameObject.GetComponent<LifeControler>().ModifyLife(damage * -1, ref cloneEnemyData.life, cloneEnemyData.maxlife);
+        _healthBar.SetActive(true);
+        _healthBar.GetComponent<Image>().fillAmount = cloneEnemyData.life/cloneEnemyData.maxlife;
     }
     public override void OnDeath()
     {

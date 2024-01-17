@@ -11,6 +11,7 @@ public class BombItem : ItemBehaivour
 
     public override void GiveToPlayer(GameObject player)
     {
+        player.GetComponent<GestionInventory>().AddBombs(1);
         GivePuntuation(itemData.Puntuation);
     }
 

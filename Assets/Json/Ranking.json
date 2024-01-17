@@ -109,3 +109,11 @@
 {"Id":108,"Puntuation":129,"RoomsCompleated":2,"EnemyDefeated":17,"Inventory":["Saber"],"ModStats":["1,2","1","1,2","1","1,2"]}
 {"Id":109,"Puntuation":614,"RoomsCompleated":4,"EnemyDefeated":50,"Inventory":["Saber","Rapier","Axe","Lance"],"ModStats":["1","1","1,4","1,2","1,2"]}
 {"Id":110,"Puntuation":544,"RoomsCompleated":4,"EnemyDefeated":55,"Inventory":["Lance","Bow"],"ModStats":["1","1","1,4","1,2","1"]}
+{"Id":111,"Puntuation":1046,"RoomsCompleated":5,"EnemyDefeated":74,"Inventory":["Lance","Saber","Sword","Bow"],"ModStats":["1,2","1","1,2","1,2","1,4"]}
+{"Id":112,"Puntuation":331,"RoomsCompleated":3,"EnemyDefeated":34,"Inventory":["Lance","Axe","Bow","Sword"],"ModStats":["1","1","1,2","1,2","1"]}
+{"Id":113,"Puntuation":2111,"RoomsCompleated":7,"EnemyDefeated":83,"Inventory":["Lance","Bow","Axe"],"ModStats":["1,4","1","1,4","1,2","1,4"]}
+{"Id":114,"Puntuation":353,"RoomsCompleated":3,"EnemyDefeated":32,"Inventory":["Saber","Sword"],"ModStats":["1","1,2","1,2","1","1,2"]}
+{"Id":115,"Puntuation":282,"RoomsCompleated":3,"EnemyDefeated":28,"Inventory":["Saber","Lance"],"ModStats":["1","1","1","1,2","1,2"]}
+{"Id":116,"Puntuation":37,"RoomsCompleated":1,"EnemyDefeated":7,"Inventory":["Saber","Bow"],"ModStats":["1","1","1","1","1"]}
+{"Id":117,"Puntuation":1362,"RoomsCompleated":6,"EnemyDefeated":83,"Inventory":["Saber","Bow","Lance","Axe"],"ModStats":["1,4","1","1,2","1,4","1,4"]}
+{"Id":118,"Puntuation":541,"RoomsCompleated":4,"EnemyDefeated":35,"Inventory":["Saber","Sword"],"ModStats":["1,2","1","1","1","1,4"]}

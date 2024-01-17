@@ -15,5 +15,5 @@ MonoBehaviour:
   ParticleSystem: {fileID: 0}
   AttackSound: {fileID: 0}
   CountDown: 0.3
-  Damage: 0
+  Damage: 0.3
   ImpulseForce: 100
