@@ -16,3 +16,4 @@ MonoBehaviour:
   ScriptableStateTransitor:
   - {fileID: 11400000, guid: 78c48dc71be4b5f40a53c6f23d201739, type: 2}
   - {fileID: 11400000, guid: ed3678cfc8db7ff49a7657d9e5b1ca29, type: 2}
+  Id: TL

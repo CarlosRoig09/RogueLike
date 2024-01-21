@@ -5,7 +5,7 @@ using UnityEngine;
 
 public static class JsonFitxerMethods
 {
-    public static string Path = Application.dataPath + "/Json";
+    public static string Dir = Application.streamingAssetsPath;
     public static void CreateFiledJsonFile(string nameFitxer, int puntuation, int rooms, int enemy, string[] inventory, string[] modStats)
     {
         var newPlayer = new Player
@@ -16,14 +16,14 @@ public static class JsonFitxerMethods
             Inventory = inventory,
             ModStats = modStats
         };
-        List<Player> players = new List<Player>();
+        List<Player> players = new();
         if (IfFileExists(nameFitxer))
         {
-            players = SelectAll(nameFitxer);
+            players = SelectAll(Path.Combine(Dir, nameFitxer));
         }
         players.Add(newPlayer);
         string[] playersString = new string[players.Count];
-        using StreamWriter sw = File.CreateText(PathWithDir(Path, nameFitxer));
+        using StreamWriter sw = File.CreateText(Path.Combine(Dir, nameFitxer));
         for (int i = 0; i < playersString.Length; i++)
         {
             players[i].Id = i;
@@ -36,28 +36,38 @@ public static class JsonFitxerMethods
     {
 
         List<Player> player1 = new();
-        using (StreamReader jsonStream = File.OpenText(PathWithDir(Path,nameFitxer)))
+        if (IfFileExists(Path.Combine(Dir, nameFitxer)))
         {
-            string line;
-            while ((line = jsonStream.ReadLine()) != null)
+            using (StreamReader jsonStream = File.OpenText(Path.Combine(Dir, nameFitxer)))
             {
-                Player user = JsonConvert.DeserializeObject<Player>(line);
-                player1.Add(user);
+                string line;
+                while ((line = jsonStream.ReadLine()) != null)
+                {
+                    Player user = JsonConvert.DeserializeObject<Player>(line);
+                    player1.Add(user);
+                }
             }
         }
         return player1;
     }
     public static Player ReturnLastPlayer(string nameFitxer)
     {
-        var players = SelectAll(nameFitxer);
-        return players[^1];
+        if (IfFileExists(Path.Combine(Dir, nameFitxer)))
+        {
+            var players = SelectAll(Path.Combine(Dir, nameFitxer));
+            return players[^1];
+        }
+        return null;
     }
     public static bool ComproveIfIsTheMaxPunt(int newPuntuation, string nameFitxer)
     {
-        foreach (var played in SelectAll(nameFitxer))
+        if (IfFileExists(Path.Combine(Dir, nameFitxer)))
         {
-            if (newPuntuation < played.Puntuation)
-                return false;
+            foreach (var played in SelectAll(Path.Combine(Dir, nameFitxer)))
+            {
+                if (newPuntuation < played.Puntuation)
+                    return false;
+            }
         }
             return true;
     }
@@ -65,9 +75,12 @@ public static class JsonFitxerMethods
     public static int ReturnBestPuntuation(string nameFitxer)
     {
         var bestPuntuation = 0;
-        foreach (var played in SelectAll(nameFitxer))
+        if (IfFileExists(Path.Combine(Dir, nameFitxer)))
         {
-            if(played.Puntuation>bestPuntuation) bestPuntuation = played.Puntuation;
+            foreach (var played in SelectAll(Path.Combine(Dir, nameFitxer)))
+            {
+                if (played.Puntuation > bestPuntuation) bestPuntuation = played.Puntuation;
+            }
         }
         return bestPuntuation;
     }
@@ -79,7 +92,7 @@ public static class JsonFitxerMethods
     }
     public static bool IfFileExists(string file)
     {
-        if (File.Exists(PathWithDir(Path,file)))
+        if (File.Exists(file))
         {
             return true;
         }

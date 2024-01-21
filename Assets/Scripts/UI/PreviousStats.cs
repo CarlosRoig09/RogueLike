@@ -30,26 +30,35 @@ public class PreviousStats : MonoBehaviour
 
     private void PutStatsLastGame(Player player)
     {
-        puntuation.text = "Puntuation : " + player.Puntuation.ToString();
-        Rooms.text = "Rooms : " + player.RoomsCompleated.ToString();
-        EnemyDefeated.text = "Enemies : " + player.EnemyDefeated.ToString();
+        if (player != null)
+        {
+            puntuation.text = "Puntuation : " + player.Puntuation.ToString();
+            Rooms.text = "Rooms : " + player.RoomsCompleated.ToString();
+            EnemyDefeated.text = "Enemies : " + player.EnemyDefeated.ToString();
+        }
     }
 
     private void StatsPlayer(Player player)
     {
-        Stats[0].transform.GetChild(0).GetComponent<TMP_Text>().text = "x" + player.ModStats[0];
-        Stats[1].transform.GetChild(0).GetComponent<TMP_Text>().text = "x" + player.ModStats[1];
-        Stats[2].transform.GetChild(0).GetComponent<TMP_Text>().text = "x" + player.ModStats[2];
-        Stats[3].transform.GetChild(0).GetComponent<TMP_Text>().text = "x" + player.ModStats[3];
-        Stats[4].transform.GetChild(0).GetComponent<TMP_Text>().text = "x" + player.ModStats[4];
+        if (player != null)
+        {
+            Stats[0].transform.GetChild(0).GetComponent<TMP_Text>().text = "x" + player.ModStats[0];
+            Stats[1].transform.GetChild(0).GetComponent<TMP_Text>().text = "x" + player.ModStats[1];
+            Stats[2].transform.GetChild(0).GetComponent<TMP_Text>().text = "x" + player.ModStats[2];
+            Stats[3].transform.GetChild(0).GetComponent<TMP_Text>().text = "x" + player.ModStats[3];
+            Stats[4].transform.GetChild(0).GetComponent<TMP_Text>().text = "x" + player.ModStats[4];
+        }
     }
 
     private void WeaponsUsed(Player player)
     {
-        for (int i = 0; i < player.Inventory.Length; i++)
+        if (player != null)
         {
-            IconWeapon[i].transform.GetChild(0).GetComponent<TMP_Text>().text = player.Inventory[i];
-            IconWeapon[i].transform.GetChild(1).GetComponent<Image>().sprite = RelationWeaponAndSprite(player.Inventory[i]);
+            for (int i = 0; i < player.Inventory.Length; i++)
+            {
+                IconWeapon[i].transform.GetChild(0).GetComponent<TMP_Text>().text = player.Inventory[i];
+                IconWeapon[i].transform.GetChild(1).GetComponent<Image>().sprite = RelationWeaponAndSprite(player.Inventory[i]);
+            }
         }
     }
 

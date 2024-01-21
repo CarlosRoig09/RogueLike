@@ -12,6 +12,8 @@ TagManager:
   - scenari
   - shop
   - wotah
+  - box
+  - door
   layers:
   - Default
   - TransparentFX
@@ -21,10 +23,10 @@ TagManager:
   - UI
   - Player
   - Wall
-  - 
-  - 
-  - 
-  - 
+  - Enemy
+  - Dash
+  - Obstacle
+  - Door
   - 
   - 
   - 
@@ -49,9 +51,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 112429201
+    locked: 0
+  - name: Enemy
+    uniqueID: 1516444285
+    locked: 0
   - name: Player
     uniqueID: 2307905963
     locked: 0
   - name: Obstacle
     uniqueID: 1067607705
+    locked: 0
+  - name: UI
+    uniqueID: 1803134253
     locked: 0

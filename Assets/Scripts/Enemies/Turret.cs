@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -15,39 +16,45 @@ public class Turret : Enemy
     [SerializeField]
     private LayerMask _playerLayerMask;
     private bool _reloading;
+    private bool _firstShootAfterTeleporting;
     protected override void Start()
     {
         base.Start();
         _shootControler = gameObject.GetComponent<ShootControler>();
         _cloneShootSO = Instantiate(_shootSO);
       _shootControler.NewWeapon(_cloneShootSO);
-        //var shoot = (ScriptableShoot)_shoot.Action;
-        //shoot.ShootControler = _shootControler;
+        _shoot = ScriptableStateMethods.CopyAStateMachineState(Shoot, new List<ScriptableState>());
+        _teleport = ScriptableStateMethods.ReturnStateWithId(_shoot.ScriptableStateTransitor,Teleport.Id);
+        stop = ScriptableStateMethods.ReturnStateWithId(_shoot.ScriptableStateTransitor, Stop.Id);
+        var shoot = (ScriptableShoot)_shoot.Action;
+        shoot.ShootControler = _shootControler;
         currentState = _shoot;
         _reloading = false;
+        _firstShootAfterTeleporting = false;
     }
     protected override void Update()
     {
         base.Update();
-        if (_cloneShootSO.currentBullets == 0&&!_reloading)
-        {
-            var teleport = (ScriptableTeleport)_teleport.Action;
-            Teleported(teleport,RandomPositions());
-            teleport.characterTransform = transform;
-            StateTransitor(_teleport);
-            _reloading = true;
-        }
-        else if (_reloading)
-        {
-            StateTransitor(_shoot);
-            if(_cloneShootSO.currentBullets==_cloneShootSO.TotalBullets)
+            if (_cloneShootSO.currentBullets == 0 && !_reloading)
             {
-                _reloading= false;
+             cloneEnemyData.Damagable = Invulnerability.NoDamagable;
+            GetComponent<Animator>().SetBool("Teleport", true);
             }
-        }
+            else if (_reloading)
+            {
+            if (_firstShootAfterTeleporting)
+            {
+                _firstShootAfterTeleporting = false;
+                StateTransitor(_shoot);
+            }
+                if (_cloneShootSO.currentBullets == _cloneShootSO.TotalBullets)
+                {
+                    _reloading = false;
+                }
+            }
     }
 
-    private bool Teleported(ScriptableTeleport teleport, Vector3[] PosiblePositions)
+    private bool Teleported(ScriptableTeleport teleport, List<Vector3> PosiblePositions)
     {
         foreach (var position in PosiblePositions)
         {
@@ -57,18 +64,30 @@ public class Turret : Enemy
                 return true;
             }
         }
-       teleport.newPosition = PosiblePositions[Random.Range(0,PosiblePositions.Length)];
+       teleport.newPosition = PosiblePositions[Random.Range(0,PosiblePositions.Count)];
         return false;
     }
 
-    private Vector3[] RandomPositions()
+    public void TeleportAction()
     {
-        Vector3[] randomPositions = (Vector3[])EnemyWaveControler.Instance.AllPositions.Clone();
-        for (int i = 0; i < randomPositions.Length;)
+        GetComponent<Animator>().SetBool("Teleport", false);
+        var teleport = (ScriptableTeleport)_teleport.Action;
+        Teleported(teleport, RandomPositions());
+        teleport.characterTransform = transform;
+        StateTransitor(_teleport);
+        _reloading = true;
+        _firstShootAfterTeleporting = true;
+        cloneEnemyData.Damagable = Invulnerability.Damagable;
+    }
+
+    private List<Vector3> RandomPositions()
+    {
+        List<Vector3> randomPositions = new (EnemyWaveControler.Instance.AllPositions);
+        for (int i = 0; i < randomPositions.Count;)
         {
             int y;
             int x;
-            if ((x = Random.Range(0, randomPositions.Length)) != (y = Random.Range(0, randomPositions.Length)))
+            if ((x = Random.Range(0, randomPositions.Count)) != (y = Random.Range(0, randomPositions.Count)))
             {
                 i++;
                 (randomPositions[x], randomPositions[y]) = (randomPositions[y], randomPositions[x]);

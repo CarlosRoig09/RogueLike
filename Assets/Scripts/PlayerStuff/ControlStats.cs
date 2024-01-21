@@ -11,6 +11,7 @@ public class ControlStats : MonoBehaviour
     [SerializeField]
     private PlayerStats playerStats;
     private ApplyModificator _applyModificator;
+    private GameObject _buffCanvas;
     void Start()
     {
         playerStats.AttackSpeed = 1;
@@ -19,6 +20,8 @@ public class ControlStats : MonoBehaviour
         playerStats.ProyectileSpeed = 1;
         playerStats.Speed = 1;
         _applyModificator= GetComponent<ApplyModificator>();
+        _buffCanvas = transform.GetChild(1).GetChild(0).gameObject;
+        _buffCanvas.SetActive(false);
     }
 
     // Update is called once per frame
@@ -53,15 +56,15 @@ public class ControlStats : MonoBehaviour
                     return true;
                 break;
             case Type.AttackSpeed:
-                if (playerStats.AttackSpeed <= 0.1f)
+                if (playerStats.AttackSpeed >= 1.4f)
                     return true;
                 break;
             case Type.ProyectileSpeed:
-                if (playerStats.ProyectileSpeed <= 1.4f)
+                if (playerStats.ProyectileSpeed >= 1.4f)
                     return true;
                 break;
             case Type.ProyectileDamage:
-                 if(playerStats.ProyectileDamage <= 1.4f)
+                 if(playerStats.ProyectileDamage >= 1.4f)
                     return true;
                  break;
         }
@@ -70,25 +73,42 @@ public class ControlStats : MonoBehaviour
 
     private void SearchForStats(Type stat, float modificator)
     {
+        string textToShow = "";
         switch (stat)
         {
             case Type.WeaponsDamage:
+                AudioManager.instance.Play("AttackBuff");
                 playerStats.Damage += modificator;
+                textToShow = "Attack Damage";
                 break;
             case Type.PlayerSpeed:
+                AudioManager.instance.Play("SpeedBuff");
                 playerStats.Speed += modificator;
                 _applyModificator.UpdateSpeed();
+                textToShow = "Speed";
                 break;
             case Type.AttackSpeed:
-                playerStats.AttackSpeed -= modificator;
+                AudioManager.instance.Play("SpeedBuff");
+                playerStats.AttackSpeed += modificator;
+                textToShow = "Attack Speed";
                 break;
-            case Type.ProyectileSpeed: 
+            case Type.ProyectileSpeed:
+                AudioManager.instance.Play("SpeedBuff");
                 playerStats.ProyectileSpeed += modificator;
+                textToShow = "Range Speed";
                 break;
             case Type.ProyectileDamage:
+                AudioManager.instance.Play("AttackBuff");
                 playerStats.ProyectileDamage += modificator;
+                textToShow = "Range Damage";
                 break;
         }
+        if (modificator > 0)
+            textToShow += " Up";
+        else
+            textToShow += " Down";
+        _buffCanvas.SetActive(true);
+        _buffCanvas.GetComponent<TMPro.TMP_Text>().text = textToShow;
     }
 
     private IEnumerator TemporaryModif(float time, Type stat, float modificator)

@@ -1,0 +1,201 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3448085219315429291
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3448085219315429288}
+  - component: {fileID: 2518434319404543625}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3448085219315429288
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3448085219315429291}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.2921553, y: 4.752925, z: -9.732679}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2518434319404543625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3448085219315429291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b8315fe68735ac4ca85d3766afe82e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: MenuTheme
+    clip: {fileID: 8300000, guid: c13d867fbdede25458f844cf9e0d6b53, type: 3}
+    volume: 1
+    pitch: 1
+    Loop: 1
+    output: {fileID: 24300002, guid: 84c6c78ab6cee1f4d8c57840c0dc1497, type: 2}
+    source: {fileID: 0}
+  - name: MapTheme
+    clip: {fileID: 8300000, guid: 1862c7a9c307e43419e63b83176dc3f2, type: 3}
+    volume: 1
+    pitch: 1
+    Loop: 1
+    output: {fileID: 24300002, guid: 84c6c78ab6cee1f4d8c57840c0dc1497, type: 2}
+    source: {fileID: 0}
+  - name: ShopTheme
+    clip: {fileID: 8300000, guid: f95ac403b9f1a9b4c8f454ffb417824a, type: 3}
+    volume: 1
+    pitch: 1
+    Loop: 1
+    output: {fileID: 24300002, guid: 84c6c78ab6cee1f4d8c57840c0dc1497, type: 2}
+    source: {fileID: 0}
+  - name: GetHit
+    clip: {fileID: 8300000, guid: fdd3f53c6e7208e449ef37441bc2e360, type: 3}
+    volume: 1
+    pitch: 1
+    Loop: 0
+    output: {fileID: 24300002, guid: 9c291c2b551614b43beb29a6f980f0a4, type: 2}
+    source: {fileID: 0}
+  - name: HitEnemy
+    clip: {fileID: 8300000, guid: cdf451127687ba345b9470ed9cb9e004, type: 3}
+    volume: 1
+    pitch: 1
+    Loop: 0
+    output: {fileID: 24300002, guid: 9c291c2b551614b43beb29a6f980f0a4, type: 2}
+    source: {fileID: 0}
+  - name: Dash
+    clip: {fileID: 8300000, guid: 70f2265936648404e846937617e530d0, type: 3}
+    volume: 1
+    pitch: 3
+    Loop: 0
+    output: {fileID: 24300002, guid: 9c291c2b551614b43beb29a6f980f0a4, type: 2}
+    source: {fileID: 0}
+  - name: LightWeapon
+    clip: {fileID: 8300000, guid: 1d68a2475d0377e46a6368c69d3408f7, type: 3}
+    volume: 1
+    pitch: 1
+    Loop: 0
+    output: {fileID: 24300002, guid: 9c291c2b551614b43beb29a6f980f0a4, type: 2}
+    source: {fileID: 0}
+  - name: MediumWeapon
+    clip: {fileID: 8300000, guid: 86c9c076572c4704da1dd49a7d2be390, type: 3}
+    volume: 1
+    pitch: 1
+    Loop: 0
+    output: {fileID: 24300002, guid: 9c291c2b551614b43beb29a6f980f0a4, type: 2}
+    source: {fileID: 0}
+  - name: HeavyWeapon
+    clip: {fileID: 8300000, guid: 5938a3ea0c207214cba3c42d648d4336, type: 3}
+    volume: 1
+    pitch: 1
+    Loop: 0
+    output: {fileID: 24300002, guid: 9c291c2b551614b43beb29a6f980f0a4, type: 2}
+    source: {fileID: 0}
+  - name: LifeRecovered
+    clip: {fileID: 8300000, guid: d118842cc65e943468194687f050ca64, type: 3}
+    volume: 1
+    pitch: 1
+    Loop: 0
+    output: {fileID: 24300002, guid: 9c291c2b551614b43beb29a6f980f0a4, type: 2}
+    source: {fileID: 0}
+  - name: Teleport
+    clip: {fileID: 8300000, guid: 488c0e18d99a33f4784ba8944fa2de85, type: 3}
+    volume: 1
+    pitch: 1
+    Loop: 0
+    output: {fileID: 24300002, guid: 9c291c2b551614b43beb29a6f980f0a4, type: 2}
+    source: {fileID: 0}
+  - name: AttackBuff
+    clip: {fileID: 8300000, guid: 6e1a447a2d3d7024cbc5975d553d3475, type: 3}
+    volume: 0.5
+    pitch: 1
+    Loop: 0
+    output: {fileID: 24300002, guid: 9c291c2b551614b43beb29a6f980f0a4, type: 2}
+    source: {fileID: 0}
+  - name: SpeedBuff
+    clip: {fileID: 8300000, guid: 13d803d6c025e014c8c058c76d41cf0f, type: 3}
+    volume: 1
+    pitch: 1
+    Loop: 0
+    output: {fileID: 0}
+    source: {fileID: 0}
+  - name: Explosion
+    clip: {fileID: 8300000, guid: 103108b694e9bac45b9ff157c982ddf8, type: 3}
+    volume: 1
+    pitch: 1
+    Loop: 0
+    output: {fileID: 24300002, guid: 9c291c2b551614b43beb29a6f980f0a4, type: 2}
+    source: {fileID: 0}
+  - name: BattleTheme
+    clip: {fileID: 8300000, guid: 6c32563d5cb4ace46b3fd9d98509ab8b, type: 3}
+    volume: 1
+    pitch: 1
+    Loop: 1
+    output: {fileID: 24300002, guid: 84c6c78ab6cee1f4d8c57840c0dc1497, type: 2}
+    source: {fileID: 0}
+  - name: Coin
+    clip: {fileID: 8300000, guid: 2c9df2bd6a773ea44a1d0747a127f15c, type: 3}
+    volume: 1
+    pitch: 1
+    Loop: 0
+    output: {fileID: 24300002, guid: 9c291c2b551614b43beb29a6f980f0a4, type: 2}
+    source: {fileID: 0}
+  - name: OpenDoor
+    clip: {fileID: 8300000, guid: f3baa76d014fb2146a5e3fb667d9074d, type: 3}
+    volume: 0.5
+    pitch: 1
+    Loop: 0
+    output: {fileID: 24300002, guid: 9c291c2b551614b43beb29a6f980f0a4, type: 2}
+    source: {fileID: 0}
+  - name: CloseDoor
+    clip: {fileID: 8300000, guid: bfa5abc31906f8d49a5d5a41ae485dd1, type: 3}
+    volume: 0.5
+    pitch: 1
+    Loop: 0
+    output: {fileID: 24300002, guid: 9c291c2b551614b43beb29a6f980f0a4, type: 2}
+    source: {fileID: 0}
+  - name: EnemyDead
+    clip: {fileID: 8300000, guid: e3db714cc94bf77488e538706fb183cd, type: 3}
+    volume: 0.5
+    pitch: 1
+    Loop: 0
+    output: {fileID: 24300002, guid: 9c291c2b551614b43beb29a6f980f0a4, type: 2}
+    source: {fileID: 0}
+  - name: PlayerGameOver
+    clip: {fileID: 8300000, guid: d7e171c604323e740bc11e28867fc595, type: 3}
+    volume: 0.5
+    pitch: 1
+    Loop: 0
+    output: {fileID: 24300002, guid: 9c291c2b551614b43beb29a6f980f0a4, type: 2}
+    source: {fileID: 0}
+  - name: ShootSound
+    clip: {fileID: 8300000, guid: 48334e1ca3a7a8345890451bd880e394, type: 3}
+    volume: 0.5
+    pitch: 1
+    Loop: 0
+    output: {fileID: 24300002, guid: 9c291c2b551614b43beb29a6f980f0a4, type: 2}
+    source: {fileID: 0}
+  - name: ObtainWeapon
+    clip: {fileID: 8300000, guid: 3e09b894532e4824b862c29e0b90efbb, type: 3}
+    volume: 1
+    pitch: 1
+    Loop: 0
+    output: {fileID: 24300002, guid: 9c291c2b551614b43beb29a6f980f0a4, type: 2}
+    source: {fileID: 0}

@@ -165,7 +165,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -182,7 +182,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 11.623964
+  orthographic size: 8.1169
   m_Depth: 5
   m_CullingMask:
     serializedVersion: 2
@@ -292,7 +292,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1855798312
 PrefabInstance:
@@ -406,6 +406,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4615364402666367220, guid: f96afe134c7afa8448e935cfab026932, type: 3}
+      propertyPath: firstWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: a14b32f2525907a4b86afff92cef1497, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f96afe134c7afa8448e935cfab026932, type: 3}
 --- !u!1001 &3448085219018559526
@@ -417,7 +421,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3448085219315429288, guid: ecc925d438a188546bff7a112dd42925, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3448085219315429288, guid: ecc925d438a188546bff7a112dd42925, type: 3}
       propertyPath: m_LocalPosition.x
@@ -463,10 +467,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioManager
       objectReference: {fileID: 0}
-    - target: {fileID: 3448085219315429291, guid: ecc925d438a188546bff7a112dd42925, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ecc925d438a188546bff7a112dd42925, type: 3}
 --- !u!1001 &4596021102929555317
@@ -483,7 +483,7 @@ PrefabInstance:
     - target: {fileID: 4596021103494977600, guid: d86efcb84ee33094fac8a9219504f506, type: 3}
       propertyPath: _turret
       value: 
-      objectReference: {fileID: 681461902211088549, guid: ee72b3a32bf03534bb72a573fab597c9, type: 3}
+      objectReference: {fileID: 3414443598116584655, guid: 32c461865aa634644a8a8d48501bec39, type: 3}
     - target: {fileID: 4596021103494977600, guid: d86efcb84ee33094fac8a9219504f506, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -597,10 +597,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6676159865253784281, guid: 50d08a1ed570d2c4d9192171f8db863f, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6676159865597202088, guid: 50d08a1ed570d2c4d9192171f8db863f, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -689,9 +685,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 6676159866814872188, guid: 50d08a1ed570d2c4d9192171f8db863f, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
+    - target: {fileID: 6676159865597202094, guid: 50d08a1ed570d2c4d9192171f8db863f, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50d08a1ed570d2c4d9192171f8db863f, type: 3}

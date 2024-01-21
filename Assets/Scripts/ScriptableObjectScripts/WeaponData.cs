@@ -89,9 +89,9 @@ public class WeaponData : ItemData
     {
         var rotationScript = grandParent.GetComponent<MoveAroundThePlayerByMousePController>();
         rotationScript.HS = HandState.MoveByRotateAnim;
-        rotationScript.RoationSpeed = 100;
+        rotationScript.RoationSpeed = 850;
         Debug.Log(noRepitePosition);
-        if (endPoint == grandParent.transform.rotation)
+        if (endPoint.eulerAngles.magnitude <= grandParent.transform.rotation.eulerAngles.magnitude)
         {
             if (noRepitePosition)
             {

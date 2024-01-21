@@ -78,9 +78,11 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        AudioManager.instance.StopAllThemes();
+        AudioManager.instance.Play("MenuTheme");
         DontDestroyOnLoad(gameObject);
         _calledStartGame = false;
-        _controlPuntuation = GameObject.Find("Puntuation").GetComponent<GetPuntuation>();
+        //_controlPuntuation = GameObject.Find("Puntuation").GetComponent<GetPuntuation>();
     }
 
     // Update is called once per frame
@@ -113,6 +115,8 @@ public class GameManager : MonoBehaviour
                 }
                 if (GameObject.Find("Spawner").GetComponent<EnemyWaveControler>().ControlIfWaveIsFinished(out _currentEnemy, out _totalEnemy) && _cS.newScene)
                 {
+                    AudioManager.instance.StopAllThemes();
+                    AudioManager.instance.Play("MapTheme");
                     GameObject.Find("Spawner").GetComponent<ControlScenari>().DoorOpens();
                     _numberOfEnemyKilled += _enemyKilledInCurrentRoom;
                     _rooms += 1;

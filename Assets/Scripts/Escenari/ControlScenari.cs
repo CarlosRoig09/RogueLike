@@ -127,6 +127,7 @@ public class ControlScenari : MonoBehaviour
 
     public void DoorOpens()
     {
+        AudioManager.instance.Play("OpenDoor");
         _currentScenari.GetComponent<LoadScenari>().CallOpenDoor();
     }
 

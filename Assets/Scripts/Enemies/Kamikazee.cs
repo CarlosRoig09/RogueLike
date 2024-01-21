@@ -23,7 +23,8 @@ public class Kamikazee : Enemy, ISpawnExplosion
         _anim= GetComponent<Animator>();
         kamikazeeData = (KamikazeeData)cloneEnemyData;
         _movement = ScriptableStateMethods.CopyAStateMachineState(Movement,new List<ScriptableState>());
-        _explode = ScriptableStateMethods.CopyAStateMachineState(Explode, new List<ScriptableState>());
+        _explode = ScriptableStateMethods.ReturnStateWithId(_movement.ScriptableStateTransitor, Explode.Id);
+        stop = ScriptableStateMethods.ReturnStateWithId(_movement.ScriptableStateTransitor, Stop.Id);
         currentState = _movement;
     }
     protected override void Update()
@@ -35,6 +36,8 @@ public class Kamikazee : Enemy, ISpawnExplosion
             IsGoingToExplote();
         }
         base.Update();
+        if(currentState!=stop)
+        transform.rotation = FindTarget();
     }
    /* private void ChangeDirectionWhenImpact()
     {
@@ -105,7 +108,6 @@ public class Kamikazee : Enemy, ISpawnExplosion
         if ((_player.transform.position-transform.position).magnitude<=3)
         {
             _anim.SetBool("GoingToExplote", true);
-            _rb.constraints = RigidbodyConstraints2D.FreezeAll;
             Explosion();
         }
     }
@@ -121,8 +123,19 @@ public class Kamikazee : Enemy, ISpawnExplosion
     }
     public void Death()
     {
+        var explode = (ScriptableExplosion)_explode.Action;
+        explode.OnExplosion -= SpawnExplosion;
+        StopAllCoroutines();
         StopMomentum();
         State = Life.Death;
+    }
+
+    public override void InvulnerabilityDeath()
+    {
+        base.InvulnerabilityDeath();
+        var explode = (ScriptableExplosion)_explode.Action;
+        explode.OnExplosion -= SpawnExplosion;
+        StopAllCoroutines();
     }
 
     private void OnDestroy()
@@ -133,8 +146,8 @@ public class Kamikazee : Enemy, ISpawnExplosion
     public void SpawnExplosion()
     {
        var explosion = Instantiate(kamikazeeData.explosion,transform.position,Quaternion.identity);
-        explosion.GetComponent<ExplosionBehaivour>().ExplosionDamage = kamikazeeData.explosionDamage;
-        explosion.GetComponent<ExplosionBehaivour>().ExplosionImpulse = kamikazeeData.explosionImpulse;
+        explosion.GetComponent<ExplosionBehaivour<PlayerController>>().ExplosionDamage = kamikazeeData.explosionDamage;
+        explosion.GetComponent<ExplosionBehaivour<PlayerController>>().ExplosionImpulse = kamikazeeData.explosionImpulse;
         StateTransitor(_explode);
         BeforeExplosion();
     }

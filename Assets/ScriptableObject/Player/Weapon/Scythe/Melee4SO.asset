@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b9e1026ba16f8c4cabc401cb813ede2, type: 3}
   m_Name: Melee4SO
   m_EditorClassIdentifier: 
-  Damage: 10
+  WeaponAttacks:
+  - {fileID: 11400000, guid: af4a53a0ebdb86f49be8f5f610e4985e, type: 2}
+  CurrentAttack: 0
   CadenceTime: 0
-  ImpulseForce: 500
   meleeAttack: 1

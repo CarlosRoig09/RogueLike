@@ -37,4 +37,16 @@ public static class ScriptableStateMethods
         }
         return false;
     }
+
+    public static ScriptableState ReturnStateWithId(List<ScriptableState> scriptableStates, string id)
+    {
+        foreach (var state in scriptableStates)
+        {
+            if (id == state.Id)
+            {
+                return state;
+            }
+        }
+        return null;
+    }
 }

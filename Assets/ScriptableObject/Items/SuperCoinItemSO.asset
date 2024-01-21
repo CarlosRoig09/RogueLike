@@ -18,5 +18,5 @@ MonoBehaviour:
   CountDown: 10
   RateAperance: 10
   Price: 0
-  Puntuation: 10
-  value: 10
+  Puntuation: 15
+  value: 15

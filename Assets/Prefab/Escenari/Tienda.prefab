@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1987061333
-  m_SortingLayer: 1
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -1766845312, guid: b04d03a70be6e86418a8a5c87489e26c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -13570,6 +13570,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: da409b2a183f81b4683f12091a868993, type: 2}
   - {fileID: 11400000, guid: ec7db1c63fd809342b4070bb26f27d87, type: 2}
   - {fileID: 11400000, guid: b4139d58672a42c4fac0c03d2908f08c, type: 2}
+  - {fileID: 11400000, guid: 6dd04e89e042d1b448356d06ac0a326d, type: 2}
   _itemHolder:
   - {fileID: 6550149366655372801}
   - {fileID: 6550149367563787702}
@@ -14653,6 +14654,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door4
       objectReference: {fileID: 0}
+    - target: {fileID: 5075857386818838893, guid: 5042a4a0a89f6e244b5427a55f75968b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7514542082414256236, guid: 5042a4a0a89f6e244b5427a55f75968b, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -14722,6 +14727,10 @@ PrefabInstance:
     - target: {fileID: 1497505097266766398, guid: 4bfa4e407c6749d4fad75f8fb6725a69, type: 3}
       propertyPath: m_Name
       value: Door3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1497505097266766398, guid: 4bfa4e407c6749d4fad75f8fb6725a69, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7630106495027381656, guid: 4bfa4e407c6749d4fad75f8fb6725a69, type: 3}
       propertyPath: m_RootOrder
@@ -14831,7 +14840,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8887210919839355270, guid: a235e6ee76ea3834cb0cc209b84bdc09, type: 3}
       propertyPath: m_SortingLayer
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8887210919839355270, guid: a235e6ee76ea3834cb0cc209b84bdc09, type: 3}
       propertyPath: m_SortingOrder

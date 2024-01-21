@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4289173861220474185}
   - component: {fileID: 4518708012124600314}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Door1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 8887210919839355270}
   - component: {fileID: 2028817186362394783}
   - component: {fileID: 4654869585625675988}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Door1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -219,7 +219,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1987061333
-  m_SortingLayer: 1
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
