@@ -31,6 +31,7 @@ public class WeaponItemController : ItemBehaivour
     {
         if (player.GetComponent<GestionInventory>().AddWeapon(weaponData))
         {
+            AudioManager.instance.Play("ObtainWeapon");
             GivePuntuation(weaponData.Puntuation);
             DestroyItem();
         }

@@ -81,7 +81,7 @@ MonoBehaviour:
     output: {fileID: 24300002, guid: 9c291c2b551614b43beb29a6f980f0a4, type: 2}
     source: {fileID: 0}
   - name: Dash
-    clip: {fileID: 8300000, guid: f46460a3bd14130498bba89fec4e7f0f, type: 3}
+    clip: {fileID: 8300000, guid: 70f2265936648404e846937617e530d0, type: 3}
     volume: 1
     pitch: 3
     Loop: 0
@@ -181,6 +181,20 @@ MonoBehaviour:
   - name: PlayerGameOver
     clip: {fileID: 8300000, guid: d7e171c604323e740bc11e28867fc595, type: 3}
     volume: 0.5
+    pitch: 1
+    Loop: 0
+    output: {fileID: 24300002, guid: 9c291c2b551614b43beb29a6f980f0a4, type: 2}
+    source: {fileID: 0}
+  - name: ShootSound
+    clip: {fileID: 8300000, guid: 48334e1ca3a7a8345890451bd880e394, type: 3}
+    volume: 0.5
+    pitch: 1
+    Loop: 0
+    output: {fileID: 24300002, guid: 9c291c2b551614b43beb29a6f980f0a4, type: 2}
+    source: {fileID: 0}
+  - name: ObtainWeapon
+    clip: {fileID: 8300000, guid: 3e09b894532e4824b862c29e0b90efbb, type: 3}
+    volume: 1
     pitch: 1
     Loop: 0
     output: {fileID: 24300002, guid: 9c291c2b551614b43beb29a6f980f0a4, type: 2}

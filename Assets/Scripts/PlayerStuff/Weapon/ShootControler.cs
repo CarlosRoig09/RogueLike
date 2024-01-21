@@ -25,6 +25,7 @@ public class ShootControler: MonoBehaviour
             if (_shootSO.currentBullets > 0&&!_reolading)
                 for (float i = 0; i < _shootSO.BulletsXShoot; i++)
                 {
+                    AudioManager.instance.Play("ShootSound");
                     var proyectile = Instantiate(_shootSO.Proyectile, transform.position, Quaternion.identity);
                     proyectile.GetComponent<ProyectileBehaivour>().WeaponType(_shootSO);
                     _shootSO.currentBullets -= 1;

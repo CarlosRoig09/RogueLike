@@ -39,7 +39,7 @@ public class LoadScenari : MonoBehaviour
     {
         _player = GameObject.Find("Player").GetComponent<Transform>();
         _spawner = GameObject.Find("Spawner");
-        ScenariLoaded(_id);
+        ScenariLoaded();
         foreach (string door in _noShowDoors)
         {
             NoInstantDoor(door);
@@ -64,7 +64,7 @@ public class LoadScenari : MonoBehaviour
                 break;
         }
     }
-  private void ScenariLoaded(int id)
+  private void ScenariLoaded()
    {
         _player = GameObject.Find("Player").GetComponent<Transform>();
         _player.transform.position = new Vector3(_door1.transform.position.x+0.2f,_door1.transform.position.y);
@@ -73,13 +73,22 @@ public class LoadScenari : MonoBehaviour
             AudioManager.instance.Play("CloseDoor");
             AudioManager.instance.StopAllThemes();
             AudioManager.instance.Play("BattleTheme");
-            _spawner.GetComponent<EnemyWaveControler>().CallWave(transform.position, ScenariStartPos, ScenariEndPos);
+            _spawner.GetComponent<EnemyWaveControler>().CallWave(transform.position, ScenariStartPos, ScenariEndPos,_door1);
         }
         else
-            CallOpenDoor();
+        {
+            AudioManager.instance.Play("CloseDoor");
+            StartCoroutine(OpenDoorsAfterTime(0.5f));
+        }
    }
 
- public void ScenariAlredyLoaded(string door)
+    private IEnumerator OpenDoorsAfterTime(float time)
+    {
+        yield return new WaitForSeconds(time);
+        CallOpenDoor();
+    }
+
+    public void ScenariAlredyLoaded(string door)
     {
         _player = GameObject.Find("Player").GetComponent<Transform>();
          switch (door)

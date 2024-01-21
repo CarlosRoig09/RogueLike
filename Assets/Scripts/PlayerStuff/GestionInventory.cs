@@ -16,7 +16,7 @@ public class GestionInventory : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        inventory.Bombs = 5;
+        inventory.Bombs = 3;
         inventory.Weapons = new List<WeaponData>();
         _counter = 0;
         _weaponController = GameObject.Find("Weapon").GetComponent<ChangeWeaponController>();
@@ -106,6 +106,10 @@ public class GestionInventory : MonoBehaviour
             bomb.GetComponent<BombBehaivour>().ThrewBomb(50, Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position);
         }
         inventory.Bombs -= 1;
+        if (inventory.Bombs < 0)
+        {
+            inventory.Bombs = 0;
+        }
     }
 
     public void SetWeaponValues(WeaponData newweapon)

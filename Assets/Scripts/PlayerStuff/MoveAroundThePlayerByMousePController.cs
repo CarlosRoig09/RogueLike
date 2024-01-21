@@ -49,6 +49,6 @@ public class MoveAroundThePlayerByMousePController : MonoBehaviour
 
     void RotateAround(Vector3 pointToRotate)
     {
-        transform.RotateAround(pointToRotate, new Vector3(0, 0, 1), _roationSpeed * Time.fixedDeltaTime);
+        transform.RotateAround(pointToRotate, new Vector3(0, 0, 1), _roationSpeed*Time.deltaTime);
     }
 }

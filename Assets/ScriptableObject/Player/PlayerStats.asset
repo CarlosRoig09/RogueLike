@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee66250baf2290246bdb0a6016735e34, type: 3}
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
-  Damage: 1
-  Speed: 2
+  Damage: 1.4000001
+  Speed: 1.4000001
   AttackSpeed: 1
-  ProyectileDamage: 1
+  ProyectileDamage: 1.2
   ProyectileSpeed: 1
