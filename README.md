@@ -1,9 +1,9 @@
-Shoot - LeftClick. 
-MeleeAttack - RightClick 
-ChangeWeapon - Scroll 
-Dash - LeftShift 
-Movement - WASD or Arrows 
-Q - Throw Bomb
+- Shoot - LeftClick. 
+- MeleeAttack - RightClick 
+- ChangeWeapon - Scroll 
+- Dash - LeftShift 
+- Movement - WASD or Arrows 
+- Q - Throw Bomb
 
 
 A Rogue Like game concept I made during my High Technician in Multi-platform Application Development course. This project include so many concepts of a Rogue Like as:
